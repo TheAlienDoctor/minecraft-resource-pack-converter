@@ -34,7 +34,10 @@ GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
 
 ;###########################################################################################################################################################################################
-;Things that need to be ran before everything else
+;Declare variables
+
+Global $dateTime = @MDAY & '.' & @MON & '.' & @YEAR & '-' & @HOUR & '.' & @MIN & '.' & @SEC
+Global $bedrockDir = @ScriptDir & "\" & IniRead("options.ini", "config", "BedrockDir", "BedrockPack")
 
 If IniRead("options.ini", "logConfig", "CustomLogDir", "false") = "false" Then
 	Global $logDir = @ScriptDir & "\" & "logs"
@@ -44,9 +47,6 @@ EndIf
 
 ;###########################################################################################################################################################################################
 ;GUI Control
-
-Global $dateTime = @MDAY & '.' & @MON & '.' & @YEAR & '-' & @HOUR & '.' & @MIN & '.' & @SEC
-Global $bedrockDir = @ScriptDir & "\" & IniRead("options.ini", "config", "BedrockDir", "BedrockPack")
 
 While 1
 	createLog()
@@ -81,8 +81,8 @@ EndFunc   ;==>createLog
 
 Func finishLog()
 	FileOpen($logDir & "\" & "log.latest", 1)
-	FileWrite($logDir & "\" & "log.latest", "Log file closed at " & @HOUR & ":" & @MIN & ":" & @SEC & " on " & @MDAY & "/" & @MON & "/" & @YEAR & " (HH:MM:SS on DD.MM.YY)" & @CRLF)
 	FileWrite($logDir & "\" & "log.latest", "###################################################################" & @CRLF)
+	FileWrite($logDir & "\" & "log.latest", "Log file closed at " & @HOUR & ":" & @MIN & ":" & @SEC & " on " & @MDAY & "/" & @MON & "/" & @YEAR & " (HH:MM:SS on DD.MM.YY)" & @CRLF)
 	FileClose($logDir & "\" & "log.latest")
 	FileMove($logDir & "\log.latest", $logDir & "\log[" & $dateTime & "].txt") ;Once the script has finished running, it will rename the log.latest to have the date and time
 EndFunc   ;==>finishLog
@@ -90,5 +90,6 @@ EndFunc   ;==>finishLog
 Func bedrockToJava()
 	FileOpen($logDir & "\" & "log.latest", 1)
 	FileWrite($logDir & "\" & "log.latest", "Bedrock mode selected" & @CRLF)
+	FileClose($logDir & "\" & "log.latest")
 	MsgBox(0, "Alien's pack converter", "Conversion complete!")
 Endfunc   ;==>bedrockToJava
