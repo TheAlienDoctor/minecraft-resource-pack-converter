@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="windows-1251"?>
-<object type="TAForm" name="Form1_1">
+<object type="TAForm" name="PackConverter">
 	<properties>
-		<property name="Left" vt="Int16">1056</property>
-		<property name="Top" vt="Int16">636</property>
-		<property name="Width" vt="Int16">630</property>
+		<property name="Left" vt="Int16">912</property>
+		<property name="Top" vt="Int16">660</property>
+		<property name="Width" vt="Int16">634</property>
 		<property name="Height" vt="Int16">241</property>
 		<property name="Hint" vt="String">Pack Converter</property>
 		<property name="Caption" vt="String">Alien's Pack Converter</property>
@@ -32,7 +32,7 @@
 		<property name="TextHeight" vt="Int8">13</property>
 	</properties>
 	<components>
-		<object type="TATab" name="Tab1">
+		<object type="TATab" name="PackConverter">
 			<properties>
 				<property name="Left" vt="Int8">8</property>
 				<property name="Top" vt="Int8">8</property>
@@ -97,10 +97,10 @@
 						</object>
 						<object type="TAButton" name="StartBeToJe">
 							<properties>
-								<property name="Left" vt="Int8">59</property>
-								<property name="Top" vt="Int8">87</property>
-								<property name="Width" vt="Int16">497</property>
-								<property name="Height" vt="Int8">57</property>
+								<property name="Left" vt="Int16">445</property>
+								<property name="Top" vt="Int16">129</property>
+								<property name="Width" vt="Int16">145</property>
+								<property name="Height" vt="Int8">25</property>
 								<property name="Hint" vt="String">Start conversion</property>
 								<property name="Caption" vt="String">Start conversion</property>
 								<property name="TabOrder" vt="Int8">2</property>
@@ -189,10 +189,10 @@
 						</object>
 						<object type="TAButton" name="StartJeToBe">
 							<properties>
-								<property name="Left" vt="Int8">59</property>
-								<property name="Top" vt="Int8">87</property>
-								<property name="Width" vt="Int16">497</property>
-								<property name="Height" vt="Int8">57</property>
+								<property name="Left" vt="Int16">445</property>
+								<property name="Top" vt="Int16">129</property>
+								<property name="Width" vt="Int16">145</property>
+								<property name="Height" vt="Int8">25</property>
 								<property name="Hint" vt="String">Start conversion</property>
 								<property name="Caption" vt="String">Start conversion</property>
 								<property name="TabOrder" vt="Int8">2</property>
