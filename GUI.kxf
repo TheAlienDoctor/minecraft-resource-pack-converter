@@ -38,7 +38,7 @@
 				<property name="Top" vt="Int8">8</property>
 				<property name="Width" vt="Int16">601</property>
 				<property name="Height" vt="Int16">185</property>
-				<property name="ActivePage" vt="Ident">JavaToBedrock</property>
+				<property name="ActivePage" vt="Ident">BedrockToJava</property>
 				<property name="Font.Charset" vt="Ident">DEFAULT_CHARSET</property>
 				<property name="Font.Color" vt="Ident">clWindowText</property>
 				<property name="Font.Height" vt="Int8">-11</property>
@@ -187,7 +187,7 @@
 							</properties>
 							<components/>
 						</object>
-						<object type="TAButton" name="Button1">
+						<object type="TAButton" name="StartJeToBe">
 							<properties>
 								<property name="Left" vt="Int8">59</property>
 								<property name="Top" vt="Int8">87</property>
