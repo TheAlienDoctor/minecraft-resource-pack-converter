@@ -3,3 +3,5 @@ List of currently unsported textures:
 Bedrock (to Java)
 textures/blocks/azalea_leaves_flowers_opaque.png
 textures/blocks/azalea_leaves_opaque.png
+
+textures/blocks/bubble_column (all variations)

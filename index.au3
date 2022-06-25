@@ -692,16 +692,6 @@ Func bedrockToJava()
 		FileWrite($logDir & "\" & "log.latest", "bookshelf.png texture not found, ignoring it!" & @CRLF)
 		FileClose($logDir & "\" & "log.latest")
 	EndIf
-	If FileExists($bedrockDir & "\textures\blocks\bookshelf.png") Then
-		FileMove($bedrockDir & "\textures\blocks\bookshelf.png", $javaDir & "\assets\minecraft\textures\block\bookshelf.png", 8)
-		FileOpen($logDir & "\" & "log.latest", 1)
-		FileWrite($logDir & "\" & "log.latest", "bookshelf.png texture found, converting it!" & @CRLF)
-		FileClose($logDir & "\" & "log.latest")
-	Else
-		FileOpen($logDir & "\" & "log.latest", 1)
-		FileWrite($logDir & "\" & "log.latest", "bookshelf.png texture not found, ignoring it!" & @CRLF)
-		FileClose($logDir & "\" & "log.latest")
-	EndIf
 	If FileExists($bedrockDir & "\textures\blocks\brewing_stand.png") Then
 		FileMove($bedrockDir & "\textures\blocks\brewing_stand.png", $javaDir & "\assets\minecraft\textures\block\brewing_stand.png", 8)
 		FileOpen($logDir & "\" & "log.latest", 1)
@@ -710,6 +700,56 @@ Func bedrockToJava()
 	Else
 		FileOpen($logDir & "\" & "log.latest", 1)
 		FileWrite($logDir & "\" & "log.latest", "brewing_stand.png texture not found, ignoring it!" & @CRLF)
+		FileClose($logDir & "\" & "log.latest")
+	EndIf
+	If FileExists($bedrockDir & "\textures\blocks\brewing_stand_base.png") Then
+		FileMove($bedrockDir & "\textures\blocks\brewing_stand_base.png", $javaDir & "\assets\minecraft\textures\block\brewing_stand_base.png", 8)
+		FileOpen($logDir & "\" & "log.latest", 1)
+		FileWrite($logDir & "\" & "log.latest", "brewing_stand_base.png texture found, converting it!" & @CRLF)
+		FileClose($logDir & "\" & "log.latest")
+	Else
+		FileOpen($logDir & "\" & "log.latest", 1)
+		FileWrite($logDir & "\" & "log.latest", "brewing_stand_base.png texture not found, ignoring it!" & @CRLF)
+		FileClose($logDir & "\" & "log.latest")
+	EndIf
+	If FileExists($bedrockDir & "\textures\blocks\brewing_stand_base.png") Then
+		FileMove($bedrockDir & "\textures\blocks\brewing_stand_base.png", $javaDir & "\assets\minecraft\textures\block\brewing_stand_base.png", 8)
+		FileOpen($logDir & "\" & "log.latest", 1)
+		FileWrite($logDir & "\" & "log.latest", "brewing_stand_base.png texture found, converting it!" & @CRLF)
+		FileClose($logDir & "\" & "log.latest")
+	Else
+		FileOpen($logDir & "\" & "log.latest", 1)
+		FileWrite($logDir & "\" & "log.latest", "brewing_stand_base.png texture not found, ignoring it!" & @CRLF)
+		FileClose($logDir & "\" & "log.latest")
+	EndIf
+	If FileExists($bedrockDir & "\textures\blocks\brick.png") Then
+		FileMove($bedrockDir & "\textures\blocks\brick.png", $javaDir & "\assets\minecraft\textures\block\bricks.png", 8)
+		FileOpen($logDir & "\" & "log.latest", 1)
+		FileWrite($logDir & "\" & "log.latest", "brick.png texture found, converting it!" & @CRLF)
+		FileClose($logDir & "\" & "log.latest")
+	Else
+		FileOpen($logDir & "\" & "log.latest", 1)
+		FileWrite($logDir & "\" & "log.latest", "brick.png texture not found, ignoring it!" & @CRLF)
+		FileClose($logDir & "\" & "log.latest")
+	EndIf
+	If FileExists($bedrockDir & "\textures\blocks\budding_amethyst.png") Then
+		FileMove($bedrockDir & "\textures\blocks\budding_amethyst.png", $javaDir & "\assets\minecraft\textures\block\budding_amethyst.png", 8)
+		FileOpen($logDir & "\" & "log.latest", 1)
+		FileWrite($logDir & "\" & "log.latest", "budding_amethyst.png texture found, converting it!" & @CRLF)
+		FileClose($logDir & "\" & "log.latest")
+	Else
+		FileOpen($logDir & "\" & "log.latest", 1)
+		FileWrite($logDir & "\" & "log.latest", "budding_amethyst.png texture not found, ignoring it!" & @CRLF)
+		FileClose($logDir & "\" & "log.latest")
+	EndIf
+	If FileExists($bedrockDir & "\textures\blocks\cactus_bottom.png") Then ;Convert tga to png eeeeee
+		FileMove($bedrockDir & "\textures\blocks\cactus_bottom.png", $javaDir & "\assets\minecraft\textures\block\budding_amethyst.png", 8)
+		FileOpen($logDir & "\" & "log.latest", 1)
+		FileWrite($logDir & "\" & "log.latest", "budding_amethyst.png texture found, converting it!" & @CRLF)
+		FileClose($logDir & "\" & "log.latest")
+	Else
+		FileOpen($logDir & "\" & "log.latest", 1)
+		FileWrite($logDir & "\" & "log.latest", "budding_amethyst.png texture not found, ignoring it!" & @CRLF)
 		FileClose($logDir & "\" & "log.latest")
 	EndIf
 
