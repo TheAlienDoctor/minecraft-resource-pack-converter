@@ -58,13 +58,19 @@ EndIf
 ;Conversion variables
 
 ;Declare the Bedrock texture and Java texture
+;NOTE: The name of the variable is (unless specified) the Bedrock texture name.
 Global $acacia_trapdoor[2] = ["textures\blocks\acacia_trapdoor.png", "assets\minecraft\textures\block\acacia_trapdoor.png"]
 Global $amethyst_block[2] = ["textures\blocks\amethyst_block.png", "assets\minecraft\block\amethyst_block.png"]
 Global $amethyst_cluster[2] = ["textures\blocks\amethyst_cluster.png", "assets\minecraft\block\amethyst_cluster.png"]
 Global $ancient_debris_side[2] = ["textures\blocks\ancient_debris_side.png", "assets\minecraft\block\ancient_debris_side.png"]
+Global $ancient_debris_top[2] = ["textures\blocks\ancient_debris_top.png", "assets\minecraft\block\ancient_debris_top.png"]
+Global $anvil_base[2] = ["textures\blocks\anvil_base.png", "assets\minecraft\block\anvil.png"]
+Global $anvil_top_damaged_0[2] = ["textures\blocks\anvil_top_damaged_0.png", "assets\minecraft\block\anvil_top.png"]
+Global $anvil_top_damaged_1[2] = ["textures\blocks\anvil_top_damaged_1.png", "assets\minecraft\block\chipped_anvil_top.png"]
+Global $anvil_top_damaged_2[2] = ["textures\blocks\anvil_top_damaged_2.png", "assets\minecraft\block\damaged_anvil_top.png"]
 
 
-Global $textures[2] = [$acacia_trapdoor, $amethyst_block, $amethyst_cluster, $ancient_debris_side]
+Global $textures[7] = [$acacia_trapdoor, $amethyst_block, $amethyst_cluster, $ancient_debris_side, $ancient_debris_top, $anvil_base, $anvil_top_damaged_1]
 
 ;###########################################################################################################################################################################################
 ;Functions
