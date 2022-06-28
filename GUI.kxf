@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <object type="TAForm" name="PackConverter">
 	<properties>
-		<property name="Left" vt="Int16">912</property>
-		<property name="Top" vt="Int16">660</property>
+		<property name="Left" vt="Int16">904</property>
+		<property name="Top" vt="Int16">618</property>
 		<property name="Width" vt="Int16">634</property>
 		<property name="Height" vt="Int16">241</property>
 		<property name="Hint" vt="String">Pack Converter</property>
@@ -26,7 +26,7 @@
 		<property name="FormOptIndentChar" vt="Int8">0</property>
 		<property name="FormOptIndentCount" vt="Int8">1</property>
 		<property name="FormOptIndentInit" vt="Int8">0</property>
-		<property name="FormOptVarScope" vt="Int8">0</property>
+		<property name="FormOptVarScope" vt="Int8">1</property>
 		<property name="Resizing" vt="Set"/>
 		<property name="PixelsPerInch" vt="Int8">96</property>
 		<property name="TextHeight" vt="Int8">13</property>
@@ -63,7 +63,7 @@
 						<property name="ParentFont" vt="False">False</property>
 					</properties>
 					<components>
-						<object type="TALabel" name="PackNameTitle">
+						<object type="TALabel" name="JEPackNameTitle">
 							<properties>
 								<property name="Left" vt="Int8">4</property>
 								<property name="Top" vt="Int8">15</property>
@@ -79,7 +79,7 @@
 							</properties>
 							<components/>
 						</object>
-						<object type="TALabel" name="PackDescTitle">
+						<object type="TALabel" name="JEPackDescTitle">
 							<properties>
 								<property name="Left" vt="Int8">3</property>
 								<property name="Top" vt="Int8">47</property>
@@ -111,7 +111,7 @@
 							</properties>
 							<components/>
 						</object>
-						<object type="TAInput" name="InputPackName">
+						<object type="TAInput" name="JEPackNameInput">
 							<properties>
 								<property name="Left" vt="Int8">76</property>
 								<property name="Top" vt="Int8">15</property>
@@ -119,7 +119,6 @@
 								<property name="Height" vt="Int8">21</property>
 								<property name="Hint" vt="String">Pack name</property>
 								<property name="TabOrder" vt="Int8">3</property>
-								<property name="Text" vt="String">Pack name</property>
 								<property name="CtrlStyle" vt="Int32">1342374016</property>
 								<property name="CtrlExStyle" vt="Int16">512</property>
 								<property name="Resizing" vt="Set">DockHeight</property>
@@ -127,7 +126,7 @@
 							</properties>
 							<components/>
 						</object>
-						<object type="TAInput" name="PackDescInput">
+						<object type="TAInput" name="JEPackDescInput">
 							<properties>
 								<property name="Left" vt="Int8">100</property>
 								<property name="Top" vt="Int8">47</property>
@@ -135,7 +134,6 @@
 								<property name="Height" vt="Int8">21</property>
 								<property name="Hint" vt="String">Pack description</property>
 								<property name="TabOrder" vt="Int8">4</property>
-								<property name="Text" vt="String">Pack description</property>
 								<property name="CtrlStyle" vt="Int32">1342374016</property>
 								<property name="CtrlExStyle" vt="Int16">512</property>
 								<property name="Resizing" vt="Set">DockHeight</property>
@@ -165,7 +163,6 @@
 								<property name="Height" vt="Int8">21</property>
 								<property name="Hint" vt="String">Pack description</property>
 								<property name="TabOrder" vt="Int8">0</property>
-								<property name="Text" vt="String">Pack description</property>
 								<property name="CtrlStyle" vt="Int32">1342374016</property>
 								<property name="CtrlExStyle" vt="Int16">512</property>
 								<property name="Resizing" vt="Set">DockHeight</property>
@@ -180,7 +177,6 @@
 								<property name="Height" vt="Int8">21</property>
 								<property name="Hint" vt="String">Pack name</property>
 								<property name="TabOrder" vt="Int8">1</property>
-								<property name="Text" vt="String">Pack name</property>
 								<property name="CtrlStyle" vt="Int32">1342374016</property>
 								<property name="CtrlExStyle" vt="Int16">512</property>
 								<property name="Resizing" vt="Set">DockHeight</property>
