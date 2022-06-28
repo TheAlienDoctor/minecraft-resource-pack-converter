@@ -1,4 +1,4 @@
-#pragma compile(Compatibility, win10 & win11)
+#pragma compile(Compatibility, Windows)
 #pragma compile(FileDescription, Converts Minecraft resource packs between Minecraft Bedrock and Java)
 #pragma compile(ProductName, Alien's Minecraft resource pack converter)
 #pragma compile(ProductVersion, 1.0.0)
@@ -20,18 +20,18 @@
 Global $PackConverter = GUICreate("Alien's Pack Converter", 619, 203, -1, -1)
 Global $PackConverter = GUICtrlCreateTab(8, 8, 601, 185)
 Global $BedrockToJava = GUICtrlCreateTabItem("Bedrock to Java")
-Global $PackNameTitle = GUICtrlCreateLabel("Pack Name:", 16, 48, 63, 17)
-Global $PackDescTitle = GUICtrlCreateLabel("Pack Description:", 15, 80, 88, 17)
+Global $JEPackNameTitle = GUICtrlCreateLabel("Pack Name:", 16, 48, 63, 17)
+Global $JEPackDescTitle = GUICtrlCreateLabel("Pack Description:", 15, 80, 88, 17)
 Global $StartBeToJe = GUICtrlCreateButton("Start conversion", 457, 162, 145, 25)
 GUICtrlSetTip(-1, "Start conversion")
-Global $InputPackName = GUICtrlCreateInput("Pack name", 88, 48, 513, 21)
+Global $JEPackNameInput = GUICtrlCreateInput("", 88, 48, 513, 21)
 GUICtrlSetTip(-1, "Pack name")
-Global $PackDescInput = GUICtrlCreateInput("Pack description", 112, 80, 489, 21)
+Global $JEPackDescInput = GUICtrlCreateInput("", 112, 80, 489, 21)
 GUICtrlSetTip(-1, "Pack description")
 Global $JavaToBedrock = GUICtrlCreateTabItem("Java to Bedrock")
-Global $BEPackDescInput = GUICtrlCreateInput("Pack description", 112, 80, 489, 21)
+Global $BEPackDescInput = GUICtrlCreateInput("", 112, 80, 489, 21)
 GUICtrlSetTip(-1, "Pack description")
-Global $BEPackNameInput = GUICtrlCreateInput("Pack name", 88, 48, 513, 21)
+Global $BEPackNameInput = GUICtrlCreateInput("", 88, 48, 513, 21)
 GUICtrlSetTip(-1, "Pack name")
 Global $StartJeToBe = GUICtrlCreateButton("Start conversion", 457, 162, 145, 25)
 GUICtrlSetTip(-1, "Start conversion")
@@ -45,8 +45,12 @@ GUISetState(@SW_SHOW)
 ;Declare variables
 
 Global $dateTime = @MDAY & '.' & @MON & '.' & @YEAR & '-' & @HOUR & '.' & @MIN & '.' & @SEC
+
 Global $bedrockDir = @ScriptDir & "\" & IniRead("options.ini", "config", "BedrockDir", "Bedrock-pack")
 Global $javaDir = @ScriptDir & "\" & IniRead("options.ini", "config", "JavaDir", "Java-pack")
+
+Global $bedrockPackName = GUICtrlRead($BEPackNameInput)
+Global $bedrockPackDesc = GUICtrlRead($BEPackDescInput)
 
 If IniRead("options.ini", "logConfig", "CustomLogDir", "false") = "false" Then
 	Global $logDir = @ScriptDir & "\" & "logs"
@@ -75,13 +79,42 @@ Global $textures[7] = [$acacia_trapdoor, $amethyst_block, $amethyst_cluster, $an
 ;###########################################################################################################################################################################################
 ;Functions
 
+;Version 4 UUID generator
+;credits goes to mimec (http://php.net/uniqid#69164)
+Func uuidGenerator()
+	Return StringFormat('%04x%04x-%04x-%04x-%04x-%04x%04x%04x', _
+			Random(0, 0xffff), Random(0, 0xffff), _
+			Random(0, 0xffff), _
+			BitOR(Random(0, 0x0fff), 0x4000), _
+			BitOR(Random(0, 0x3fff), 0x8000), _
+			Random(0, 0xffff), Random(0, 0xffff), Random(0, 0xffff) _
+			)
+EndFunc   ;==>uuidGenerator
+
 Func bedrockToJava()
+	Local $javaPackDesc = GUICtrlRead($JEPackDescInput)
+
 	FileOpen($logDir & "\" & "log.latest", 1)
-	FileWrite($logDir & "\" & "log.latest", "Begin converting Bedrock to Java" & @CRLF)
+	FileWrite($logDir & "\" & "log.latest", "Began converting Bedrock to Java" & @CRLF)
+	FileClose($logDir & "\" & "log.latest")
+
+	DirCreate($javaDir)
+
+	FileOpen($logDir & "\" & "log.latest", 1)
+	FileWrite($logDir & "\" & "log.latest", "Generating pack.mcmeta file" & @CRLF)
+	FileClose($logDir & "\" & "log.latest")
+
+	FileOpen($javaDir & "\" & "pack.txt", 8)
+	FileWrite($javaDir & '\' & 'pack.txt', '{"pack":{"pack_format":9,"description":"' & $javaPackDesc & '"}}')
+	FileClose($javaDir & "\" & "pack.txt")
+	FileMove($javaDir & "\" & "pack.txt", $javaDir & "\" & "pack.mcmeta")
+
+	FileOpen($logDir & "\" & "log.latest", 1)
+	FileWrite($logDir & "\" & "log.latest", "Generated pack.mcmeta file" & @CRLF)
+	FileWrite($logDir & "\" & "log.latest", "Beginning texture file conversion" & @CRLF)
 	FileClose($logDir & "\" & "log.latest")
 
 	For $index = 0 To 1
-		FileOpen("")
 		Local $current = $textures[$index]
 
 		If FileExists($bedrockDir & "\" & $current[0]) Then
@@ -95,11 +128,61 @@ Func bedrockToJava()
 			FileClose($logDir & "\" & "log.latest")
 		EndIf
 	Next
+
 	FileOpen($logDir & "\" & "log.latest", 1)
-	FileWrite($logDir & "\" & "log.latest", "Bedrock to Java conversion complete!" & @CRLF)
+	FileWrite($logDir & "\" & "log.latest", "Texture file conversion complete!" & @CRLF)
+	FileWrite($logDir & "\" & "log.latest", "Bedrock to Java pack conversion complete!" & @CRLF)
 	FileClose($logDir & "\" & "log.latest")
 	MsgBox(0, "Alien's pack converter", "Conversion complete!")
 EndFunc   ;==>bedrockToJava
+
+; Page break to help my eyes xD ########################################################################################
+
+Func javaToBedrock()
+	Local $bedrockPackName = GUICtrlRead($BEPackNameInput)
+	Local $bedrockPackDesc = GUICtrlRead($BEPackDescInput)
+
+	FileOpen($logDir & "\" & "log.latest", 1)
+	FileWrite($logDir & "\" & "log.latest", "Began converting Java to Bedrock" & @CRLF)
+	FileClose($logDir & "\" & "log.latest")
+
+	DirCreate($bedrockDir)
+
+	FileOpen($logDir & "\" & "log.latest", 1)
+	FileWrite($logDir & "\" & "log.latest", "Generating manifest.json file" & @CRLF)
+	FileClose($logDir & "\" & "log.latest")
+
+	FileOpen($bedrockDir & "\" & "manifest.txt", 8)
+	FileWrite($bedrockDir & '\' & 'manifest.txt', '{"format_version":2,"header":{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","name":"' & $bedrockPackName & '","uuid":"' & uuidGenerator() & '","version":[1,0,0],"min_engine_version":[1,19,0]},"modules":[{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","type":"resources","uuid":"' & uuidGenerator() & '","version":[1,0,0]}]}')
+	FileClose($bedrockDir & "\" & "manifest.txt")
+	FileMove($bedrockDir & "\" & "manifest.txt", $bedrockDir & "\" & "manifest.json")
+
+	FileOpen($logDir & "\" & "log.latest", 1)
+	FileWrite($logDir & "\" & "log.latest", "Generated manifest.json file" & @CRLF)
+	FileWrite($logDir & "\" & "log.latest", "Beginning texture file conversion" & @CRLF)
+	FileClose($logDir & "\" & "log.latest")
+
+	For $index = 0 To 1
+		Local $current = $textures[$index]
+
+		If FileExists($bedrockDir & "\" & $current[1]) Then
+			FileMove($bedrockDir & "\" & $current[1], $javaDir & "\" & $current[0], 8)
+			FileOpen($logDir & "\" & "log.latest", 1)
+			FileWrite($logDir & "\" & "log.latest", $current[1] & " found, moved it to " & $current[0] & @CRLF)
+			FileClose($logDir & "\" & "log.latest")
+		Else
+			FileOpen($logDir & "\" & "log.latest", 1)
+			FileWrite($logDir & "\" & "log.latest", $current[1] & " not found, ignoring it! " & @CRLF)
+			FileClose($logDir & "\" & "log.latest")
+		EndIf
+	Next
+
+	FileOpen($logDir & "\" & "log.latest", 1)
+	FileWrite($logDir & "\" & "log.latest", "Texture file conversion complete!" & @CRLF)
+	FileWrite($logDir & "\" & "log.latest", "Java to Bedrock pack conversion complete!" & @CRLF)
+	FileClose($logDir & "\" & "log.latest")
+	MsgBox(0, "Alien's pack converter", "Conversion complete!")
+EndFunc   ;==>javaToBedrock
 
 Func createLog()
 	If FileExists($logDir) Then ;If directory exists then begin writing logs
@@ -124,29 +207,6 @@ Func finishLog()
 	FileMove($logDir & "\log.latest", $logDir & "\log[" & $dateTime & "].txt")
 EndFunc   ;==>finishLog
 
-Func bedrockToJavaOLD()
-	FileOpen($logDir & "\" & "log.latest", 1)
-	FileWrite($logDir & "\" & "log.latest", "Begin converting Bedrock to Java" & @CRLF)
-	FileClose($logDir & "\" & "log.latest")
-
-	If FileExists($bedrockDir & "\textures\blocks\acacia_trapdoor.png") Then
-		FileMove($bedrockDir & "\textures\blocks\acacia_trapdoor.png", $javaDir & "\assets\minecraft\textures\block\acacia_trapdoor.png", 8)
-		FileOpen($logDir & "\" & "log.latest", 1)
-		FileWrite($logDir & "\" & "log.latest", "acacia_trapdoor.png texture found, converting it!" & @CRLF)
-		FileClose($logDir & "\" & "log.latest")
-	Else
-		FileOpen($logDir & "\" & "log.latest", 1)
-		FileWrite($logDir & "\" & "log.latest", "acacia_trapdoor.png texture not found, ignoring it!" & @CRLF)
-		FileClose($logDir & "\" & "log.latest")
-	EndIf
-
-	FileOpen($logDir & "\" & "log.latest", 1)
-	FileWrite($logDir & "\" & "log.latest", "Bedrock to Java conversion complete!" & @CRLF)
-	FileClose($logDir & "\" & "log.latest")
-	MsgBox(0, "Alien's pack converter", "Conversion complete!")
-
-Endfunc   ;==>bedrockToJavaOLD
-
 ;###########################################################################################################################################################################################
 ;GUI Control
 
@@ -161,6 +221,9 @@ While 1
 
 		Case $StartBeToJe
 			bedrockToJava()
+
+		Case $StartJeToBe
+			javaToBedrock()
 
 	EndSwitch
 WEnd
