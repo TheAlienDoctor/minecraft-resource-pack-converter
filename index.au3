@@ -13,6 +13,7 @@
 #include <TabConstants.au3>
 #include <WindowsConstants.au3>
 
+#include "conversions.au3"
 #include "UDF\Zip.au3"
 
 ;###########################################################################################################################################################################################
@@ -57,22 +58,7 @@ ElseIf IniRead("options.ini", "logConfig", "CustomLogDir", "false") = "true" The
 	Global $logDir = IniRead("options.ini", "logConfig", "LogDir", @ScriptDir & "\logs")
 EndIf
 
-;###########################################################################################################################################################################################
-;Conversion variables
-
-;Declare the Bedrock texture and Java texture
-;NOTE: The name of the variable is (unless specified) the Bedrock texture name.
-Global $acacia_trapdoor[2] = ["textures\blocks\acacia_trapdoor.png", "assets\minecraft\textures\block\acacia_trapdoor.png"]
-Global $amethyst_block[2] = ["textures\blocks\amethyst_block.png", "assets\minecraft\textures\block\amethyst_block.png"]
-Global $amethyst_cluster[2] = ["textures\blocks\amethyst_cluster.png", "assets\minecraft\textures\block\amethyst_cluster.png"]
-Global $ancient_debris_side[2] = ["textures\blocks\ancient_debris_side.png", "assets\minecraft\textures\block\ancient_debris_side.png"]
-Global $ancient_debris_top[2] = ["textures\blocks\ancient_debris_top.png", "assets\minecraft\textures\block\ancient_debris_top.png"]
-Global $anvil_base[2] = ["textures\blocks\anvil_base.png", "assets\minecraft\textures\block\anvil.png"]
-Global $anvil_top_damaged_0[2] = ["textures\blocks\anvil_top_damaged_0.png", "assets\minecraft\textures\block\anvil_top.png"]
-Global $anvil_top_damaged_1[2] = ["textures\blocks\anvil_top_damaged_1.png", "assets\minecraft\textures\block\chipped_anvil_top.png"]
-Global $anvil_top_damaged_2[2] = ["textures\blocks\anvil_top_damaged_2.png", "assets\minecraft\textures\block\damaged_anvil_top.png"]
-
-
+;The conversion variables can be found in conversions.au3, this is to help with not cluttering this script
 Global $textures[9] = [$acacia_trapdoor, $amethyst_block, $amethyst_cluster, $ancient_debris_side, $ancient_debris_top, $anvil_base, $anvil_top_damaged_0, $anvil_top_damaged_1, $anvil_top_damaged_2]
 
 ;###########################################################################################################################################################################################
@@ -130,13 +116,20 @@ Func bedrockToJava()
 	Next
 	FileOpen($logDir & "\log.latest", 1)
 	FileWrite($logDir & "\log.latest", "Texture file conversion complete!" & @CRLF)
-	FileWrite($logDir & "\log.latest", "Began making .zip folder" & @CRLF)
+	FileWrite($logDir & "\log.latest", "Creating pack.zip file" & @CRLF)
 	FileClose($logDir & "\log.latest")
 
 	_Zip_Create($javaDir & "\pack.zip")
+
+	FileOpen($logDir & "\log.latest", 1)
+	FileWrite($logDir & "\log.latest", "Created pack.zip file" & @CRLF)
+	FileWrite($logDir & "\log.latest", "Adding files to pack.zip file" & @CRLF)
+	FileClose($logDir & "\log.latest")
+
 	_Zip_AddFolderContents($javaDir & "\pack.zip", $javaDir & "\pack", 1)
 
 	FileOpen($logDir & "\log.latest", 1)
+	FileWrite($logDir & "\log.latest", "Finished adding files to pack.zip!" & @CRLF)
 	FileWrite($logDir & "\log.latest", ".zip folder created and renamed!" & @CRLF)
 	FileWrite($logDir & "\log.latest", "Bedrock to Java pack conversion complete!" & @CRLF)
 	FileClose($logDir & "\log.latest")
