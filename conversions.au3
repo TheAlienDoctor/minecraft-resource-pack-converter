@@ -1,3 +1,4 @@
+;Conversion variables, so the main script file doesn't get too cluttered!
 Global $acacia_trapdoor[2] = ["textures\blocks\acacia_trapdoor.png", "assets\minecraft\textures\block\acacia_trapdoor.png"]
 Global $amethyst_block[2] = ["textures\blocks\amethyst_block.png", "assets\minecraft\textures\block\amethyst_block.png"]
 Global $amethyst_cluster[2] = ["textures\blocks\amethyst_cluster.png", "assets\minecraft\textures\block\amethyst_cluster.png"]
