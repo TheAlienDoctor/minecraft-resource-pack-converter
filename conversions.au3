@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Global $door_acacia_lower[2] = ["textures\blocks\door_acacia_lower.png", "assets\minecraft\block\acacia_door_bottom.png"]
 Global $door_acacia_upper[2] = ["textures\blocks\door_acacia_upper.png", "assets\minecraft\block\acacia_door_top.png"]
 Global $log_acacia[2] = ["textures\blocks\log_acacia.png", "assets\minecraft\block\acacia_log.png"]
