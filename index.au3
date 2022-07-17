@@ -77,6 +77,23 @@ Func uuidGenerator()
 			)
 EndFunc   ;==>uuidGenerator
 
+Func createLog()
+	If FileExists($logDir) Then ;If directory exists then begin writing logs
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "Log file generated at " & @HOUR & ":" & @MIN & ":" & @SEC & " on " & @MDAY & "/" & @MON & "/" & @YEAR & " (HH:MM:SS on DD.MM.YY)" & @CRLF)
+		FileWrite($logDir & "\log.latest", "###################################################################" & @CRLF)
+		FileClose($logDir & "\log.latest")
+	ElseIf FileExists($logDir) = "0" Then ;If directory doesn't exist create it then begin writing logs
+		DirCreate($logDir)
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "Created log file directory" & @CRLF)
+		FileWrite($logDir & "\log.latest", @CRLF)
+		FileWrite($logDir & "\log.latest", "Log file generated at " & @HOUR & ":" & @MIN & ":" & @SEC & " on " & @MDAY & "/" & @MON & "/" & @YEAR & " (HH:MM:SS on DD.MM.YY)" & @CRLF)
+		FileWrite($logDir & "\log.latest", "###################################################################" & @CRLF)
+		FileClose($logDir & "\log.latest")
+	EndIf
+EndFunc   ;==>createLog
+
 Func finishLog()
 	FileOpen($logDir & "\log.latest", 1)
 	FileWrite($logDir & "\log.latest", "###################################################################" & @CRLF)
