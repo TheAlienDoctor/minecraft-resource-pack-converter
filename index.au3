@@ -391,14 +391,55 @@ Func bedrockToJava()
 				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
 				$conversionCount += 1
 				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF & @CRLF)
+				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
 				FileClose($logDir & "\log.latest")
 			Else
 				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF & @CRLF)
+				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
 				FileClose($logDir & "\log.latest")
 			EndIf
 		Next
+		For $index = 0 To 44
+			Local $current = $blockTextures18[$index]
+
+			If FileExists($inputDir & "\" & $current[0]) Then
+				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
+				$conversionCount += 1
+				FileOpen($logDir & "\log.latest", 1)
+				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
+				FileClose($logDir & "\log.latest")
+			Else
+				FileOpen($logDir & "\log.latest", 1)
+				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
+				FileClose($logDir & "\log.latest")
+			EndIf
+		Next
+
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "Converted block textures!" & @CRLF)
+		FileWrite($logDir & "\log.latest", @CRLF)
+		FileClose($logDir & "\log.latest")
+
+		For $index = 0 To 1
+			Local $current = $colormapTextures[$index]
+
+			If FileExists($inputDir & "\" & $current[0]) Then
+				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
+				$conversionCount += 1
+				FileOpen($logDir & "\log.latest", 1)
+				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
+				FileClose($logDir & "\log.latest")
+			Else
+				FileOpen($logDir & "\log.latest", 1)
+				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
+				FileClose($logDir & "\log.latest")
+			EndIf
+		Next
+
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "Converted colormap textures!" & @CRLF)
+		FileWrite($logDir & "\log.latest", @CRLF)
+		FileClose($logDir & "\log.latest")
 
 		For $index = 0 To 85
 			Local $current = $itemTextures1[$index]
@@ -452,14 +493,19 @@ Func bedrockToJava()
 				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
 				$conversionCount += 1
 				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF & @CRLF)
+				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
 				FileClose($logDir & "\log.latest")
 			Else
 				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF & @CRLF)
+				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
 				FileClose($logDir & "\log.latest")
 			EndIf
 		Next
+
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "Converted item textures!" & @CRLF)
+		FileWrite($logDir & "\log.latest", @CRLF)
+		FileClose($logDir & "\log.latest")
 
 		For $index = 0 To 93
 			Local $current = $entityTextures1[$index]
@@ -492,6 +538,11 @@ Func bedrockToJava()
 			EndIf
 		Next
 
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "Converted entity textures!" & @CRLF)
+		FileWrite($logDir & "\log.latest", @CRLF)
+		FileClose($logDir & "\log.latest")
+
 		For $index = 0 To 2
 			Local $current = $environmentTextures[$index]
 
@@ -499,14 +550,19 @@ Func bedrockToJava()
 				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
 				$conversionCount += 1
 				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF & @CRLF)
+				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
 				FileClose($logDir & "\log.latest")
 			Else
 				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF & @CRLF)
+				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
 				FileClose($logDir & "\log.latest")
 			EndIf
 		Next
+
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "Converted environment textures!" & @CRLF)
+		FileWrite($logDir & "\log.latest", @CRLF)
+		FileClose($logDir & "\log.latest")
 
 		For $index = 0 To 10
 			Local $current = $armorTextures[$index]
@@ -515,15 +571,19 @@ Func bedrockToJava()
 				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
 				$conversionCount += 1
 				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF & @CRLF)
+				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
 				FileClose($logDir & "\log.latest")
 			Else
 				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF & @CRLF)
+				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
 				FileClose($logDir & "\log.latest")
 			EndIf
 		Next
 
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "Converted armor textures!" & @CRLF)
+		FileWrite($logDir & "\log.latest", @CRLF)
+		FileClose($logDir & "\log.latest")
 
 
 		FileOpen($logDir & "\log.latest", 1)
@@ -580,8 +640,8 @@ Func javaToBedrock()
 	FileClose($logDir & "\log.latest")
 
 	;For $index = 0 To 8
-	;	Local $current = $textures[$index]
-	;
+;
+;
 	;	If FileExists($inputDir & "\" & $current[1]) Then
 	;		FileMove($inputDir & "\" & $current[1], $bedrockDir & "\pack\" & $current[0], 8)
 	;		Local $conversionCount = +1
@@ -612,6 +672,7 @@ Func javaToBedrock()
 	FileOpen($logDir & "\log.latest", 1)
 	FileWrite($logDir & "\log.latest", "Finished adding files to pack.zip!" & @CRLF)
 	FileWrite($logDir & "\log.latest", "Java to Bedrock pack conversion complete!" & @CRLF)
+	FileWrite($logDir & "\log.latest", @CRLF)
 	FileClose($logDir & "\log.latest")
 
 	MsgBox(0, "Alien's pack converter", "Conversion complete! Converted " & $conversionCount & " files to Bedrock edition!")
