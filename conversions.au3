@@ -772,55 +772,97 @@ Global $glass_yellow[2] = ["textures\blocks\glass_yellow.png", "assets\minecraft
 Global $hardened_clay_stained_yellow[2] = ["textures\blocks\hardened_clay_stained_yellow.png", "assets\minecraft\textures\block\yellow_terracotta.png"]
 Global $wool_colored_yellow[2] = ["textures\blocks\wool_colored_yellow.png", "assets\minecraft\textures\block\yellow_wool.png"]
 
-Global $blockTextures1[49] = [$door_acacia_lower, $door_acacia_upper, $log_acacia, $log_acacia_top, $planks_acacia, $sapling_acacia, $acacia_trapdoor, $rail_activator, $rail_activator_powered, $flower_allium, $amethyst_block, $amethyst_cluster, $ancient_debris_side, $ancient_debris_top, $stone_andesite, $anvil_base, $anvil_top_damaged_0, $melon_stem_connected, $pumpkin_stem_connected, $azalea_leaves, $azalea_plant, $azalea_side, $azalea_top, $flower_houstonia, $bamboo_singleleaf, $bamboo_sapling, $bamboo_stem, $barrel_bottom, $barrel_side, $barrel_top, $barrel_top_open, $basalt_side, $basalt_top, $beacon, $bedrock, $beehive_side, $beetroots_stage_0, $beetroots_stage_1, $beetroots_stage_2, $beetroots_stage_3, $bee_nest_bottom, $bee_nest_front, $bee_nest_front_honey, $bee_nest_side, $bee_nest_top, $big_dripleaf_side1, $big_dripleaf_stem, $big_dripleaf_side2, $big_dripleaf_top]
+;Conversion variables that were added in manually
+Global $bamboo_leaf[2] = ["textures\blocks\bamboo_leaf.png", "assets\minecraft\textures\block\bamboo_large_leaves.png"]
+Global $bamboo_small_leaf[2] = ["textures\blocks\bamboo_small_leaf.png", "assets\minecraft\textures\block\bamboo_small_leaves.png"]
+Global $barrier[2] = ["textures\blocks\barrier.png", "assets\minecraft\textures\item\barrier.png"]
+Global $beehive_front[2] = ["textures\blocks\beehive_front.png", "assets\minecraft\textures\block\beehive_front.png"]
+Global $beehive_front_honey[2] = ["textures\blocks\beehive_front_honey.png", "assets\minecraft\textures\block\beehive_front_honey.png"]
+Global $beehive_top[2] = ["textures\blocks\beehive_top.png", "assets\minecraft\textures\block\beehive_end.png"]
+Global $bell_bottom[2] = ["textures\blocks\bell_bottom.png", "assets\minecraft\textures\block\bell_bottom.png"]
+Global $bell_side[2] = ["textures\blocks\bell_side.png", "assets\minecraft\textures\block\bell_side.png"]
+Global $bell_top[2] = ["textures\blocks\bell_top.png", "assets\minecraft\textures\block\bell_top.png"]
+Global $carrots_stage_3[2] = ["textures\blocks\carrots_stage_3.png", "assets\minecraft\textures\block\carrots_stage3.png"]
+Global $cocoa_stage_2[2] = ["textures\blocks\cocoa_stage_2.png", "assets\minecraft\textures\block\cocoa_stage2.png"]
+Global $compost[2] = ["textures\blocks\compost.png", "assets\minecraft\textures\block\composter_compost.png"]
+Global $compost_ready[2] = ["textures\blocks\compost_ready.png", "assets\minecraft\textures\block\composter_ready.png"]
+Global $composter_top[2] = ["textures\blocks\composter_top.png", "assets\minecraft\textures\block\composter_top.png"]
+Global $conduit_base[2] = ["textures\blocks\conduit_base.png", "assets\minecraft\textures\entity\conduit\base.png"]
+Global $conduit_cage[2] = ["textures\blocks\conduit_cage.png", "assets\minecraft\textures\entity\conduit\cage.png"]
+Global $conduit_wind_horizontal[2] = ["textures\blocks\conduit_wind_horizontal.png", "assets\minecraft\textures\entity\conduit\wind.png"]
+Global $conduit_wind_vertical[2] = ["textures\blocks\conduit_wind_vertical.png", "assets\minecraft\textures\entity\conduit\wind_vertical.png"]
+Global $coral_purple[2] = ["textures\blocks\coral_purple.png", "assets\minecraft\textures\block\bubble_coral_block.png"]
+Global $coral_red[2] = ["textures\blocks\coral_red.png", "assets\minecraft\textures\block\fire_coral_block.png"]
+Global $dried_kelp_side_b[2] = ["textures\blocks\dried_kelp_side_b.png", "assets\minecraft\textures\block\dried_kelp_side.png"]
+Global $grass_side_snowed[2] = ["textures\blocks\grass_side_snowed.png", "assets\minecraft\textures\block\grass_block_snow.png"]
+Global $hopper_inside[2] = ["textures\blocks\hopper_inside.png", "assets\minecraft\textures\block\hopper_inside.png"]
+Global $loom_top[2] = ["textures\blocks\loom_top.png", "assets\minecraft\textures\block\loom_top.png"]
+Global $nether_wart_block[2] = ["textures\blocks\nether_wart_block.png", "assets\minecraft\textures\block\nether_wart_block.png"]
+Global $noteblock[2] = ["textures\blocks\noteblock.png", "assets\minecraft\textures\block\note_block.png"]
+Global $observer_back_lit[2] = ["textures\blocks\observer_back_lit.png", "assets\minecraft\textures\block\observer_back_on.png"]
+Global $obsidian[2] = ["textures\blocks\obsidian.png", "assets\minecraft\textures\block\obsidian.png"]
+Global $piston_side[2] = ["textures\blocks\piston_side.png", "assets\minecraft\textures\block\piston_side.png"]
+Global $piston_top_normal[2] = ["textures\blocks\piston_top_normal.png", "assets\minecraft\textures\block\piston_top.png"]
+Global $piston_top_sticky[2] = ["textures\blocks\piston_top_sticky.png", "assets\minecraft\textures\block\piston_top_sticky.png"]
+Global $planks_spruce[2] = ["textures\blocks\planks_spruce.png", "assets\minecraft\textures\block\spruce_planks.png"]
+Global $potted_azalea_bush_side[2] = ["textures\blocks\potted_azalea_bush_side.png", "assets\minecraft\textures\block\potted_azalea_bush_side.png"]
+Global $potted_flowering_azalea_bush_side[2] = ["textures\blocks\potted_flowering_azalea_bush_side.png", "assets\minecraft\textures\block\potted_flowering_azalea_bush_side.png"]
+Global $pumpkin_stem_disconnected[2] = ["textures\blocks\pumpkin_stem_disconnected.png", "assets\minecraft\textures\block\pumpkin_stem.png"]
+Global $pumpkin_top[2] = ["textures\blocks\pumpkin_top.png", "assets\minecraft\textures\block\pumpkin_top.png"]
+Global $quartz_block_top[2] = ["textures\blocks\quartz_block_top.png", "assets\minecraft\textures\block\quartz_block_top.png"]
+Global $redstone_dust_cross[2] = ["textures\blocks\redstone_dust_cross.png", "assets\minecraft\textures\block\redstone_dust_dot.png"]
+Global $respawn_anchor_bottom[2] = ["textures\blocks\respawn_anchor_bottom.png", "assets\minecraft\textures\block\respawn_anchor_bottom.png"]
+Global $sculk_shrieker_bottom[2] = ["textures\blocks\sculk_shrieker_bottom.png", "assets\minecraft\textures\block\sculk_shrieker_bottom.png"]
+Global $smoker_bottom[2] = ["textures\blocks\smoker_bottom.png", "assets\minecraft\textures\block\smoker_bottom.png"]
+Global $stripped_spruce_log[2] = ["textures\blocks\stripped_spruce_log.png", "assets\minecraft\textures\block\stripped_spruce_log.png"]
+Global $trip_wire[2] = ["textures\blocks\trip_wire.png", "assets\minecraft\textures\block\tripwire.png"]
+Global $weeping_vines_base[2] = ["textures\blocks\weeping_vines_base.png", "assets\minecraft\textures\block\weeping_vines_plant.png"]
+Global $weeping_vines_bottom[2] = ["textures\blocks\weeping_vines_bottom.png", "assets\minecraft\textures\block\weeping_vines.png"]
 
+
+Global $blockTextures1[49] = [$door_acacia_lower, $door_acacia_upper, $log_acacia, $log_acacia_top, $planks_acacia, $sapling_acacia, $acacia_trapdoor, $rail_activator, $rail_activator_powered, $flower_allium, $amethyst_block, $amethyst_cluster, $ancient_debris_side, $ancient_debris_top, $stone_andesite, $anvil_base, $anvil_top_damaged_0, $melon_stem_connected, $pumpkin_stem_connected, $azalea_leaves, $azalea_plant, $azalea_side, $azalea_top, $flower_houstonia, $bamboo_singleleaf, $bamboo_sapling, $bamboo_stem, $barrel_bottom, $barrel_side, $barrel_top, $barrel_top_open, $basalt_side, $basalt_top, $beacon, $bedrock, $beehive_side, $beetroots_stage_0, $beetroots_stage_1, $beetroots_stage_2, $beetroots_stage_3, $bee_nest_bottom, $bee_nest_front, $bee_nest_front_honey, $bee_nest_side, $bee_nest_top, $big_dripleaf_side1, $big_dripleaf_stem, $big_dripleaf_side2, $big_dripleaf_top]
 
 Global $blockTextures2[48] = [$door_birch_lower, $door_birch_upper, $log_birch, $log_birch_top, $planks_birch, $sapling_birch, $birch_trapdoor, $blackstone, $blackstone_top, $black_candle, $black_candle_lit, $concrete_black, $concrete_powder_black, $glazed_terracotta_black, $shulker_top_black, $glass_black, $hardened_clay_stained_black, $wool_colored_black, $blast_furnace_front_off, $blast_furnace_front_on, $blast_furnace_side, $blast_furnace_top, $blue_candle, $blue_candle_lit, $concrete_blue, $concrete_powder_blue, $glazed_terracotta_blue, $blue_ice, $flower_blue_orchid, $shulker_top_blue, $glass_blue, $hardened_clay_stained_blue, $wool_colored_blue, $bone_block_side, $bone_block_top, $bookshelf, $coral_plant_pink, $coral_pink, $coral_fan_pink, $brewing_stand, $brewing_stand_base, $brick, $brown_candle, $brown_candle_lit, $concrete_brown, $concrete_powder_brown, $glazed_terracotta_brown, $mushroom_brown]
 
-
 Global $blockTextures3[48] = [$mushroom_block_skin_brown, $shulker_top_brown, $glass_brown, $hardened_clay_stained_brown, $wool_colored_brown, $coral_plant_purple, $coral_fan_purple, $budding_amethyst, $cake_bottom, $cake_inner, $cake_side, $cake_top, $calcite, $campfire, $campfire_log, $campfire_log_lit, $candle, $candle_lit, $carrots_stage_0, $carrots_stage_1, $carrots_stage_2, $carrots_stage3, $carrots_stage_3, $cartography_table_side1, $cartography_table_side2, $cartography_table_side3, $cartography_table_top, $pumpkin_face_off, $cauldron_bottom, $cauldron_inner, $hopper_inside, $cauldron_side, $cauldron_top, $cave_vines_head, $cave_vines_head_berries, $cave_vines_body, $cave_vines_body_berries, $chain_command_block_back, $chain_command_block_conditional, $chain_command_block_front, $chain_command_block_side, $anvil_top_damaged_1, $chiseled_deepslate, $chiseled_nether_bricks, $chiseled_polished_blackstone, $quartz_block_chiseled, $quartz_block_chiseled_top, $red_sandstone_carved]
-
 
 Global $blockTextures4[48] = [$sandstone_carved, $stonebrick_carved, $chorus_flower, $chorus_flower_dead, $chorus_plant, $clay, $coal_block, $coal_ore, $coarse_dirt, $cobbled_deepslate, $cobblestone, $web, $cocoa_stage_0, $cocoa_stage_1, $command_block_back, $command_block_conditional, $command_block_front, $command_block_side, $comparator_off, $comparator_on, $composter_bottom, $composter_side, $copper_block, $copper_ore, $flower_cornflower, $cracked_deepslate_bricks, $cracked_deepslate_tiles, $cracked_nether_bricks, $cracked_polished_blackstone_bricks, $stonebrick_cracked, $crafting_table_front, $crafting_table_side, $crafting_table_top, $crimson_door_lower, $crimson_door_top, $crimson_fungus, $crimson_nylium_top, $crimson_nylium_side, $crimson_planks, $crimson_roots, $crimson_roots_pot, $crimson_log_side, $crimson_log_top, $crimson_trapdoor, $crying_obsidian, $respawn_anchor_bottom, $cut_copper, $red_sandstone_smooth]
 
-
 Global $blockTextures5[48] = [$sandstone_smooth, $cyan_candle, $cyan_candle_lit, $concrete_cyan, $concrete_powder_cyan, $glazed_terracotta_cyan, $shulker_top_cyan, $glass_cyan, $hardened_clay_stained_cyan, $wool_colored_cyan, $anvil_top_damaged_2, $flower_dandelion, $door_dark_oak_lower, $door_dark_oak_upper, $log_big_oak, $log_big_oak_top, $planks_big_oak, $sapling_roofed_oak, $dark_oak_trapdoor, $prismarine_dark, $daylight_detector_inverted_top, $daylight_detector_side, $daylight_detector_top, $coral_plant_pink_dead, $coral_pink_dead, $coral_fan_pink_dead, $coral_plant_purple_dead, $coral_purple_dead, $coral_fan_purple_dead, $deadbush, $coral_plant_red_dead, $coral_red_dead, $coral_fan_red_dead, $coral_plant_yellow_dead, $coral_yellow_dead, $coral_fan_yellow_dead, $coral_plant_blue_dead, $coral_blue_dead, $coral_fan_blue_dead, $deepslate, $deepslate_bricks, $deepslate_coal_ore, $deepslate_copper_ore, $deepslate_diamond_ore, $deepslate_emerald_ore, $deepslate_gold_ore, $deepslate_iron_ore, $deepslate_lapis_ore]
-
 
 Global $blockTextures6[48] = [$deepslate_redstone_ore, $deepslate_tiles, $deepslate_top, $rail_detector, $rail_detector_powered, $diamond_block, $diamond_ore, $stone_diorite, $dirt, $grass_path_side, $grass_path_top, $dispenser_front_horizontal, $dispenser_front_vertical, $dragon_egg, $dried_kelp_side_a, $dried_kelp_top, $dripstone_block, $dropper_front_horizontal, $dropper_front_vertical, $emerald_block, $emerald_ore, $enchanting_table_bottom, $obsidian, $enchanting_table_side, $enchanting_table_top, $endframe_eye, $endframe_side, $endframe_top, $end_rod, $end_stone, $end_bricks, $exposed_copper, $exposed_cut_copper, $farmland_dry, $farmland_wet, $fire_0, $fire_1, $coral_plant_red, $coral_fan_red, $fletcher_table_side2, $fletcher_table_side1, $fletcher_table_top, $azalea_leaves_flowers, $flowering_azalea_side, $flowering_azalea_top, $flower_pot, $frogspawn, $frosted_ice_0]
 
-
 Global $blockTextures7[48] = [$frosted_ice_1, $frosted_ice_2, $frosted_ice_3, $furnace_front_off, $furnace_front_on, $furnace_side, $furnace_top, $gilded_blackstone, $glass, $glowstone, $glow_item_frame, $glow_lichen, $gold_block, $gold_ore, $stone_granite, $grass_side_carried, $grass_block_snow, $grass_top, $gravel, $gray_candle, $gray_candle_lit, $concrete_gray, $concrete_powder_gray, $glazed_terracotta_gray, $shulker_top_gray, $glass_gray, $hardened_clay_stained_gray, $wool_colored_gray, $green_candle, $green_candle_lit, $concrete_green, $concrete_powder_green, $glazed_terracotta_green, $shulker_top_green, $glass_green, $hardened_clay_stained_green, $wool_colored_green, $hanging_roots, $hay_block_side, $hay_block_top, $honeycomb, $honey_bottom, $honey_side, $honey_top, $cauldron_inner, $hopper_inside, $hopper_outside, $hopper_top]
-
 
 Global $blockTextures8[48] = [$coral_plant_yellow, $coral_yellow, $coral_fan_yellow, $ice, $iron_bars, $iron_block, $door_iron_lower, $door_iron_upper, $iron_ore, $iron_trapdoor, $itemframe_background, $pumpkin_face_on, $jigsaw_back, $jigsaw_lock, $jigsaw_side, $jigsaw_front, $jukebox_side, $noteblock, $jukebox_top, $door_jungle_lower, $door_jungle_upper, $log_jungle, $log_jungle_top, $planks_jungle, $sapling_jungle, $jungle_trapdoor, $ladder, $lantern, $lapis_block, $lapis_ore, $large_amethyst_bud, $lava_flow, $lava_still, $lectern_base, $lectern_front, $lectern_sides, $lectern_top, $lever, $lightning_rod, $light_blue_candle, $light_blue_candle_lit, $concrete_light_blue, $concrete_powder_light_blue, $glazed_terracotta_light_blue, $shulker_top_light_blue, $glass_light_blue, $hardened_clay_stained_light_blue, $wool_colored_light_blue]
 
-
 Global $blockTextures9[48] = [$light_gray_candle, $light_gray_candle_lit, $concrete_silver, $concrete_powder_silver, $glazed_terracotta_silver, $shulker_top_silver, $glass_silver, $hardened_clay_stained_silver, $wool_colored_silver, $flower_lily_of_the_valley, $waterlily, $lime_candle, $lime_candle_lit, $concrete_lime, $concrete_powder_lime, $glazed_terracotta_lime, $shulker_top_lime, $glass_lime, $hardened_clay_stained_lime, $wool_colored_lime, $lodestone_side, $lodestone_top, $loom_bottom, $loom_front, $loom_side, $magenta_candle, $magenta_candle_lit, $concrete_magenta, $concrete_powder_magenta, $glazed_terracotta_magenta, $shulker_top_magenta, $glass_magenta, $hardened_clay_stained_magenta, $wool_colored_magenta, $magma, $mangrove_door_bottom, $mangrove_door_top, $mangrove_log_side, $mangrove_log_top, $mangrove_planks, $mangrove_propagule, $mangrove_propagule_hanging, $mangrove_roots_side, $mangrove_roots_top, $mangrove_trapdoor, $medium_amethyst_bud, $melon_side, $melon_stem_disconnected]
-
 
 Global $blockTextures10[48] = [$pumpkin_stem_disconnected, $melon_top, $cobblestone_mossy, $stonebrick_mossy, $moss_block, $mud, $muddy_mangrove_roots_side, $muddy_mangrove_roots_top, $mud_bricks, $mushroom_block_inside, $mushroom_block_skin_stem, $mycelium_side, $mycelium_top, $netherite_block, $netherrack, $nether_brick, $nether_gold_ore, $portal, $quartz_ore, $nether_sprouts, $nether_wart_stage_0, $nether_wart_stage_1, $nether_wart_stage_2, $jukebox_side, $noteblock, $door_wood_lower, $door_wood_upper, $log_oak, $log_oak_top, $planks_oak, $sapling_oak, $trapdoor, $observer_back, $observer_front, $observer_side, $observer_top, $enchanting_table_bottom, $obsidian, $ochre_froglight_side, $ochre_froglight_top, $orange_candle, $orange_candle_lit, $concrete_orange, $concrete_powder_orange, $glazed_terracotta_orange, $shulker_top_orange, $glass_orange, $hardened_clay_stained_orange]
 
-
 Global $blockTextures11[48] = [$flower_tulip_orange, $wool_colored_orange, $flower_oxeye_daisy, $oxidized_copper, $oxidized_cut_copper, $ice_packed, $packed_mud, $pearlescent_froglight_side, $pearlescent_froglight_top, $double_plant_paeonia_bottom, $double_plant_paeonia_top, $pink_candle, $pink_candle_lit, $concrete_pink, $concrete_powder_pink, $glazed_terracotta_pink, $shulker_top_pink, $glass_pink, $hardened_clay_stained_pink, $flower_tulip_pink, $wool_colored_pink, $piston_bottom, $piston_inner, $dirt_podzol_side, $dirt_podzol_top, $pointed_dripstone_down_base, $pointed_dripstone_down_frustum, $pointed_dripstone_down_middle, $pointed_dripstone_down_tip, $pointed_dripstone_down_merge, $pointed_dripstone_up_base, $pointed_dripstone_up_frustum, $pointed_dripstone_up_middle, $pointed_dripstone_up_tip, $pointed_dripstone_up_merge, $stone_andesite_smooth, $polished_basalt_side, $polished_basalt_top, $polished_blackstone, $polished_blackstone_bricks, $polished_deepslate, $stone_diorite_smooth, $stone_granite_smooth, $flower_rose, $potatoes_stage_0, $potatoes_stage_1, $potatoes_stage_2, $potatoes_stage_3]
-
 
 Global $blockTextures12[48] = [$potted_azalea_bush_plant, $potted_azalea_bush_top, $potted_flowering_azalea_bush_plant, $potted_flowering_azalea_bush_top, $powder_snow, $rail_golden, $rail_golden_powered, $prismarine_rough, $prismarine_bricks, $pumpkin_side, $purple_candle, $purple_candle_lit, $concrete_purple, $concrete_powder_purple, $glazed_terracotta_purple, $shulker_top_purple, $glass_purple, $hardened_clay_stained_purple, $wool_colored_purple, $purpur_block, $purpur_pillar, $purpur_pillar_top, $quartz_block_bottom, $quartz_block_side, $quartz_block_top, $quartz_block_side, $quartz_block_top, $quartz_bricks, $quartz_block_lines, $quartz_block_lines_top, $rail_normal, $rail_normal_turned, $raw_copper_block, $raw_gold_block, $raw_iron_block, $redstone_block, $redstone_lamp_off, $redstone_lamp_on, $redstone_ore, $redstone_torch_on, $redstone_torch_off, $red_candle, $red_candle_lit, $concrete_red, $concrete_powder_red, $glazed_terracotta_red, $mushroom_red, $mushroom_block_skin_red]
 
-
 Global $blockTextures13[48] = [$red_nether_brick, $red_sand, $red_sandstone_normal, $red_sandstone_bottom, $red_sandstone_top, $shulker_top_red, $glass_red, $hardened_clay_stained_red, $flower_tulip_red, $wool_colored_red, $reinforced_deepslate_bottom, $reinforced_deepslate_side, $reinforced_deepslate_top, $repeater_off, $repeater_on, $repeating_command_block_back, $repeating_command_block_conditional, $repeating_command_block_front, $repeating_command_block_side, $crying_obsidian, $respawn_anchor_bottom, $respawn_anchor_side0, $respawn_anchor_side1, $respawn_anchor_side2, $respawn_anchor_side3, $respawn_anchor_side4, $respawn_anchor_top, $respawn_anchor_top_off, $dirt_with_roots, $double_plant_rose_bottom, $double_plant_rose_top, $sand, $sandstone_normal, $sandstone_bottom, $sandstone_top, $sculk, $sculk_catalyst_bottom, $sculk_catalyst_side, $sculk_catalyst_side_bloom, $sculk_catalyst_top, $sculk_catalyst_top_bloom, $sculk_sensor_bottom, $sculk_shrieker_bottom, $sculk_sensor_side, $sculk_sensor_tendril_active, $sculk_sensor_tendril_inactive, $sculk_sensor_top, $sculk_sensor_bottom]
-
 
 Global $blockTextures14[48] = [$sculk_shrieker_bottom, $sculk_shrieker_can_summon_inner_top, $sculk_shrieker_inner_top, $sculk_shrieker_side, $sculk_shrieker_top, $sculk_vein, $seagrass, $sea_lantern, $sea_pickle, $shroomlight, $shulker_top_undyed, $slime, $small_amethyst_bud, $small_dripleaf_side, $small_dripleaf_stem_bottom, $small_dripleaf_stem_top, $small_dripleaf_top, $smithing_table_bottom, $smithing_table_front, $smithing_table_side, $smithing_table_top, $smoker_front_off, $smoker_front_on, $smoker_side, $smoker_top, $smooth_basalt, $stone_slab_top, $stone_slab_side, $snow, $soul_campfire, $soul_campfire_log_lit, $soul_fire_0, $soul_fire_1, $soul_lantern, $soul_sand, $soul_soil, $soul_torch, $mob_spawner, $sponge, $spore_blossom, $spore_blossom_base, $door_spruce_lower, $door_spruce_upper, $log_spruce, $log_spruce_top, $sapling_spruce, $spruce_trapdoor, $stone]
 
-
 Global $blockTextures15[48] = [$stonecutter2_bottom, $stonecutter2_side, $stonecutter2_top, $stonebrick, $stripped_acacia_log, $stripped_acacia_log_top, $stripped_birch_log, $stripped_birch_log_top, $stripped_crimson_stem_side, $stripped_crimson_stem_top, $stripped_dark_oak_log, $stripped_dark_oak_log_top, $stripped_jungle_log, $stripped_jungle_log_top, $stripped_mangrove_log_side, $stripped_mangrove_log_top, $stripped_oak_log, $stripped_oak_log_top, $stripped_spruce_log_top, $stripped_warped_stem_side, $stripped_warped_stem_top, $structure_block, $structure_block_corner, $structure_block_data, $structure_block_load, $structure_block_save, $double_plant_sunflower_back, $double_plant_sunflower_bottom, $double_plant_sunflower_front, $double_plant_sunflower_top, $sweet_berry_bush_stage0, $sweet_berry_bush_stage1, $sweet_berry_bush_stage2, $sweet_berry_bush_stage3, $target_side, $target_top, $hardened_clay, $tinted_glass, $tnt_bottom, $tnt_side, $tnt_top, $torch_on, $trip_wire_source, $coral_plant_blue, $coral_blue, $coral_fan_blue, $tuff, $turtle_egg_not_cracked]
-
 
 Global $blockTextures16[48] = [$turtle_egg_slightly_cracked, $turtle_egg_very_cracked, $twisting_vines_bottom, $twisting_vines_base, $verdant_froglight_side, $verdant_froglight_top, $vine, $warped_door_lower, $warped_door_top, $warped_fungus, $warped_nylium_top, $warped_nylium_side, $warped_planks, $warped_roots, $warped_roots_pot, $warped_stem_side, $warped_stem_top, $warped_trapdoor, $warped_wart_block, $weathered_copper, $weathered_cut_copper, $weeping_vines, $weeping_vines_plant, $sponge_wet, $wheat_stage_0, $wheat_stage_1, $wheat_stage_2, $wheat_stage_3, $wheat_stage_4, $wheat_stage_5, $wheat_stage_6, $wheat_stage_7, $white_candle, $white_candle_lit, $concrete_white, $concrete_powder_white, $glazed_terracotta_white, $shulker_top_white, $glass_white, $hardened_clay_stained_white, $flower_tulip_white, $wool_colored_white, $flower_wither_rose, $yellow_candle, $yellow_candle_lit, $concrete_yellow, $concrete_powder_yellow, $glazed_terracotta_yellow]
 
-
 Global $blockTextures17[4] = [$shulker_top_yellow, $glass_yellow, $hardened_clay_stained_yellow, $wool_colored_yellow]
+
+Global $blockTextures18[45] = [$bamboo_leaf, $bamboo_small_leaf, $barrier, $beehive_front, $beehive_front_honey, $beehive_top, $bell_bottom, $bell_side, $bell_top, $carrots_stage_3, $cocoa_stage_2, $compost, $compost_ready, $composter_top, $conduit_base, $conduit_cage, $conduit_wind_horizontal, $conduit_wind_vertical, $coral_purple, $coral_red, $dried_kelp_side_b, $grass_side_snowed, $hopper_inside, $loom_top, $nether_wart_block, $noteblock, $observer_back_lit, $obsidian, $piston_side, $piston_top_normal, $piston_top_sticky, $planks_spruce, $potted_azalea_bush_side, $potted_flowering_azalea_bush_side, $pumpkin_stem_disconnected, $pumpkin_top, $quartz_block_top, $redstone_dust_cross, $respawn_anchor_bottom, $sculk_shrieker_bottom, $smoker_bottom, $stripped_spruce_log, $trip_wire, $weeping_vines_base, $weeping_vines_bottom]
+
+
+Global $foliage_colormap[2] = ["textures\colormap\foliage.png", "assets\minecraft\textures\colormap\foliage.png"]
+Global $grass_colormap[2] = ["textures\colormap\grass.png", "assets\minecraft\textures\colormap\grass.png"]
+
+
+Global $colorMapTextures[2] = [$foliage_colormap, $grass_colormap]
+
 
 Global $boat_acacia[2] = ["textures\items\boat_acacia.png", "assets\minecraft\textures\item\acacia_boat.png"]
 Global $acacia_chest_boat[2] = ["textures\items\acacia_chest_boat.png", "assets\minecraft\textures\item\acacia_chest_boat.png"]
@@ -1362,18 +1404,46 @@ Global $level_gold[2] = ["textures\entity\villager2\levels\level_gold.png", "ass
 Global $level_stone[2] = ["textures\entity\villager2\levels\level_stone.png", "assets\minecraft\textures\entity\zombie_villager\profession_level\stone.png"]
 Global $biome_desert_zombie[2] = ["textures\entity\zombie_villager2\biomes\biome-desert-zombie.png", "assets\minecraft\textures\entity\zombie_villager\type\desert.png"]
 
+;Conversion variables that were added in manually
+Global $blackcatCat[2] = ["textures\entity\cat\blackcat.png", "assets\minecraft\textures\entity\cat\black.png"]
+Global $redtabbyCat[2] = ["textures\entity\cat\redtabby.png", "assets\minecraft\textures\entity\cat\red.png"]
+Global $siameseCat[2] = ["textures\entity\cat\siamese.png", "assets\minecraft\textures\entity\cat\siamese.png"]
+Global $tabbyCat[2] = ["textures\entity\cat\tabby.png", "assets\minecraft\textures\entity\cat\tabby.png"]
+Global $whiteCat[2] = ["textures\entity\cat\white.png", "assets\minecraft\textures\entity\cat\white.png"]
+Global $creeper[2] = ["textures\entity\creeper\creeper.png", "assets\minecraft\textures\entity\creeper\creeper.png"]
+Global $dragon_exploding[2] = ["textures\entity\dragon\dragon_exploding.png", "assets\minecraft\textures\entity\enderdragon\dragon_exploding.png"]
+Global $cod[2] = ["textures\entity\fish\cod.png", "assets\minecraft\textures\entity\fish\cod.png"]
+Global $salmon[2] = ["textures\entity\fish\salmon.png", "assets\minecraft\textures\entity\fish\salmon.png"]
+Global $tropical_a[2] = ["textures\entity\fish\tropical_a.png", "assets\minecraft\textures\entity\fish\tropical_a.png"]
+Global $tropical_a_pattern_1[2] = ["textures\entity\fish\tropical_a_pattern_1.png", "assets\minecraft\textures\entity\fish\tropical_a_pattern_1.png"]
+Global $tropical_a_pattern_2[2] = ["textures\entity\fish\tropical_a_pattern_2.png", "assets\minecraft\textures\entity\fish\tropical_a_pattern_2.png"]
+Global $tropical_a_pattern_3[2] = ["textures\entity\fish\tropical_a_pattern_3.png", "assets\minecraft\textures\entity\fish\tropical_a_pattern_3.png"]
+Global $tropical_a_pattern_4[2] = ["textures\entity\fish\tropical_a_pattern_4.png", "assets\minecraft\textures\entity\fish\tropical_a_pattern_4.png"]
+Global $tropical_a_pattern_5[2] = ["textures\entity\fish\tropical_a_pattern_5.png", "assets\minecraft\textures\entity\fish\tropical_a_pattern_5.png"]
+Global $tropical_a_pattern_6[2] = ["textures\entity\fish\tropical_a_pattern_6.png", "assets\minecraft\textures\entity\fish\tropical_a_pattern_6.png"]
+Global $tropical_b[2] = ["textures\entity\fish\tropical_b.png", "assets\minecraft\textures\entity\fish\tropical_b.png"]
+Global $tropical_b_pattern_1[2] = ["textures\entity\fish\tropical_b_pattern_1.png", "assets\minecraft\textures\entity\fish\tropical_b_pattern_1.png"]
+Global $tropical_b_pattern_2[2] = ["textures\entity\fish\tropical_b_pattern_2.png", "assets\minecraft\textures\entity\fish\tropical_b_pattern_2.png"]
+Global $tropical_b_pattern_3[2] = ["textures\entity\fish\tropical_b_pattern_3.png", "assets\minecraft\textures\entity\fish\tropical_b_pattern_3.png"]
+Global $tropical_b_pattern_4[2] = ["textures\entity\fish\tropical_b_pattern_4.png", "assets\minecraft\textures\entity\fish\tropical_b_pattern_4.png"]
+Global $tropical_b_pattern_5[2] = ["textures\entity\fish\tropical_b_pattern_5.png", "assets\minecraft\textures\entity\fish\tropical_b_pattern_5.png"]
+Global $tropical_b_pattern_6[2] = ["textures\entity\fish\tropical_b_pattern_6.png", "assets\minecraft\textures\entity\fish\tropical_b_pattern_6.png"]
+Global $arctic_fox[2] = ["textures\entity\fox\arctic_fox.png", "assets\minecraft\textures\entity\fox\snow_fox.png"]
+Global $fox[2] = ["textures\entity\fox\fox.png", "assets\minecraft\textures\entity\fox\fox.png"]
+Global $hoglin[2] = ["textures\entity\hoglin\hoglin.png", "assets\minecraft\textures\entity\hoglin\hoglin.png"]
+Global $iron_golem[2] = ["textures\entity\iron_golem\iron_golem.png", "assets\minecraft\textures\entity\iron_golem\iron_golem.png"]
+;next: LLama
 
 
 Global $entityTextures1[94] = [$alex, $bat, $beacon_beam, $chicken, $enchanting_table_book, $endermite, $end_portal, $experience_orb, $guardian, $guardian_beam, $guardian_elder, $silverfish, $snow_golem, $steve, $wandering_trader, $witch, $allay, $armor_stand, $axolotl_blue, $axolotl_cyan, $axolotl_gold, $axolotl_lucy, $axolotl_wild, $banner_piglin, $polarbear, $bee, $bee_angry, $bee_angry_nectar, $bee_nectar, $bell, $boat_acacia, $boat_birch, $boat_darkoak, $boat_jungle, $mangrove_boat, $boat_oak, $boat_spruce, $allblackcat, $britishshorthair, $calico, $jellie, $ocelot, $persian, $ragdoll, $red, $redtabby, $chest_boat_acacia, $chest_boat_birch, $chest_boat_darkoak, $chest_boat_jungle, $chest_boat_mangrove, $chest_boat_oak, $chest_boat_spruce, $brown_mooshroom, $cow, $mooshroom, $creeper, $creeper, $creeper_armor, $wither_armor_blue, $dragon_eyes, $endercrystal, $endercrystal_beam, $pufferfish, $cold_frog, $temperate_frog, $warm_frog, $ghast, $goat, $donkey, $horse_black, $horse_brown, $horse_chestnut, $horse_creamy, $horse_darkbrown, $horse_gray, $horse_markings_blackdots, $horse_markings_white, $horse_markings_whitedots, $horse_markings_whitefield, $horse_skeleton, $horse_white, $horse_zombie, $mule, $horse_armor_diamond, $horse_armor_gold, $horse_armor_iron, $evoker, $fangs, $ravager, $vex, $vex_charging, $cracked_high, $cracked_low]
 
-
 Global $entityTextures2[92] = [$cracked_medium, $spit, $decor_black, $decor_blue, $decor_brown, $decor_cyan, $decor_gray, $decor_green, $decor_light_blue, $decor_silver, $decor_lime, $decor_magenta, $decor_orange, $decor_pink, $trader_llama_decor, $decor_white, $decor_yellow, $panda_aggressive, $panda_brown, $panda_lazy, $panda, $panda_playful, $panda_sneezy, $panda_worried, $pig, $saddle, $piglin, $piglin_brute, $zombie_piglin, $blackrabbit, $brown, $gold, $salt, $toast, $white, $white_splotched, $shulker_undyed, $shulker_black, $shulker_blue, $shulker_brown, $shulker_cyan, $shulker_gray, $shulker_green, $shulker_light_blue, $shulker_silver, $shulker_lime, $shulker_magenta, $shulker_orange, $shulker_pink, $shulker_red, $shulker_white, $shulker_yellow, $spark, $sign_acacia, $sign_birch, $sign_crimson, $sign_darkoak, $sign_jungle, $mangrove_sign, $sign, $sign_spruce, $sign_warped, $skeleton, $skeleton, $stray, $stray_overlay, $wither_skeleton, $wither_skeleton, $slime, $squid, $tadpole, $villager, $level_diamond, $level_emerald, $level_gold, $level_stone, $warden, $warden_bioluminescent_layer, $warden_heart, $warden_pulsating_spots_1, $warden_pulsating_spots_2, $wither, $wither_armor_white, $wither_invulnerable, $wolf, $wolf_angry, $zombie_villager, $level_diamond, $level_emerald, $level_gold, $level_stone, $biome_desert_zombie]
 
+Global $entityTextures4[8] = [$blackcatCat, $redtabbyCat, $siameseCat, $tabbyCat, $whiteCat, $creeper, $dragon_exploding, $cod, $salmon, $tropical_a, $tropical_a_pattern_1, $tropical_a_pattern_2, $tropical_a_pattern_3, $tropical_a_pattern_4, $tropical_a_pattern_5, $tropical_a_pattern_6, $tropical_b, $tropical_b_pattern_1, $tropical_b_pattern_2, $tropical_b_pattern_3, $tropical_b_pattern_4, $tropical_b_pattern_5, $tropical_b_pattern_6, $arctic_fox, $fox]
 
 Global $clouds[2] = ["textures\environment\clouds.png", "assets\minecraft\textures\environment\clouds.png"]
 Global $moon_phases[2] = ["textures\environment\moon_phases.png", "assets\minecraft\textures\environment\moon_phases.png"]
 Global $sun[2] = ["textures\environment\sun.png", "assets\minecraft\textures\environment\sun.png"]
-
 
 
 Global $environmentTextures[3] = [$clouds, $moon_phases, $sun]
@@ -1390,7 +1460,6 @@ Global $iron_2[2] = ["textures\models\armor\iron_2.png", "assets\minecraft\textu
 Global $netherite_1[2] = ["textures\models\armor\netherite_1.png", "assets\minecraft\textures\models\armor\netherite_layer_1.png"]
 Global $netherite_2[2] = ["textures\models\armor\netherite_2.png", "assets\minecraft\textures\models\armor\netherite_layer_2.png"]
 Global $turtle_1[2] = ["textures\models\armor\turtle_1.png", "assets\minecraft\textures\models\armor\turtle_layer_1.png"]
-
 
 
 Global $armorTextures[11] = [$chain_1, $chain_2, $diamond_1, $diamond_2, $gold_1, $gold_2, $iron_1, $iron_2, $netherite_1, $netherite_2, $turtle_1]
