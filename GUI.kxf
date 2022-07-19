@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <object type="TAForm" name="PackConverter">
 	<properties>
-		<property name="Left" vt="Int16">930</property>
-		<property name="Top" vt="Int16">544</property>
+		<property name="Left" vt="Int16">492</property>
+		<property name="Top" vt="Int16">218</property>
 		<property name="Width" vt="Int16">630</property>
 		<property name="Height" vt="Int16">259</property>
 		<property name="Hint" vt="String">Pack Converter</property>
@@ -66,11 +66,11 @@
 						<object type="TALabel" name="JEPackDescTitle">
 							<properties>
 								<property name="Left" vt="Int8">3</property>
-								<property name="Top" vt="Int8">15</property>
+								<property name="Top" vt="Int8">47</property>
 								<property name="Width" vt="Int8">88</property>
 								<property name="Height" vt="Int8">17</property>
 								<property name="Caption" vt="String">Pack Description:</property>
-								<property name="TabOrder" vt="Int8">0</property>
+								<property name="TabOrder" vt="Int8">2</property>
 								<property name="HaveVariable" vt="False">False</property>
 								<property name="CtrlStyle" vt="Int32">1342308608</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
@@ -87,7 +87,7 @@
 								<property name="Height" vt="Int8">25</property>
 								<property name="Hint" vt="String">Start conversion</property>
 								<property name="Caption" vt="String">Start conversion</property>
-								<property name="TabOrder" vt="Int8">1</property>
+								<property name="TabOrder" vt="Int8">0</property>
 								<property name="Color" vt="Ident">clBtnFace</property>
 								<property name="CtrlStyle" vt="Int32">1342373888</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
@@ -98,15 +98,46 @@
 						<object type="TAInput" name="JEPackDescInput">
 							<properties>
 								<property name="Left" vt="Int8">100</property>
-								<property name="Top" vt="Int8">15</property>
+								<property name="Top" vt="Int8">47</property>
 								<property name="Width" vt="Int16">489</property>
 								<property name="Height" vt="Int8">21</property>
 								<property name="Hint" vt="String">Pack description</property>
-								<property name="TabOrder" vt="Int8">2</property>
+								<property name="TabOrder" vt="Int8">1</property>
 								<property name="CtrlStyle" vt="Int32">1342374016</property>
 								<property name="CtrlExStyle" vt="Int16">512</property>
 								<property name="Resizing" vt="Set">DockHeight</property>
 								<property name="Description" vt="String">JEPackDescInput</property>
+							</properties>
+							<components/>
+						</object>
+						<object type="TALabel" name="JEPackNameTitle">
+							<properties>
+								<property name="Left" vt="Int8">4</property>
+								<property name="Top" vt="Int8">15</property>
+								<property name="Width" vt="Int8">63</property>
+								<property name="Height" vt="Int8">17</property>
+								<property name="Caption" vt="String">Pack Name:</property>
+								<property name="TabOrder" vt="Int8">3</property>
+								<property name="HaveVariable" vt="False">False</property>
+								<property name="CtrlStyle" vt="Int32">1342308608</property>
+								<property name="CtrlExStyle" vt="Int8">0</property>
+								<property name="Resizing" vt="Set"/>
+								<property name="Description" vt="String">JEPackNameTitle</property>
+							</properties>
+							<components/>
+						</object>
+						<object type="TAInput" name="JEPackNameInput">
+							<properties>
+								<property name="Left" vt="Int8">76</property>
+								<property name="Top" vt="Int8">15</property>
+								<property name="Width" vt="Int16">513</property>
+								<property name="Height" vt="Int8">21</property>
+								<property name="Hint" vt="String">Pack name</property>
+								<property name="TabOrder" vt="Int8">4</property>
+								<property name="CtrlStyle" vt="Int32">1342374016</property>
+								<property name="CtrlExStyle" vt="Int16">512</property>
+								<property name="Resizing" vt="Set">DockHeight</property>
+								<property name="Description" vt="String">JEPackNameInput</property>
 							</properties>
 							<components/>
 						</object>
@@ -212,6 +243,36 @@
 				<property name="Hint" vt="String">Copyright notice</property>
 				<property name="Caption" vt="UTF8String">Copyright © 2022, TheAlienDoctor</property>
 				<property name="TabOrder" vt="Int8">1</property>
+				<property name="HaveVariable" vt="False">False</property>
+				<property name="CtrlStyle" vt="Int32">1342308608</property>
+				<property name="CtrlExStyle" vt="Int8">0</property>
+				<property name="Resizing" vt="Set"/>
+			</properties>
+			<components/>
+		</object>
+		<object type="TALabel" name="VersionNumber">
+			<properties>
+				<property name="Left" vt="Int16">537</property>
+				<property name="Top" vt="Int16">200</property>
+				<property name="Width" vt="Int8">69</property>
+				<property name="Height" vt="Int8">17</property>
+				<property name="Caption" vt="String">Version: 1.0.0</property>
+				<property name="TabOrder" vt="Int8">2</property>
+				<property name="HaveVariable" vt="False">False</property>
+				<property name="CtrlStyle" vt="Int32">1342308608</property>
+				<property name="CtrlExStyle" vt="Int8">0</property>
+				<property name="Resizing" vt="Set"/>
+			</properties>
+			<components/>
+		</object>
+		<object type="TALabel" name="GitHubNotice">
+			<properties>
+				<property name="Left" vt="Int16">219</property>
+				<property name="Top" vt="Int16">200</property>
+				<property name="Width" vt="Int16">273</property>
+				<property name="Height" vt="Int8">17</property>
+				<property name="Caption" vt="String">View source code,  report bugs and contribute on GitHub</property>
+				<property name="TabOrder" vt="Int8">3</property>
 				<property name="HaveVariable" vt="False">False</property>
 				<property name="CtrlStyle" vt="Int32">1342308608</property>
 				<property name="CtrlExStyle" vt="Int8">0</property>
