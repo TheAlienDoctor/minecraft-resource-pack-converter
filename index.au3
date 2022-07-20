@@ -113,8 +113,48 @@ Func createInputDir()
 	EndIf
 EndFunc   ;==>createInputDir
 
+Func convert($mode, $conversionArray, $arrayDataCount)
+
+	$arrayDataCount -= 1 ;For loops start at 0, so you need to minus 1 from the total
+
+	If $mode = 0 Then ;BedrockToJava
+		For $index = 0 To $arrayDataCount
+			Local $current = $conversionArray[$index]
+
+			If FileExists($inputDir & "\" & $current[0]) Then
+				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
+				$conversionCount += 1
+				FileOpen($logDir & "\log.latest", 1)
+				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
+				FileClose($logDir & "\log.latest")
+			Else
+				FileOpen($logDir & "\log.latest", 1)
+				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
+				FileClose($logDir & "\log.latest")
+			EndIf
+		Next
+
+	ElseIf $mode = 1 Then ;JavaToBedrock
+		For $index = 0 To $arrayDataCount
+			Local $current = $conversionArray[$index]
+
+			If FileExists($inputDir & "\" & $current[1]) Then
+				FileMove($inputDir & "\" & $current[1], $bedrockDir & "\pack\" & $current[0], 8)
+				$conversionCount += 1
+				FileOpen($logDir & "\log.latest", 1)
+				FileWrite($logDir & "\log.latest", $current[1] & " found, moved it to " & $current[0] & @CRLF)
+				FileClose($logDir & "\log.latest")
+			Else
+				FileOpen($logDir & "\log.latest", 1)
+				FileWrite($logDir & "\log.latest", $current[1] & " not found, ignoring it! " & @CRLF)
+				FileClose($logDir & "\log.latest")
+			EndIf
+		Next
+	EndIf
+EndFunc   ;==>convert
+
 ;###########################################################################################################################################################################################
-;Conversion functions
+;Main conversion functions
 
 Func bedrockToJava()
 	Local $confirmBox = MsgBox(1, "Alien's pack converter", "Are you sure you want to start conversion? This will delete everything inside the " & $javaDir & " folder, so make sure you have removed any previous packs from it.")
@@ -144,441 +184,39 @@ Func bedrockToJava()
 		FileWrite($logDir & "\log.latest", "Beginning texture file conversion" & @CRLF)
 		FileClose($logDir & "\log.latest")
 
-		For $index = 0 To 48
-			Local $current = $blockTextures1[$index]
+		convert(0, $blockTextures1, 49)
+		convert(0, $blockTextures2, 48)
+		convert(0, $blockTextures3, 48)
+		convert(0, $blockTextures4, 48)
+		convert(0, $blockTextures5, 48)
+		convert(0, $blockTextures6, 48)
+		convert(0, $blockTextures7, 48)
+		convert(0, $blockTextures8, 48)
+		convert(0, $blockTextures9, 48)
+		convert(0, $blockTextures10, 48)
+		convert(0, $blockTextures11, 48)
+		convert(0, $blockTextures12, 48)
+		convert(0, $blockTextures13, 48)
+		convert(0, $blockTextures14, 48)
+		convert(0, $blockTextures15, 48)
+		convert(0, $blockTextures16, 48)
+		convert(0, $blockTextures17, 4)
+		convert(0, $blockTextures18, 45)
 
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-		For $index = 0 To 47
-			Local $current = $blockTextures2[$index]
+		convert(0, $colorMapTextures, 2)
 
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-		For $index = 0 To 47
-			Local $current = $blockTextures3[$index]
+		convert(0, $itemTextures1, 86)
+		convert(0, $itemTextures2, 85)
+		convert(0, $itemTextures3, 85)
+		convert(0, $itemTextures4, 85)
 
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-		For $index = 0 To 47
-			Local $current = $blockTextures4[$index]
+		convert(0, $entityTextures1, 94)
+		convert(0, $entityTextures2, 92)
+		convert(0, $entityTextures3, 27)
 
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-		For $index = 0 To 47
-			Local $current = $blockTextures5[$index]
+		convert(0, $environmentTextures, 3)
 
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-		For $index = 0 To 47
-			Local $current = $blockTextures6[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-		For $index = 0 To 47
-			Local $current = $blockTextures7[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-		For $index = 0 To 47
-			Local $current = $blockTextures8[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-		For $index = 0 To 47
-			Local $current = $blockTextures9[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-		For $index = 0 To 47
-			Local $current = $blockTextures10[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-		For $index = 0 To 47
-			Local $current = $blockTextures11[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-		For $index = 0 To 47
-			Local $current = $blockTextures12[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-		For $index = 0 To 47
-			Local $current = $blockTextures13[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-		For $index = 0 To 47
-			Local $current = $blockTextures14[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-		For $index = 0 To 47
-			Local $current = $blockTextures15[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-		For $index = 0 To 47
-			Local $current = $blockTextures16[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-		For $index = 0 To 3
-			Local $current = $blockTextures17[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-		For $index = 0 To 44
-			Local $current = $blockTextures18[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Converted block textures!" & @CRLF)
-		FileWrite($logDir & "\log.latest", @CRLF)
-		FileClose($logDir & "\log.latest")
-
-		For $index = 0 To 1
-			Local $current = $colormapTextures[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Converted colormap textures!" & @CRLF)
-		FileWrite($logDir & "\log.latest", @CRLF)
-		FileClose($logDir & "\log.latest")
-
-		For $index = 0 To 85
-			Local $current = $itemTextures1[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-		For $index = 0 To 84
-			Local $current = $itemTextures2[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-		For $index = 0 To 84
-			Local $current = $itemTextures3[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-		For $index = 0 To 84
-			Local $current = $itemTextures4[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Converted item textures!" & @CRLF)
-		FileWrite($logDir & "\log.latest", @CRLF)
-		FileClose($logDir & "\log.latest")
-
-		For $index = 0 To 93
-			Local $current = $entityTextures1[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-		For $index = 0 To 91
-			Local $current = $entityTextures2[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Converted entity textures!" & @CRLF)
-		FileWrite($logDir & "\log.latest", @CRLF)
-		FileClose($logDir & "\log.latest")
-
-		For $index = 0 To 2
-			Local $current = $environmentTextures[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
-
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Converted environment textures!" & @CRLF)
-		FileWrite($logDir & "\log.latest", @CRLF)
-		FileClose($logDir & "\log.latest")
-
-		For $index = 0 To 10
-			Local $current = $armorTextures[$index]
-
-			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
-				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
-			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
-			EndIf
-		Next
+		convert(0, $armorTextures, 11)
 
 		FileOpen($logDir & "\log.latest", 1)
 		FileWrite($logDir & "\log.latest", "Converted armor textures!" & @CRLF)
@@ -639,21 +277,39 @@ Func javaToBedrock()
 	FileWrite($logDir & "\log.latest", "Beginning texture file conversion" & @CRLF)
 	FileClose($logDir & "\log.latest")
 
-	;For $index = 0 To 8
-;
-;
-	;	If FileExists($inputDir & "\" & $current[1]) Then
-	;		FileMove($inputDir & "\" & $current[1], $bedrockDir & "\pack\" & $current[0], 8)
-	;		Local $conversionCount = +1
-	;		FileOpen($logDir & "\log.latest", 1)
-	;		FileWrite($logDir & "\log.latest", $current[1] & " found, moved it to " & $current[0] & @CRLF)
-	;		FileClose($logDir & "\log.latest")
-	;	Else
-	;		FileOpen($logDir & "\log.latest", 1)
-	;		FileWrite($logDir & "\log.latest", $current[1] & " not found, ignoring it! " & @CRLF)
-	;		FileClose($logDir & "\log.latest")
-	;	EndIf
-	;Next
+		convert(1, $blockTextures1, 49)
+		convert(1, $blockTextures2, 48)
+		convert(1, $blockTextures3, 48)
+		convert(1, $blockTextures4, 48)
+		convert(1, $blockTextures5, 48)
+		convert(1, $blockTextures6, 48)
+		convert(1, $blockTextures7, 48)
+		convert(1, $blockTextures8, 48)
+		convert(1, $blockTextures9, 48)
+		convert(1, $blockTextures10, 48)
+		convert(1, $blockTextures11, 48)
+		convert(1, $blockTextures12, 48)
+		convert(1, $blockTextures13, 48)
+		convert(1, $blockTextures14, 48)
+		convert(1, $blockTextures15, 48)
+		convert(1, $blockTextures16, 48)
+		convert(1, $blockTextures17, 4)
+		convert(1, $blockTextures18, 45)
+
+		convert(1, $colorMapTextures, 2)
+
+		convert(1, $itemTextures1, 86)
+		convert(1, $itemTextures2, 85)
+		convert(1, $itemTextures3, 85)
+		convert(1, $itemTextures4, 85)
+
+		convert(1, $entityTextures1, 94)
+		convert(1, $entityTextures2, 92)
+		convert(1, $entityTextures3, 27)
+
+		convert(1, $environmentTextures, 3)
+
+		convert(1, $armorTextures, 11)
 
 	FileOpen($logDir & "\log.latest", 1)
 	FileWrite($logDir & "\log.latest", "Texture file conversion complete!" & @CRLF)
