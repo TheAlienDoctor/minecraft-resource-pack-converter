@@ -176,7 +176,7 @@ Func bedrockToJava()
 
 		Local $javaPackName = GUICtrlRead($JEPackNameInput)
 		Local $javaPackDesc = GUICtrlRead($JEPackDescInput)
-		$conversionCount = 0
+		Global $conversionCount = 0
 
 		FileOpen($logDir & "\log.latest", 1)
 		FileWrite($logDir & "\log.latest", "Began converting Bedrock to Java" & @CRLF)
@@ -275,7 +275,7 @@ EndFunc   ;==>bedrockToJava
 Func javaToBedrock()
 	Local $bedrockPackName = GUICtrlRead($BEPackNameInput)
 	Local $bedrockPackDesc = GUICtrlRead($BEPackDescInput)
-	Local $conversionCount = 0
+	Global $conversionCount = 0
 
 	FileOpen($logDir & "\log.latest", 1)
 	FileWrite($logDir & "\log.latest", "Began converting Java to Bedrock" & @CRLF)
