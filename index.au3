@@ -23,11 +23,14 @@
 Global $PackConverter = GUICreate("Alien's Pack Converter", 615, 221, -1, -1)
 Global $PackConverter = GUICtrlCreateTab(8, 8, 601, 185)
 Global $BedrockToJava = GUICtrlCreateTabItem("Bedrock to Java")
-Global $JEPackDescTitle = GUICtrlCreateLabel("Pack Description:", 15, 48, 88, 17)
 Global $StartBeToJe = GUICtrlCreateButton("Start conversion", 457, 162, 145, 25)
 GUICtrlSetTip(-1, "Start conversion")
-Global $JEPackDescInput = GUICtrlCreateInput("", 112, 48, 489, 21)
+Global $JEPackDescInput = GUICtrlCreateInput("", 112, 80, 489, 21)
 GUICtrlSetTip(-1, "Pack description")
+Global $JEPackDescTitle = GUICtrlCreateLabel("Pack Description:", 15, 80, 88, 17)
+Global $JEPackNameTitle = GUICtrlCreateLabel("Pack Name:", 16, 48, 63, 17)
+Global $JEPackNameInput = GUICtrlCreateInput("", 88, 48, 513, 21)
+GUICtrlSetTip(-1, "Pack name")
 Global $JavaToBedrock = GUICtrlCreateTabItem("Java to Bedrock")
 Global $BEPackDescInput = GUICtrlCreateInput("", 112, 80, 489, 21)
 GUICtrlSetTip(-1, "Pack description")
@@ -40,6 +43,8 @@ Global $BEPackNameTitle = GUICtrlCreateLabel("Pack Name:", 16, 48, 63, 17)
 GUICtrlCreateTabItem("")
 Global $CopyrightNotice = GUICtrlCreateLabel("Copyright © 2022, TheAlienDoctor", 8, 200, 167, 17)
 GUICtrlSetTip(-1, "Copyright notice")
+Global $VersionNumber = GUICtrlCreateLabel("Version: 1.0.0", 537, 200, 69, 17)
+Global $GitHubNotice = GUICtrlCreateLabel("View source code,  report bugs and contribute on GitHub", 219, 200, 273, 17)
 GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
 
@@ -92,6 +97,15 @@ Func createLog()
 	EndIf
 EndFunc   ;==>createLog
 
+Func startUp() ;Function to be ran on startup (excluding create logs function)
+	If FileExists(@ScriptDir & "\LICENSE.txt") = 0 Then
+		InetGet("https://thealiendoctor.com/software-license/pack-converter-2022.txt", @ScriptDir & "\LICENSE.txt")
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "Re-downloaded license" & @CRLF)
+		FileClose($logDir & "\log.latest")
+	EndIf
+EndFunc   ;==>startUp
+
 Func finishLog()
 	FileOpen($logDir & "\log.latest", 1)
 	FileWrite($logDir & "\log.latest", "###################################################################" & @CRLF)
@@ -120,6 +134,7 @@ Func bedrockToJava()
 	Local $confirmBox = MsgBox(1, "Alien's pack converter", "Are you sure you want to start conversion? This will delete everything inside the " & $javaDir & " folder, so make sure you have removed any previous packs from it.")
 	If $confirmBox = 1 Then
 
+		Local $javaPackName = GUICtrlRead($JEPackNameInput)
 		Local $javaPackDesc = GUICtrlRead($JEPackDescInput)
 		$conversionCount = 0
 
@@ -602,7 +617,12 @@ Func bedrockToJava()
 
 		FileOpen($logDir & "\log.latest", 1)
 		FileWrite($logDir & "\log.latest", "Finished adding files to pack.zip!" & @CRLF)
-		FileWrite($logDir & "\log.latest", ".zip folder created and renamed!" & @CRLF)
+		FileClose($logDir & "\log.latest")
+
+		FileMove($javaDir & "\pack.zip", $javaDir & "\" & $javaPackName)
+
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", ".zip folder renamed!" & @CRLF)
 		FileWrite($logDir & "\log.latest", "Bedrock to Java pack conversion complete!" & @CRLF)
 		FileClose($logDir & "\log.latest")
 
@@ -640,8 +660,8 @@ Func javaToBedrock()
 	FileClose($logDir & "\log.latest")
 
 	;For $index = 0 To 8
-;
-;
+	;
+	;
 	;	If FileExists($inputDir & "\" & $current[1]) Then
 	;		FileMove($inputDir & "\" & $current[1], $bedrockDir & "\pack\" & $current[0], 8)
 	;		Local $conversionCount = +1
@@ -683,6 +703,7 @@ EndFunc   ;==>javaToBedrock
 ;GUI Control
 
 createLog()
+startUp()
 createInputDir()
 
 While 1
@@ -697,6 +718,20 @@ While 1
 
 		Case $StartJeToBe
 			javaToBedrock()
+
+		Case $CopyrightNotice
+			If FileExists(@ScriptDir & "\LICENSE.txt") = 0 Then
+				InetGet("https://thealiendoctor.com/software-license/pack-converter-2022.txt", @ScriptDir & "\LICENSE.txt")
+				FileOpen($logDir & "\log.latest", 1)
+				FileWrite($logDir & "\log.latest", "Re-downloaded license" & @CRLF)
+				FileClose($logDir & "\log.latest")
+				ShellExecute(@ScriptDir & "\LICENSE.txt")
+			ElseIf FileExists(@ScriptDir & "\LICENSE.txt") Then
+				ShellExecute(@ScriptDir & "\LICENSE.txt")
+			EndIf
+
+		Case $GitHubNotice
+			ShellExecute("https://github.com/TheAlienDoctor/minecraft-resource-pack-converter")
 
 	EndSwitch
 WEnd
