@@ -81,6 +81,10 @@ Func uuidGenerator()
 EndFunc   ;==>uuidGenerator
 
 Func createLog()
+	If FileExists($logDir & "\latest.log") Then
+		FileMove($logDir & "\log.latest", $logDir & "\log.old")
+	EndIf
+
 	If FileExists($logDir) Then ;If directory exists then begin writing logs
 		FileOpen($logDir & "\log.latest", 1)
 		FileWrite($logDir & "\log.latest", "Log file generated at " & @HOUR & ":" & @MIN & ":" & @SEC & " on " & @MDAY & "/" & @MON & "/" & @YEAR & " (HH:MM:SS on DD.MM.YY)" & @CRLF)
@@ -208,7 +212,7 @@ Func bedrockToJava()
 		convert(0, $blockTextures7, 48)
 		convert(0, $blockTextures8, 48)
 		convert(0, $blockTextures9, 48)
-		convert(0, $blockTextures10, 48)
+		convert(0, $blockTextures10, 47)
 		convert(0, $blockTextures11, 48)
 		convert(0, $blockTextures12, 48)
 		convert(0, $blockTextures13, 48)
@@ -216,7 +220,7 @@ Func bedrockToJava()
 		convert(0, $blockTextures15, 48)
 		convert(0, $blockTextures16, 48)
 		convert(0, $blockTextures17, 4)
-		convert(0, $blockTextures18, 45)
+		convert(0, $blockTextures18, 44)
 
 		convert(0, $colorMapTextures, 2)
 
@@ -224,14 +228,18 @@ Func bedrockToJava()
 		convert(0, $itemTextures2, 85)
 		convert(0, $itemTextures3, 85)
 		convert(0, $itemTextures4, 85)
+		convert(0, $itemTextures5, 21)
 
 		convert(0, $entityTextures1, 94)
 		convert(0, $entityTextures2, 92)
-		convert(0, $entityTextures3, 27)
+		convert(0, $entityTextures3, 57)
+		convert(0, $entityTextures4, 43)
 
-		convert(0, $environmentTextures, 3)
+		convert(0, $environmentTextures, 12)
 
 		convert(0, $armorTextures, 11)
+
+		convert(0, $guiTextures, 1)
 
 		FileOpen($logDir & "\log.latest", 1)
 		FileWrite($logDir & "\log.latest", "Converted armor textures!" & @CRLF)
@@ -257,7 +265,7 @@ Func bedrockToJava()
 		FileWrite($logDir & "\log.latest", "Finished adding files to pack.zip!" & @CRLF)
 		FileClose($logDir & "\log.latest")
 
-		FileMove($javaDir & "\pack.zip", $javaDir & "\" & $javaPackName)
+		FileMove($javaDir & "\pack.zip", $javaDir & "\" & $javaPackName & ".zip")
 
 		FileOpen($logDir & "\log.latest", 1)
 		FileWrite($logDir & "\log.latest", ".zip folder renamed!" & @CRLF)
@@ -273,29 +281,32 @@ Func bedrockToJava()
 EndFunc   ;==>bedrockToJava
 
 Func javaToBedrock()
-	Local $bedrockPackName = GUICtrlRead($BEPackNameInput)
-	Local $bedrockPackDesc = GUICtrlRead($BEPackDescInput)
-	Global $conversionCount = 0
+	Local $confirmBox = MsgBox(1, "Alien's pack converter", "Are you sure you want to start conversion? This will delete everything inside the " & $bedrockDir & " folder, so make sure you have removed any previous packs from it.")
+	If $confirmBox = 1 Then
+		Local $bedrockPackName = GUICtrlRead($BEPackNameInput)
+		Local $bedrockPackDesc = GUICtrlRead($BEPackDescInput)
+		Global $conversionCount = 0
 
-	FileOpen($logDir & "\log.latest", 1)
-	FileWrite($logDir & "\log.latest", "Began converting Java to Bedrock" & @CRLF)
-	FileClose($logDir & "\log.latest")
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "Began converting Java to Bedrock" & @CRLF)
+		FileClose($logDir & "\log.latest")
 
-	DirCreate($bedrockDir & "\pack")
+		DirRemove($bedrockDir, 1)
+		DirCreate($bedrockDir & "\pack")
 
-	FileOpen($logDir & "\log.latest", 1)
-	FileWrite($logDir & "\log.latest", "Generating manifest.json file" & @CRLF)
-	FileClose($logDir & "\log.latest")
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "Generating manifest.json file" & @CRLF)
+		FileClose($logDir & "\log.latest")
 
-	FileOpen($bedrockDir & "\pack\manifest.txt", 8)
-	FileWrite($bedrockDir & '\pack\manifest.txt', '{"format_version":2,"header":{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","name":"' & $bedrockPackName & '","uuid":"' & uuidGenerator() & '","version":[1,0,0],"min_engine_version":[1,19,0]},"modules":[{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","type":"resources","uuid":"' & uuidGenerator() & '","version":[1,0,0]}]}')
-	FileClose($bedrockDir & "\pack\manifest.txt")
-	FileMove($bedrockDir & "\pack\manifest.txt", $bedrockDir & "\pack\manifest.json")
+		FileOpen($bedrockDir & "\pack\manifest.txt", 8)
+		FileWrite($bedrockDir & '\pack\manifest.txt', '{"format_version":2,"header":{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","name":"' & $bedrockPackName & '","uuid":"' & uuidGenerator() & '","version":[1,0,0],"min_engine_version":[1,19,0]},"modules":[{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","type":"resources","uuid":"' & uuidGenerator() & '","version":[1,0,0]}]}')
+		FileClose($bedrockDir & "\pack\manifest.txt")
+		FileMove($bedrockDir & "\pack\manifest.txt", $bedrockDir & "\pack\manifest.json")
 
-	FileOpen($logDir & "\log.latest", 1)
-	FileWrite($logDir & "\log.latest", "Generated manifest.json file" & @CRLF)
-	FileWrite($logDir & "\log.latest", "Beginning texture file conversion" & @CRLF)
-	FileClose($logDir & "\log.latest")
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "Generated manifest.json file" & @CRLF)
+		FileWrite($logDir & "\log.latest", "Beginning texture file conversion" & @CRLF)
+		FileClose($logDir & "\log.latest")
 
 		convert(1, $blockTextures1, 49)
 		convert(1, $blockTextures2, 48)
@@ -306,7 +317,7 @@ Func javaToBedrock()
 		convert(1, $blockTextures7, 48)
 		convert(1, $blockTextures8, 48)
 		convert(1, $blockTextures9, 48)
-		convert(1, $blockTextures10, 48)
+		convert(1, $blockTextures10, 47)
 		convert(1, $blockTextures11, 48)
 		convert(1, $blockTextures12, 48)
 		convert(1, $blockTextures13, 48)
@@ -314,7 +325,7 @@ Func javaToBedrock()
 		convert(1, $blockTextures15, 48)
 		convert(1, $blockTextures16, 48)
 		convert(1, $blockTextures17, 4)
-		convert(1, $blockTextures18, 45)
+		convert(1, $blockTextures18, 44)
 
 		convert(1, $colorMapTextures, 2)
 
@@ -322,36 +333,50 @@ Func javaToBedrock()
 		convert(1, $itemTextures2, 85)
 		convert(1, $itemTextures3, 85)
 		convert(1, $itemTextures4, 85)
+		convert(1, $itemTextures5, 21)
 
 		convert(1, $entityTextures1, 94)
 		convert(1, $entityTextures2, 92)
-		convert(1, $entityTextures3, 27)
+		convert(1, $entityTextures3, 57)
+		convert(1, $entityTextures4, 43)
 
-		convert(1, $environmentTextures, 3)
+		convert(1, $environmentTextures, 12)
 
 		convert(1, $armorTextures, 11)
 
-	FileOpen($logDir & "\log.latest", 1)
-	FileWrite($logDir & "\log.latest", "Texture file conversion complete!" & @CRLF)
-	FileWrite($logDir & "\log.latest", "Creating .zip file" & @CRLF)
-	FileClose($logDir & "\log.latest")
+		convert(1, $guiTextures, 1)
 
-	_Zip_Create($bedrockDir & "\pack.zip")
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "Texture file conversion complete! Converted " & $conversionCount & "files!" & @CRLF)
+		FileWrite($logDir & "\log.latest", "Creating .mcpack file" & @CRLF)
+		FileClose($logDir & "\log.latest")
 
-	FileOpen($logDir & "\log.latest", 1)
-	FileWrite($logDir & "\log.latest", "Created pack.zip file" & @CRLF)
-	FileWrite($logDir & "\log.latest", "Adding files to pack.zip file" & @CRLF)
-	FileClose($logDir & "\log.latest")
+		_Zip_Create($bedrockDir & "\pack.zip")
 
-	_Zip_AddFolderContents($bedrockDir & "\pack.zip", $bedrockDir & "\pack\", 1)
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "Created pack.zip file" & @CRLF)
+		FileWrite($logDir & "\log.latest", "Adding files to pack.zip file" & @CRLF)
+		FileClose($logDir & "\log.latest")
 
-	FileOpen($logDir & "\log.latest", 1)
-	FileWrite($logDir & "\log.latest", "Finished adding files to pack.zip!" & @CRLF)
-	FileWrite($logDir & "\log.latest", "Java to Bedrock pack conversion complete!" & @CRLF)
-	FileWrite($logDir & "\log.latest", @CRLF)
-	FileClose($logDir & "\log.latest")
+		_Zip_AddFolderContents($bedrockDir & "\pack.zip", $bedrockDir & "\pack\", 1)
 
-	MsgBox(0, "Alien's pack converter", "Conversion complete! Converted " & $conversionCount & " files to Bedrock edition!")
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "Finished adding files to pack.zip!" & @CRLF)
+		FileClose($logDir & "\log.latest")
+
+		FileMove($bedrockDir & "\pack.zip", $bedrockDir & "\" & $bedrockPackName & ".mcpack")
+
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "Java to Bedrock pack conversion complete!" & @CRLF)
+		FileWrite($logDir & "\log.latest", @CRLF)
+		FileClose($logDir & "\log.latest")
+
+		MsgBox(0, "Alien's pack converter", "Conversion complete! Converted " & $conversionCount & " files to Bedrock edition!")
+	Else
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "Conversion aborted" & @CRLF)
+		FileClose($logDir & "\log.latest")
+	EndIf
 EndFunc   ;==>javaToBedrock
 
 
