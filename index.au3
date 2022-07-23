@@ -52,30 +52,30 @@ GUISetState(@SW_SHOW)
 ;Declare variables
 
 Global $dateTime = @MDAY & '.' & @MON & '.' & @YEAR & '-' & @HOUR & '.' & @MIN & '.' & @SEC
-
 Global $inputDir = @ScriptDir & "\" & IniRead("options.ini", "config", "InputDir", "input")
+Global $repeats = IniRead("options.txt", "config", "repeats", 2)
 
 If IniRead("options.ini", "Bedrock to Java", "useCustomDir", "error") = "false" Then
-Global $javaDir = @ScriptDir & "\Java Pack"
+	Global $javaDir = @ScriptDir & "\Java Pack"
 
 ElseIf IniRead("options.ini", "Bedrock to Java", "useCustomDir", "error") = "true" Then
-Global $javaDir = IniRead("options.ini", "Bedrock to Java", "JavaDir", @ScriptDir & "Java-pack")
+	Global $javaDir = IniRead("options.ini", "Bedrock to Java", "JavaDir", @ScriptDir & "Java-pack")
 
 Else
-MsgBox(0, "Alien's pack converter", "Error in config file: useCustomDir can only be set to true or false!")
-Exit
+	MsgBox(0, "Alien's pack converter", "Error in config file: useCustomDir can only be set to true or false!")
+	Exit
 EndIf
 
 
 If IniRead("options.ini", "Java to Bedrock", "useCustomDir", "false") = "false" Then
-Global $bedrockDir = @ScriptDir & "\Bedrock pack"
+	Global $bedrockDir = @ScriptDir & "\Bedrock pack"
 
 ElseIf IniRead("options.ini", "Java to Bedrock", "useCustomDir", "false") = "true" Then
-Global $bedrockDir = IniRead("options.ini", "Java to Bedrock", "BedrockDir", @ScriptDir & \ "Bedrock Pack")
+	Global $bedrockDir = IniRead("options.ini", "Java to Bedrock", "BedrockDir", @ScriptDir & \ "Bedrock Pack")
 
 Else
-MsgBox(0, "Alien's pack converter", "Error in config file: useCustomDir can only be set to True or False!")
-Exit
+	MsgBox(0, "Alien's pack converter", "Error in config file: useCustomDir can only be set to True or False!")
+	Exit
 EndIf
 
 If IniRead("options.ini", "logConfig", "CustomLogDir", "error") = "false" Then
@@ -85,8 +85,8 @@ ElseIf IniRead("options.ini", "logConfig", "CustomLogDir", "error") = "true" The
 	Global $logDir = IniRead("options.ini", "logConfig", "LogDir", @ScriptDir & "\logs")
 
 Else
-MsgBox(0, "Alien's pack converter", "Error in config file: useCustomDir can only be set to True or False!")
-Exit
+	MsgBox(0, "Alien's pack converter", "Error in config file: CustomLogDir can only be set to True or False!")
+	Exit
 EndIf
 
 ;The conversion variables can be found in conversions.au3, this is to help with not cluttering this script
@@ -159,7 +159,7 @@ EndFunc   ;==>createInputDir
 
 Func convert($mode, $conversionArray, $arrayDataCount)
 
-	$arrayDataCount -= 1 ;For loops start at 0, so you need to minus 1 from the total
+	$arrayDataCount -= 1 ;ForLoops start at 0, so you need to minus 1 from the total
 
 	If $mode = 0 Then ;BedrockToJava
 		For $index = 0 To $arrayDataCount
@@ -207,6 +207,7 @@ Func bedrockToJava()
 		Local $javaPackName = GUICtrlRead($JEPackNameInput)
 		Local $javaPackDesc = GUICtrlRead($JEPackDescInput)
 		Global $conversionCount = 0
+		Local $timesRan = 0
 
 		FileOpen($logDir & "\log.latest", 1)
 		FileWrite($logDir & "\log.latest", "Began converting Bedrock to Java" & @CRLF)
@@ -229,43 +230,47 @@ Func bedrockToJava()
 		FileWrite($logDir & "\log.latest", "Beginning texture file conversion" & @CRLF)
 		FileClose($logDir & "\log.latest")
 
-		convert(0, $blockTextures1, 49)
-		convert(0, $blockTextures2, 48)
-		convert(0, $blockTextures3, 48)
-		convert(0, $blockTextures4, 48)
-		convert(0, $blockTextures5, 48)
-		convert(0, $blockTextures6, 48)
-		convert(0, $blockTextures7, 48)
-		convert(0, $blockTextures8, 48)
-		convert(0, $blockTextures9, 48)
-		convert(0, $blockTextures10, 47)
-		convert(0, $blockTextures11, 48)
-		convert(0, $blockTextures12, 48)
-		convert(0, $blockTextures13, 48)
-		convert(0, $blockTextures14, 48)
-		convert(0, $blockTextures15, 48)
-		convert(0, $blockTextures16, 48)
-		convert(0, $blockTextures17, 4)
-		convert(0, $blockTextures18, 44)
+		While $timesRan < $repeats
+			convert(0, $blockTextures1, 49)
+			convert(0, $blockTextures2, 48)
+			convert(0, $blockTextures3, 48)
+			convert(0, $blockTextures4, 48)
+			convert(0, $blockTextures5, 48)
+			convert(0, $blockTextures6, 48)
+			convert(0, $blockTextures7, 48)
+			convert(0, $blockTextures8, 48)
+			convert(0, $blockTextures9, 48)
+			convert(0, $blockTextures10, 47)
+			convert(0, $blockTextures11, 48)
+			convert(0, $blockTextures12, 48)
+			convert(0, $blockTextures13, 48)
+			convert(0, $blockTextures14, 48)
+			convert(0, $blockTextures15, 48)
+			convert(0, $blockTextures16, 48)
+			convert(0, $blockTextures17, 4)
+			convert(0, $blockTextures18, 44)
 
-		convert(0, $colorMapTextures, 2)
+			convert(0, $colorMapTextures, 2)
 
-		convert(0, $itemTextures1, 86)
-		convert(0, $itemTextures2, 85)
-		convert(0, $itemTextures3, 85)
-		convert(0, $itemTextures4, 85)
-		convert(0, $itemTextures5, 21)
+			convert(0, $itemTextures1, 86)
+			convert(0, $itemTextures2, 85)
+			convert(0, $itemTextures3, 85)
+			convert(0, $itemTextures4, 85)
+			convert(0, $itemTextures5, 21)
 
-		convert(0, $entityTextures1, 94)
-		convert(0, $entityTextures2, 92)
-		convert(0, $entityTextures3, 57)
-		convert(0, $entityTextures4, 43)
+			convert(0, $entityTextures1, 94)
+			convert(0, $entityTextures2, 92)
+			convert(0, $entityTextures3, 57)
+			convert(0, $entityTextures4, 43)
 
-		convert(0, $environmentTextures, 12)
+			convert(0, $environmentTextures, 12)
 
-		convert(0, $armorTextures, 11)
+			convert(0, $armorTextures, 11)
 
-		convert(0, $guiTextures, 1)
+			convert(0, $guiTextures, 1)
+			$timesRan += 1
+			Sleep(10)
+		WEnd
 
 		FileOpen($logDir & "\log.latest", 1)
 		FileWrite($logDir & "\log.latest", "Converted armor textures!" & @CRLF)
@@ -312,6 +317,7 @@ Func javaToBedrock()
 		Local $bedrockPackName = GUICtrlRead($BEPackNameInput)
 		Local $bedrockPackDesc = GUICtrlRead($BEPackDescInput)
 		Global $conversionCount = 0
+		Local $timesRan = 0
 
 		FileOpen($logDir & "\log.latest", 1)
 		FileWrite($logDir & "\log.latest", "Began converting Java to Bedrock" & @CRLF)
@@ -334,43 +340,48 @@ Func javaToBedrock()
 		FileWrite($logDir & "\log.latest", "Beginning texture file conversion" & @CRLF)
 		FileClose($logDir & "\log.latest")
 
-		convert(1, $blockTextures1, 49)
-		convert(1, $blockTextures2, 48)
-		convert(1, $blockTextures3, 48)
-		convert(1, $blockTextures4, 48)
-		convert(1, $blockTextures5, 48)
-		convert(1, $blockTextures6, 48)
-		convert(1, $blockTextures7, 48)
-		convert(1, $blockTextures8, 48)
-		convert(1, $blockTextures9, 48)
-		convert(1, $blockTextures10, 47)
-		convert(1, $blockTextures11, 48)
-		convert(1, $blockTextures12, 48)
-		convert(1, $blockTextures13, 48)
-		convert(1, $blockTextures14, 48)
-		convert(1, $blockTextures15, 48)
-		convert(1, $blockTextures16, 48)
-		convert(1, $blockTextures17, 4)
-		convert(1, $blockTextures18, 44)
+		While $timesRan < $repeats
+			convert(1, $blockTextures1, 49)
+			convert(1, $blockTextures2, 48)
+			convert(1, $blockTextures3, 48)
+			convert(1, $blockTextures4, 48)
+			convert(1, $blockTextures5, 48)
+			convert(1, $blockTextures6, 48)
+			convert(1, $blockTextures7, 48)
+			convert(1, $blockTextures8, 48)
+			convert(1, $blockTextures9, 48)
+			convert(1, $blockTextures10, 47)
+			convert(1, $blockTextures11, 48)
+			convert(1, $blockTextures12, 48)
+			convert(1, $blockTextures13, 48)
+			convert(1, $blockTextures14, 48)
+			convert(1, $blockTextures15, 48)
+			convert(1, $blockTextures16, 48)
+			convert(1, $blockTextures17, 4)
+			convert(1, $blockTextures18, 44)
 
-		convert(1, $colorMapTextures, 2)
+			convert(1, $colorMapTextures, 2)
 
-		convert(1, $itemTextures1, 86)
-		convert(1, $itemTextures2, 85)
-		convert(1, $itemTextures3, 85)
-		convert(1, $itemTextures4, 85)
-		convert(1, $itemTextures5, 21)
+			convert(1, $itemTextures1, 86)
+			convert(1, $itemTextures2, 85)
+			convert(1, $itemTextures3, 85)
+			convert(1, $itemTextures4, 85)
+			convert(1, $itemTextures5, 21)
 
-		convert(1, $entityTextures1, 94)
-		convert(1, $entityTextures2, 92)
-		convert(1, $entityTextures3, 57)
-		convert(1, $entityTextures4, 43)
+			convert(1, $entityTextures1, 94)
+			convert(1, $entityTextures2, 92)
+			convert(1, $entityTextures3, 57)
+			convert(1, $entityTextures4, 43)
 
-		convert(1, $environmentTextures, 12)
+			convert(1, $environmentTextures, 12)
 
-		convert(1, $armorTextures, 11)
+			convert(1, $armorTextures, 11)
 
-		convert(1, $guiTextures, 1)
+			convert(1, $guiTextures, 1)
+
+			$timesRan += 1
+			Sleep(10)
+		WEnd
 
 		FileOpen($logDir & "\log.latest", 1)
 		FileWrite($logDir & "\log.latest", "Texture file conversion complete! Converted " & $conversionCount & "files!" & @CRLF)
