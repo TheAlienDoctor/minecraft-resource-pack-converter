@@ -19,7 +19,7 @@
 ;###########################################################################################################################################################################################
 ;GUI (from Koda)
 
-#Region ### START Koda GUI section ### Form=d:\06 code\minecraft-resource-pack-converter\gui.kxf
+#Region ### START Koda GUI section
 Global $PackConverter = GUICreate("Alien's Pack Converter", 615, 221, -1, -1)
 Global $PackConverter = GUICtrlCreateTab(8, 8, 601, 185)
 Global $BedrockToJava = GUICtrlCreateTabItem("Bedrock to Java")
@@ -54,13 +54,39 @@ GUISetState(@SW_SHOW)
 Global $dateTime = @MDAY & '.' & @MON & '.' & @YEAR & '-' & @HOUR & '.' & @MIN & '.' & @SEC
 
 Global $inputDir = @ScriptDir & "\" & IniRead("options.ini", "config", "InputDir", "input")
-Global $bedrockDir = @ScriptDir & "\" & IniRead("options.ini", "config", "BedrockDir", "Bedrock-pack" & "pack")
-Global $javaDir = @ScriptDir & "\" & IniRead("options.ini", "config", "JavaDir", "Java-pack" & "pack")
 
-If IniRead("options.ini", "logConfig", "CustomLogDir", "false") = "false" Then
+If IniRead("options.ini", "Bedrock to Java", "useCustomDir", "error") = "false" Then
+Global $javaDir = @ScriptDir & "\Java Pack"
+
+ElseIf IniRead("options.ini", "Bedrock to Java", "useCustomDir", "error") = "true" Then
+Global $javaDir = IniRead("options.ini", "Bedrock to Java", "JavaDir", @ScriptDir & "Java-pack")
+
+Else
+MsgBox(0, "Alien's pack converter", "Error in config file: useCustomDir can only be set to true or false!")
+Exit
+EndIf
+
+
+If IniRead("options.ini", "Java to Bedrock", "useCustomDir", "false") = "false" Then
+Global $bedrockDir = @ScriptDir & "\Bedrock pack"
+
+ElseIf IniRead("options.ini", "Java to Bedrock", "useCustomDir", "false") = "true" Then
+Global $bedrockDir = IniRead("options.ini", "Java to Bedrock", "BedrockDir", @ScriptDir & \ "Bedrock Pack")
+
+Else
+MsgBox(0, "Alien's pack converter", "Error in config file: useCustomDir can only be set to True or False!")
+Exit
+EndIf
+
+If IniRead("options.ini", "logConfig", "CustomLogDir", "error") = "false" Then
 	Global $logDir = @ScriptDir & "\logs"
-ElseIf IniRead("options.ini", "logConfig", "CustomLogDir", "false") = "true" Then
+
+ElseIf IniRead("options.ini", "logConfig", "CustomLogDir", "error") = "true" Then
 	Global $logDir = IniRead("options.ini", "logConfig", "LogDir", @ScriptDir & "\logs")
+
+Else
+MsgBox(0, "Alien's pack converter", "Error in config file: useCustomDir can only be set to True or False!")
+Exit
 EndIf
 
 ;The conversion variables can be found in conversions.au3, this is to help with not cluttering this script
