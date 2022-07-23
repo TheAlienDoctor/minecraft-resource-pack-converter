@@ -240,6 +240,7 @@
 				<property name="Top" vt="Int16">200</property>
 				<property name="Width" vt="Int16">167</property>
 				<property name="Height" vt="Int8">17</property>
+				<property name="Cursor" vt="Ident">crHandPoint</property>
 				<property name="Hint" vt="String">Copyright notice</property>
 				<property name="Caption" vt="UTF8String">Copyright © 2022, TheAlienDoctor</property>
 				<property name="TabOrder" vt="Int8">1</property>
@@ -271,6 +272,7 @@
 				<property name="Top" vt="Int16">200</property>
 				<property name="Width" vt="Int16">273</property>
 				<property name="Height" vt="Int8">17</property>
+				<property name="Cursor" vt="Ident">crHandPoint</property>
 				<property name="Caption" vt="String">View source code,  report bugs and contribute on GitHub</property>
 				<property name="TabOrder" vt="Int8">3</property>
 				<property name="HaveVariable" vt="False">False</property>
