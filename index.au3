@@ -43,10 +43,10 @@ Global $BEPackNameTitle = GUICtrlCreateLabel("Pack Name:", 16, 48, 63, 17)
 GUICtrlCreateTabItem("")
 Global $CopyrightNotice = GUICtrlCreateLabel("Copyright © 2022, TheAlienDoctor", 8, 200, 167, 17)
 GUICtrlSetTip(-1, "Copyright notice")
-GUICtrlSetCursor (-1, 0)
+GUICtrlSetCursor(-1, 0)
 Global $VersionNumber = GUICtrlCreateLabel("Version: 1.0.0", 537, 200, 69, 17)
 Global $GitHubNotice = GUICtrlCreateLabel("View source code,  report bugs and contribute on GitHub", 219, 200, 273, 17)
-GUICtrlSetCursor (-1, 0)
+GUICtrlSetCursor(-1, 0)
 GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
 
@@ -65,6 +65,7 @@ ElseIf IniRead("options.ini", "Bedrock to Java", "useCustomDir", "error") = "tru
 
 Else
 	MsgBox(0, "Alien's pack converter", "Error in config file: useCustomDir can only be set to true or false!")
+	finishLog()
 	Exit
 EndIf
 
@@ -76,7 +77,8 @@ ElseIf IniRead("options.ini", "Java to Bedrock", "useCustomDir", "false") = "tru
 	Global $bedrockDir = IniRead("options.ini", "Java to Bedrock", "BedrockDir", @ScriptDir & "\Bedrock Pack")
 
 Else
-	MsgBox(0, "Alien's pack converter", "Error in config file: useCustomDir can only be set to True or False!")
+	MsgBox(0, "Alien's pack converter", "Error in config file: useCustomDir can only be set to true or false!")
+	finishLog()
 	Exit
 EndIf
 
@@ -87,7 +89,7 @@ ElseIf IniRead("options.ini", "logConfig", "CustomLogDir", "error") = "true" The
 	Global $logDir = IniRead("options.ini", "logConfig", "LogDir", @ScriptDir & "\logs")
 
 Else
-	MsgBox(0, "Alien's pack converter", "Error in config file: CustomLogDir can only be set to True or False!")
+	MsgBox(0, "Alien's pack converter", "Error in config file: CustomLogDir can only be set to true or false!")
 	Exit
 EndIf
 
@@ -107,6 +109,34 @@ Func uuidGenerator()
 			Random(0, 0xffff), Random(0, 0xffff), Random(0, 0xffff) _
 			)
 EndFunc   ;==>uuidGenerator
+
+Func checkForUpdates()
+	Local $ping = Ping("TheAlienDoctor.com")
+	If $ping > 0 Then
+		;Download that file
+	Else
+		$NoInternet = MsgBox(6, "Alien's pack converter", "Warning: You are not connected to the internet or TheAlienDoctor.com is down. This means the update checker could not run. Continue?")
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "No Internet, unable to check for updates" & @CRLF)
+		FileClose($logDir & "\log.latest")
+	EndIf
+
+	If $NoInternet = 2 Then ;Cancel
+		finishLog()
+		Exit
+
+	ElseIf $NoInternet = 10 Then ;Try again
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "Trying to check for updates again" & @CRLF)
+		FileClose($logDir & "\log.latest")
+		checkForUpdates()
+
+	ElseIf $NoInternet = 11 Then ;Continue
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "Continued without checking for updates (no internet)" & @CRLF)
+		FileClose($logDir & "\log.latest")
+	EndIf
+EndFunc   ;==>checkForUpdates
 
 Func createLog()
 	If FileExists($logDir & "\latest.log") Then
@@ -130,7 +160,7 @@ Func createLog()
 EndFunc   ;==>createLog
 
 Func startUp() ;Function to be ran on startup (excluding create logs function)
-	
+
 	If FileExists(@ScriptDir & "\LICENSE.txt") = 0 Then ;License redownload
 		InetGet("https://thealiendoctor.com/software-license/pack-converter-2022.txt", @ScriptDir & "\LICENSE.txt")
 		FileOpen($logDir & "\log.latest", 1)
@@ -148,6 +178,19 @@ Func startUp() ;Function to be ran on startup (excluding create logs function)
 		FileWrite($logDir & "\log.latest", "Created input directory" & @CRLF)
 		FileClose($logDir & "\log.latest")
 	EndIf
+
+	If IniRead("options.ini", "config", "autoCheckUpdates", "Error") = true Then ;Check for updates on startup
+	checkForUpdates()
+
+ElseIf IniRead("options.ini", "config", "autoCheckUpdates", "Error") = false Then
+	FileOpen($logDir & "\log.latest", 1)
+	FileWrite($logDir & "\log.latest", "Auto update check is disabled - this is not recommended!" & @CRLF)
+	FileClose($logDir & "\log.latest")
+Else
+	MsgBox(0, "Alien's pack converter", "Error in config file: autoCheckUpdates can only be set to true or false!")
+	finishLog()
+	Exit
+EndIf
 EndFunc   ;==>startUp
 
 Func finishLog()
