@@ -118,7 +118,7 @@ Func createLog()
 		FileWrite($logDir & "\log.latest", "Log file generated at " & @HOUR & ":" & @MIN & ":" & @SEC & " on " & @MDAY & "/" & @MON & "/" & @YEAR & " (HH:MM:SS on DD.MM.YY)" & @CRLF)
 		FileWrite($logDir & "\log.latest", "###################################################################" & @CRLF)
 		FileClose($logDir & "\log.latest")
-	ElseIf FileExists($logDir) = "0" Then ;If directory doesn't exist create it then begin writing logs
+	ElseIf FileExists($logDir) = 0 Then ;If directory doesn't exist create it then begin writing logs
 		DirCreate($logDir)
 		FileOpen($logDir & "\log.latest", 1)
 		FileWrite($logDir & "\log.latest", "Created log file directory" & @CRLF)
@@ -130,10 +130,22 @@ Func createLog()
 EndFunc   ;==>createLog
 
 Func startUp() ;Function to be ran on startup (excluding create logs function)
-	If FileExists(@ScriptDir & "\LICENSE.txt") = 0 Then
+	
+	If FileExists(@ScriptDir & "\LICENSE.txt") = 0 Then ;License redownload
 		InetGet("https://thealiendoctor.com/software-license/pack-converter-2022.txt", @ScriptDir & "\LICENSE.txt")
 		FileOpen($logDir & "\log.latest", 1)
 		FileWrite($logDir & "\log.latest", "Re-downloaded license" & @CRLF)
+		FileClose($logDir & "\log.latest")
+	EndIf
+
+	If FileExists($inputDir) Then ;Create input directory if it doesn't already exist
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "Input directory exists" & @CRLF)
+		FileClose($logDir & "\log.latest")
+	Else
+		DirCreate($inputDir)
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", "Created input directory" & @CRLF)
 		FileClose($logDir & "\log.latest")
 	EndIf
 EndFunc   ;==>startUp
@@ -145,19 +157,6 @@ Func finishLog()
 	FileClose($logDir & "\log.latest")
 	FileMove($logDir & "\log.latest", $logDir & "\log[" & $dateTime & "].txt")
 EndFunc   ;==>finishLog
-
-Func createInputDir()
-	If FileExists($inputDir) Then
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Input directory exists" & @CRLF)
-		FileClose($logDir & "\log.latest")
-	Else
-		DirCreate($inputDir)
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Created input directory" & @CRLF)
-		FileClose($logDir & "\log.latest")
-	EndIf
-EndFunc   ;==>createInputDir
 
 Func convert($mode, $conversionArray, $arrayDataCount)
 
@@ -424,7 +423,6 @@ EndFunc   ;==>javaToBedrock
 
 createLog()
 startUp()
-createInputDir()
 
 While 1
 	$nMsg = GUIGetMsg()
