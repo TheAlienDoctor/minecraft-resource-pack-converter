@@ -112,6 +112,9 @@ EndFunc   ;==>uuidGenerator
 
 Func checkForUpdates()
 	Local $ping = Ping("TheAlienDoctor.com")
+	Local $NoInternet = 0
+
+
 	If $ping > 0 Then
 		;Download that file
 	Else
@@ -211,6 +214,7 @@ Func convert($mode, $conversionArray, $arrayDataCount)
 
 			If FileExists($inputDir & "\" & $current[0]) Then
 				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
+				Sleep(10)
 				$conversionCount += 1
 				FileOpen($logDir & "\log.latest", 1)
 				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
@@ -228,6 +232,7 @@ Func convert($mode, $conversionArray, $arrayDataCount)
 
 			If FileExists($inputDir & "\" & $current[1]) Then
 				FileMove($inputDir & "\" & $current[1], $bedrockDir & "\pack\" & $current[0], 8)
+				Sleep(10)
 				$conversionCount += 1
 				FileOpen($logDir & "\log.latest", 1)
 				FileWrite($logDir & "\log.latest", $current[1] & " found, moved it to " & $current[0] & @CRLF)
@@ -277,7 +282,7 @@ Func bedrockToJava()
 		While $timesRan < $repeats
 			convert(0, $blockTextures1, 49)
 			convert(0, $blockTextures2, 48)
-			convert(0, $blockTextures3, 48)
+			convert(0, $blockTextures3, 47)
 			convert(0, $blockTextures4, 48)
 			convert(0, $blockTextures5, 48)
 			convert(0, $blockTextures6, 48)
@@ -313,14 +318,12 @@ Func bedrockToJava()
 
 			convert(0, $guiTextures, 1)
 			$timesRan += 1
-			Sleep(10)
-		WEnd
-
 		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Converted armor textures!" & @CRLF)
+		FileWrite($logDir & "\log.latest", @CRLF)
+		FileWrite($logDir & "\log.latest", "Texture conversion function ran " &  $timesRan & "/" & $repeats & @CRLF)
 		FileWrite($logDir & "\log.latest", @CRLF)
 		FileClose($logDir & "\log.latest")
-
+		WEnd
 
 		FileOpen($logDir & "\log.latest", 1)
 		FileWrite($logDir & "\log.latest", "Texture file conversion complete! Converted " & $conversionCount & " files!" & @CRLF)
@@ -387,7 +390,7 @@ Func javaToBedrock()
 		While $timesRan < $repeats
 			convert(1, $blockTextures1, 49)
 			convert(1, $blockTextures2, 48)
-			convert(1, $blockTextures3, 48)
+			convert(1, $blockTextures3, 47)
 			convert(1, $blockTextures4, 48)
 			convert(1, $blockTextures5, 48)
 			convert(1, $blockTextures6, 48)
