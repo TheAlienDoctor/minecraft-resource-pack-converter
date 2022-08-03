@@ -119,9 +119,7 @@ Func checkForUpdates()
 		;Download that file
 	Else
 		$NoInternet = MsgBox(6, "Alien's pack converter", "Warning: You are not connected to the internet or TheAlienDoctor.com is down. This means the update checker could not run. Continue?")
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "No Internet, unable to check for updates" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "No Internet, unable to check for updates")
 	EndIf
 
 	If $NoInternet = 2 Then ;Cancel
@@ -129,15 +127,11 @@ Func checkForUpdates()
 		Exit
 
 	ElseIf $NoInternet = 10 Then ;Try again
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Trying to check for updates again" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "Trying to check for updates again")
 		checkForUpdates()
 
 	ElseIf $NoInternet = 11 Then ;Continue
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Continued without checking for updates (no internet)" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "Continued without checking for updates (no internet)")
 	EndIf
 EndFunc   ;==>checkForUpdates
 
@@ -147,18 +141,13 @@ Func createLog()
 	EndIf
 
 	If FileExists($logDir) Then ;If directory exists then begin writing logs
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Log file generated at " & @HOUR & ":" & @MIN & ":" & @SEC & " on " & @MDAY & "/" & @MON & "/" & @YEAR & " (HH:MM:SS on DD.MM.YY)" & @CRLF)
-		FileWrite($logDir & "\log.latest", "###################################################################" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "Log file generated at " & @HOUR & ":" & @MIN & ":" & @SEC & " on " & @MDAY & "/" & @MON & "/" & @YEAR & " (HH:MM:SS on DD.MM.YY)")
+		logWrite(0, "###################################################################")
 	ElseIf FileExists($logDir) = 0 Then ;If directory doesn't exist create it then begin writing logs
 		DirCreate($logDir)
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Created log file directory" & @CRLF)
-		FileWrite($logDir & "\log.latest", @CRLF)
-		FileWrite($logDir & "\log.latest", "Log file generated at " & @HOUR & ":" & @MIN & ":" & @SEC & " on " & @MDAY & "/" & @MON & "/" & @YEAR & " (HH:MM:SS on DD.MM.YY)" & @CRLF)
-		FileWrite($logDir & "\log.latest", "###################################################################" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "Log file generated at " & @HOUR & ":" & @MIN & ":" & @SEC & " on " & @MDAY & "/" & @MON & "/" & @YEAR & " (HH:MM:SS on DD.MM.YY)")
+		logWrite(0, "###################################################################")
+		logWrite(0, "Created logging directory!")
 	EndIf
 EndFunc   ;==>createLog
 
@@ -166,41 +155,58 @@ Func startUp() ;Function to be ran on startup (excluding create logs function)
 
 	If FileExists(@ScriptDir & "\LICENSE.txt") = 0 Then ;License redownload
 		InetGet("https://thealiendoctor.com/software-license/pack-converter-2022.txt", @ScriptDir & "\LICENSE.txt")
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Re-downloaded license" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "Re-downloaded license")
 	EndIf
 
 	If FileExists($inputDir) Then ;Create input directory if it doesn't already exist
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Input directory exists" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "Input directory exists")
 	Else
 		DirCreate($inputDir)
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Created input directory" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "Created input directory")
 	EndIf
 
 	If IniRead("options.ini", "config", "autoCheckUpdates", "Error") = true Then ;Check for updates on startup
-	checkForUpdates()
+		checkForUpdates()
 
-ElseIf IniRead("options.ini", "config", "autoCheckUpdates", "Error") = false Then
-	FileOpen($logDir & "\log.latest", 1)
-	FileWrite($logDir & "\log.latest", "Auto update check is disabled - this is not recommended!" & @CRLF)
-	FileClose($logDir & "\log.latest")
-Else
-	MsgBox(0, "Alien's pack converter", "Error in config file: autoCheckUpdates can only be set to true or false!")
-	finishLog()
-	Exit
-EndIf
+	ElseIf IniRead("options.ini", "config", "autoCheckUpdates", "Error") = false Then
+		logWrite(0, "Auto update check is disabled - this is not recommended!")
+	Else
+		MsgBox(0, "Alien's pack converter", "Error in config file: autoCheckUpdates can only be set to true or false!")
+		finishLog()
+		Exit
+	EndIf
 EndFunc   ;==>startUp
+
+Func logWrite($spaces, $content)
+	If $spaces = 1 Then ;For adding spaces around the content written to the log
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", @CRLF)
+		FileClose($logDir & "\log.latest")
+	ElseIf $spaces = 2 Then
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", @CRLF)
+		FileClose($logDir & "\log.latest")
+	EndIf
+
+	FileOpen($logDir & "\log.latest", 1)
+	FileWrite($logDir & "\log.latest", $content & @CRLF)
+	FileClose($logDir & "\log.latest")
+
+	If $spaces = 1 Then
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", @CRLF)
+		FileClose($logDir & "\log.latest")
+	ElseIf $spaces = 3 Then
+		FileOpen($logDir & "\log.latest", 1)
+		FileWrite($logDir & "\log.latest", @CRLF)
+		FileClose($logDir & "\log.latest")
+	EndIf
+EndFunc   ;==>logWrite
 
 Func finishLog()
 	FileOpen($logDir & "\log.latest", 1)
-	FileWrite($logDir & "\log.latest", "###################################################################" & @CRLF)
-	FileWrite($logDir & "\log.latest", "Log file closed at " & @HOUR & ":" & @MIN & ":" & @SEC & " on " & @MDAY & "/" & @MON & "/" & @YEAR & " (HH:MM:SS on DD.MM.YY)" & @CRLF)
-	FileClose($logDir & "\log.latest")
+	logWrite(0, "###################################################################")
+	logWrite(0, "Log file closed at " & @HOUR & ":" & @MIN & ":" & @SEC & " on " & @MDAY & "/" & @MON & "/" & @YEAR & " (HH:MM:SS on DD.MM.YY)")
 	FileMove($logDir & "\log.latest", $logDir & "\log[" & $dateTime & "].txt")
 EndFunc   ;==>finishLog
 
@@ -216,13 +222,9 @@ Func convert($mode, $conversionArray, $arrayDataCount)
 				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
 				Sleep(10)
 				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " found, moved it to " & $current[1] & @CRLF)
-				FileClose($logDir & "\log.latest")
+				logWrite(0, $current[0] & " found, moved it to " & $current[1])
 			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[0] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
+				logWrite(0, $current[0] & " not found, ignoring it!")
 			EndIf
 		Next
 
@@ -234,13 +236,9 @@ Func convert($mode, $conversionArray, $arrayDataCount)
 				FileMove($inputDir & "\" & $current[1], $bedrockDir & "\pack\" & $current[0], 8)
 				Sleep(10)
 				$conversionCount += 1
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[1] & " found, moved it to " & $current[0] & @CRLF)
-				FileClose($logDir & "\log.latest")
+				logWrite(0, $current[1] & " found, moved it to " & $current[0])
 			Else
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", $current[1] & " not found, ignoring it! " & @CRLF)
-				FileClose($logDir & "\log.latest")
+				logWrite(0, $current[1] & " not found, ignoring it!")
 			EndIf
 		Next
 	EndIf
@@ -258,16 +256,12 @@ Func bedrockToJava()
 		Global $conversionCount = 0
 		Local $timesRan = 0
 
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Began converting Bedrock to Java" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "Began converting Bedrock to Java")
 
 		DirRemove($javaDir, 1)
 		DirCreate($javaDir & "\pack")
 
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Generating pack.mcmeta file" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "Generating pack.mcmeta file")
 
 		FileOpen($javaDir & "\pack\pack.txt", 8)
 		FileWrite($javaDir & '\pack\pack.txt', '{"pack":{"pack_format":9,"description":"' & $javaPackDesc & '"}}')
@@ -275,9 +269,8 @@ Func bedrockToJava()
 		FileMove($javaDir & "\pack\pack.txt", $javaDir & "\pack\pack.mcmeta")
 
 		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Generated pack.mcmeta file" & @CRLF)
-		FileWrite($logDir & "\log.latest", "Beginning texture file conversion" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "Generated pack.mcmeta file")
+		logWrite(0, "Beginning texture file conversion")
 
 		While $timesRan < $repeats
 			convert(0, $blockTextures1, 49)
@@ -318,43 +311,29 @@ Func bedrockToJava()
 
 			convert(0, $guiTextures, 1)
 			$timesRan += 1
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", @CRLF)
-		FileWrite($logDir & "\log.latest", "Texture conversion function ran " &  $timesRan & "/" & $repeats & @CRLF)
-		FileWrite($logDir & "\log.latest", @CRLF)
-		FileClose($logDir & "\log.latest")
+			logWrite(1, "Texture conversion function ran " & $timesRan & "/" & $repeats)
 		WEnd
 
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Texture file conversion complete! Converted " & $conversionCount & " files!" & @CRLF)
-		FileWrite($logDir & "\log.latest", "Creating pack.zip file" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "Texture file conversion complete! Converted " & $conversionCount & " files!")
+		logWrite(0, "Creating pack.zip file")
 
 		_Zip_Create($javaDir & "\pack.zip")
 
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Created pack.zip file" & @CRLF)
-		FileWrite($logDir & "\log.latest", "Adding files to pack.zip file" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "Created pack.zip file")
+		logWrite(0, "Adding files to pack.zip file")
 
 		_Zip_AddFolderContents($javaDir & "\pack.zip", $javaDir & "\pack", 1)
 
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Finished adding files to pack.zip!" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "Finished adding files to pack.zip!")
 
 		FileMove($javaDir & "\pack.zip", $javaDir & "\" & $javaPackName & ".zip")
 
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", ".zip folder renamed!" & @CRLF)
-		FileWrite($logDir & "\log.latest", "Bedrock to Java pack conversion complete!" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, ".zip folder renamed!")
+		logWrite(0, "Bedrock to Java pack conversion complete!")
 
 		MsgBox(0, "Alien's pack converter", "Conversion complete! Converted " & $conversionCount & " files to Java edition!")
 	Else
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Conversion aborted" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "Conversion aborted")
 	EndIf
 EndFunc   ;==>bedrockToJava
 
@@ -366,26 +345,20 @@ Func javaToBedrock()
 		Global $conversionCount = 0
 		Local $timesRan = 0
 
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Began converting Java to Bedrock" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "Began converting Java to Bedrock")
 
 		DirRemove($bedrockDir, 1)
 		DirCreate($bedrockDir & "\pack")
 
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Generating manifest.json file" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "Generating manifest.json file")
 
 		FileOpen($bedrockDir & "\pack\manifest.txt", 8)
 		FileWrite($bedrockDir & '\pack\manifest.txt', '{"format_version":2,"header":{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","name":"' & $bedrockPackName & '","uuid":"' & uuidGenerator() & '","version":[1,0,0],"min_engine_version":[1,19,0]},"modules":[{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","type":"resources","uuid":"' & uuidGenerator() & '","version":[1,0,0]}]}')
 		FileClose($bedrockDir & "\pack\manifest.txt")
 		FileMove($bedrockDir & "\pack\manifest.txt", $bedrockDir & "\pack\manifest.json")
 
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Generated manifest.json file" & @CRLF)
-		FileWrite($logDir & "\log.latest", "Beginning texture file conversion" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "Generated manifest.json file")
+		logWrite(0, "Beginning texture file conversion")
 
 		While $timesRan < $repeats
 			convert(1, $blockTextures1, 49)
@@ -430,36 +403,25 @@ Func javaToBedrock()
 			Sleep(10)
 		WEnd
 
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Texture file conversion complete! Converted " & $conversionCount & "files!" & @CRLF)
-		FileWrite($logDir & "\log.latest", "Creating .mcpack file" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "Texture file conversion complete! Converted " & $conversionCount & "files!")
+		logWrite(0, "Creating .mcpack file")
 
 		_Zip_Create($bedrockDir & "\pack.zip")
 
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Created pack.zip file" & @CRLF)
-		FileWrite($logDir & "\log.latest", "Adding files to pack.zip file" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "Created pack.zip file")
+		logWrite(0, "Adding files to pack.zip file")
 
 		_Zip_AddFolderContents($bedrockDir & "\pack.zip", $bedrockDir & "\pack\", 1)
 
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Finished adding files to pack.zip!" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "Finished adding files to pack.zip!")
 
 		FileMove($bedrockDir & "\pack.zip", $bedrockDir & "\" & $bedrockPackName & ".mcpack")
 
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Java to Bedrock pack conversion complete!" & @CRLF)
-		FileWrite($logDir & "\log.latest", @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(3, "Java to Bedrock pack conversion complete!")
 
 		MsgBox(0, "Alien's pack converter", "Conversion complete! Converted " & $conversionCount & " files to Bedrock edition!")
 	Else
-		FileOpen($logDir & "\log.latest", 1)
-		FileWrite($logDir & "\log.latest", "Conversion aborted" & @CRLF)
-		FileClose($logDir & "\log.latest")
+		logWrite(0, "Conversion aborted")
 	EndIf
 EndFunc   ;==>javaToBedrock
 
@@ -486,9 +448,7 @@ While 1
 		Case $CopyrightNotice
 			If FileExists(@ScriptDir & "\LICENSE.txt") = 0 Then
 				InetGet("https://thealiendoctor.com/software-license/pack-converter-2022.txt", @ScriptDir & "\LICENSE.txt")
-				FileOpen($logDir & "\log.latest", 1)
-				FileWrite($logDir & "\log.latest", "Re-downloaded license" & @CRLF)
-				FileClose($logDir & "\log.latest")
+				logWrite(0, "Re-downloaded license")
 				ShellExecute(@ScriptDir & "\LICENSE.txt")
 			ElseIf FileExists(@ScriptDir & "\LICENSE.txt") Then
 				ShellExecute(@ScriptDir & "\LICENSE.txt")
