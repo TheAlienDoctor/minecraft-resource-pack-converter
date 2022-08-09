@@ -15,6 +15,7 @@
 
 #include "conversions.au3"
 #include "UDF\Zip.au3"
+#include <InetConstants.au3>
 
 ;###########################################################################################################################################################################################
 ;GUI (from Koda)
@@ -56,6 +57,7 @@ GUISetState(@SW_SHOW)
 Global $dateTime = @MDAY & '.' & @MON & '.' & @YEAR & '-' & @HOUR & '.' & @MIN & '.' & @SEC
 Global $inputDir = @ScriptDir & "\" & IniRead("options.ini", "config", "InputDir", "input")
 Global $repeats = IniRead("options.txt", "config", "repeats", 2)
+Global $currentVersionNumber = 100
 
 If IniRead("options.ini", "Bedrock to Java", "useCustomDir", "error") = "false" Then
 	Global $javaDir = @ScriptDir & "\Java Pack"
@@ -65,7 +67,7 @@ ElseIf IniRead("options.ini", "Bedrock to Java", "useCustomDir", "error") = "tru
 
 Else
 	MsgBox(0, "Alien's pack converter", "Error in config file: useCustomDir can only be set to true or false!")
-	finishLog()
+	exitProgram()
 	Exit
 EndIf
 
@@ -78,7 +80,7 @@ ElseIf IniRead("options.ini", "Java to Bedrock", "useCustomDir", "false") = "tru
 
 Else
 	MsgBox(0, "Alien's pack converter", "Error in config file: useCustomDir can only be set to true or false!")
-	finishLog()
+	exitProgram()
 	Exit
 EndIf
 
@@ -112,25 +114,44 @@ EndFunc   ;==>uuidGenerator
 
 Func checkForUpdates()
 	Local $ping = Ping("TheAlienDoctor.com")
-	Local $NoInternet = 0
+	Local $NoInternetMsgBox = 0
 
 
 	If $ping > 0 Then
-		;Download that file
+		DirCreate(@ScriptDir & "\temp\")
+		InetGet("https://thealiendoctor.com/software-versions/pack-converter-versions.ini", @ScriptDir & "\temp\versions.ini", 1)
+		Global $latestVersionNum = IniRead(@ScriptDir & "\temp\versions.ini", "latest", "latest-version-num", "100")
+
+		If $latestVersionNum > $currentVersionNumber Then
+			Global $updateMsg = IniRead(@ScriptDir & "\temp\versions.ini", $latestVersionNum, "update-message", "(updated message undefined)")
+			Global $updateMsgBox = MsgBox(4, "Alien's pack converter", "There is a new update out now!" & @CRLF & $updateMsg & @CRLF & @CRLF & "Would you like to download it?")
+			logWrite(0, "New version found")
+
+			If $updateMsgBox = 6 Then
+				Global $versionPage = IniRead(@ScriptDir & "\temp\versions.ini", $latestVersionNum, "version-page", "https://www.thealiendoctor.com/downloads/apps-software/pack-converter")
+				ShellExecute($versionPage)
+				logWrite(0, "Opened newest version page")
+				exitProgram()
+				Exit
+			EndIf
+
+		EndIf
+
+
 	Else
-		$NoInternet = MsgBox(6, "Alien's pack converter", "Warning: You are not connected to the internet or TheAlienDoctor.com is down. This means the update checker could not run. Continue?")
+		$NoInternetMsgBox = MsgBox(6, "Alien's pack converter", "Warning: You are not connected to the internet or TheAlienDoctor.com is down. This means the update checker could not run. Continue?")
 		logWrite(0, "No Internet, unable to check for updates")
 	EndIf
 
-	If $NoInternet = 2 Then ;Cancel
-		finishLog()
+	If $NoInternetMsgBox = 2 Then ;Cancel
+		exitProgram()
 		Exit
 
-	ElseIf $NoInternet = 10 Then ;Try again
+	ElseIf $NoInternetMsgBox = 10 Then ;Try again
 		logWrite(0, "Trying to check for updates again")
 		checkForUpdates()
 
-	ElseIf $NoInternet = 11 Then ;Continue
+	ElseIf $NoInternetMsgBox = 11 Then ;Continue
 		logWrite(0, "Continued without checking for updates (no internet)")
 	EndIf
 EndFunc   ;==>checkForUpdates
@@ -172,7 +193,7 @@ Func startUp() ;Function to be ran on startup (excluding create logs function)
 		logWrite(0, "Auto update check is disabled - this is not recommended!")
 	Else
 		MsgBox(0, "Alien's pack converter", "Error in config file: autoCheckUpdates can only be set to true or false!")
-		finishLog()
+		exitProgram()
 		Exit
 	EndIf
 EndFunc   ;==>startUp
@@ -203,12 +224,14 @@ Func logWrite($spaces, $content)
 	EndIf
 EndFunc   ;==>logWrite
 
-Func finishLog()
+Func exitProgram()
 	FileOpen($logDir & "\log.latest", 1)
 	logWrite(0, "###################################################################")
 	logWrite(0, "Log file closed at " & @HOUR & ":" & @MIN & ":" & @SEC & " on " & @MDAY & "/" & @MON & "/" & @YEAR & " (HH:MM:SS on DD.MM.YY)")
 	FileMove($logDir & "\log.latest", $logDir & "\log[" & $dateTime & "].txt")
-EndFunc   ;==>finishLog
+
+	DirRemove(@ScriptDir & "\temp\", 1)
+EndFunc   ;==>exitProgram
 
 Func convert($mode, $conversionArray, $arrayDataCount)
 
@@ -406,16 +429,16 @@ Func javaToBedrock()
 		logWrite(0, "Texture file conversion complete! Converted " & $conversionCount & "files!")
 		logWrite(0, "Creating .mcpack file")
 
-		_Zip_Create($bedrockDir & "\pack.zip")
+		_Zip_Create($bedrockDir & "\" & $bedrockPackName & ".zip")
 
 		logWrite(0, "Created pack.zip file")
 		logWrite(0, "Adding files to pack.zip file")
 
-		_Zip_AddFolderContents($bedrockDir & "\pack.zip", $bedrockDir & "\pack\", 1)
+		_Zip_AddFolderContents($bedrockDir & "\" & $bedrockPackName & ".zip", $bedrockDir & "\pack\", 1)
 
 		logWrite(0, "Finished adding files to pack.zip!")
 
-		FileMove($bedrockDir & "\pack.zip", $bedrockDir & "\" & $bedrockPackName & ".mcpack")
+		FileMove($bedrockDir & "\" & $bedrockPackName & ".zip", $bedrockDir & "\" & $bedrockPackName & ".mcpack")
 
 		logWrite(3, "Java to Bedrock pack conversion complete!")
 
@@ -436,7 +459,7 @@ While 1
 	$nMsg = GUIGetMsg()
 	Switch $nMsg
 		Case $GUI_EVENT_CLOSE
-			finishLog()
+			exitProgram()
 			Exit
 
 		Case $StartBeToJe
