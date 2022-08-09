@@ -1,0 +1,52 @@
+# Info
+Alien's pack converter is a program written in AutoIt that will convert Mineraft Resource packs between Minecraft Bedrock and Java editions.
+It is also open sorce if you wish to contribute or report bugs, which you can find the link for by clicking on the GitHub notice in the GUI.
+
+# How to use
+1) Firstly you are going to need to get the pack you wish to convert, unzip it and save it in the input directory. By default this is a
+folder in the scripts directory called "input" but the name can be changed in the options.ini file. Make sure that the unzipped version
+of the pack is not nested inside the folder, and that the pack files are the first thing inside the input folder.
+
+2) After putting your pack into the input folder, you can open the PackConverter.exe app itself. Assuming there are no errors in the config
+file, it should open fine and display a GUI with two tabs. It is now time to choose which type of conversion you want to do, although both
+conversions have the same steps from a user point of view.
+
+3) Once you have the tab open for the correct type of pack you wish to convert, you should see two input boxes - one for the name of the
+pack and one for the description of the pack. This is not the name of the pack you are converting, but instead what you want to call the
+converted pack this program will generate for you.
+
+4) Next you can click the "start conversion" button to start the conversion. Please note that currently there is no loading bar or anyway
+to actually tell if the pack has began converting at this time, however there is a popup box warning you that all the contents of the
+output folder will be deleted. This means if you have any packs that this program has generated and you haven't removed them from the
+output directory then they will be deleted so that the programm can convert this pack without any coflicts.
+
+5) After about 10 seconds (sometimes more depending on the specs of your computer) a loading bar may appear showing you the progress on
+the zip folder creation, which can be disabled in the options.ini - once that has finished there should be a popup box letting you know
+how many files have been converted.
+
+6) If you want to check which files have been converted, then you can open the orignally input-ed pack and check which files are left over
+(please note at this current time only .png files can be converted) or you can check the log file, which you can find in the logs folder.
+Logs are time + date stamped to let you find one easily, or if the program is open then the log will be called log.latest. You can open
+these logs in any text editor.
+
+# Updating
+To update simply redownload the program from TheAlienDoctor.com. You may want to save your options.ini file as that will contain any
+custom settings you may have set, however bear in mind that if there have been any changes to the options.ini file in a newer update
+that an older one will not be compatible, and will likely give errors so its not recommended to simply copy and paste the file
+(instead maybe copy and paste values from the old to new file?) Everytime you open the program, it will check for updates
+(as long as you are connected to the internet). It will only alert you of an update if there is actually a newer version than the one your
+currently running. This can be disabled in the options.ini but is not recommended.
+
+# Report bugs
+To report any bugs, please check out the GitHub repo and click on the "issues" tab. You may also contribute code there should you wish. You can also join Alien's Discord server (linked below) if you are having issues running this program. Feel free to ask for help with this in th Help channel!
+
+Thats it, hope you enjoy :D
+
+# Links
+GitHub repo: https://github.com/TheAlienDoctor/minecraft-resource-pack-converter
+
+YouTube: The Alien Doctor - https://TheAlienDoctor.com/r/YouTube
+Discord server: https://TheAlienDoctor.com/r/Discord
+Twitter: @TheAlienDoctor - https://TheAlienDoctor.com/r/Twitter
+Patreon: TheAlienDoctor - https://TheAlienDoctor.com/r/Patreon
+Twitch: TheAliendoctor_ - https://TheAlienDoctor.com/r/Twitch
