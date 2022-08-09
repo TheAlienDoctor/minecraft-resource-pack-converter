@@ -154,6 +154,8 @@ Func checkForUpdates()
 	ElseIf $NoInternetMsgBox = 11 Then ;Continue
 		logWrite(0, "Continued without checking for updates (no internet)")
 	EndIf
+	
+	DirRemove(@ScriptDir & "\temp\", 1)
 EndFunc   ;==>checkForUpdates
 
 Func createLog()
