@@ -61,7 +61,7 @@ GUISetState(@SW_SHOW)
 Global $dateTime = @MDAY & '.' & @MON & '.' & @YEAR & '-' & @HOUR & '.' & @MIN & '.' & @SEC
 Global $inputDir = @ScriptDir & "\" & IniRead("options.ini", "config", "InputDir", "input")
 Global $repeats = IniRead("options.txt", "config", "repeats", 2)
-Global $currentVersionNumber = 100
+Global $currentVersionNumber = 101
 
 If IniRead("options.ini", "Bedrock to Java", "useCustomDir", "error") = "false" Then
 	Global $javaDir = @ScriptDir & "\Java Pack"
