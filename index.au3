@@ -117,7 +117,7 @@ Func uuidGenerator()
 EndFunc   ;==>uuidGenerator
 
 Func checkForUpdates($updateCheckOutputMsg)
-logWrite(0, "Running update check")
+	logWrite(0, "Running update check")
 	Local $ping = Ping("TheAlienDoctor.com")
 	Local $NoInternetMsgBox = 0
 
@@ -127,48 +127,26 @@ logWrite(0, "Running update check")
 		InetGet("https://thealiendoctor.com/software-versions/pack-converter-versions.ini", @ScriptDir & "\temp\versions.ini", 1)
 		Global $latestVersionNum = IniRead(@ScriptDir & "\temp\versions.ini", "latest", "latest-version-num", "100")
 
-		If $updateCheckOutputMsg = 0 Then
-			If $latestVersionNum > $currentVersionNumber Then
-				Global $updateMsg = IniRead(@ScriptDir & "\temp\versions.ini", $latestVersionNum, "update-message", "(updated message undefined)")
-				Global $updateMsgBox = MsgBox(4, "Alien's pack converter", "There is a new update out now!" & @CRLF & $updateMsg & @CRLF & @CRLF & "Would you like to download it?")
-				logWrite(0, "New version found")
+		If $latestVersionNum > $currentVersionNumber Then
+			Global $updateMsg = IniRead(@ScriptDir & "\temp\versions.ini", $latestVersionNum, "update-message", "(updated message undefined)")
+			Global $updateMsgBox = MsgBox(4, "Alien's pack converter", "There is a new update out now!" & @CRLF & $updateMsg & @CRLF & @CRLF & "Would you like to download it?")
+			logWrite(0, "New version found")
 
-				If $updateMsgBox = 6 Then
-					Global $versionPage = IniRead(@ScriptDir & "\temp\versions.ini", $latestVersionNum, "version-page", "https://www.thealiendoctor.com/downloads/pack-converter")
-					ShellExecute($versionPage)
-					logWrite(0, "Opened newest version page")
-					exitProgram()
-					Exit
-				EndIf
-			Else
-				logWrite(0, "No new updates found")
-
+			If $updateMsgBox = 6 Then
+				Global $versionPage = IniRead(@ScriptDir & "\temp\versions.ini", $latestVersionNum, "version-page", "https://www.thealiendoctor.com/downloads/pack-converter")
+				ShellExecute($versionPage)
+				logWrite(0, "Opened newest version page")
+				exitProgram()
+				Exit
 			EndIf
-		EndIf
-
-		If $updateCheckOutputMsg = 1 Then
-			If $latestVersionNum > $currentVersionNumber Then
-				Global $updateMsg = IniRead(@ScriptDir & "\temp\versions.ini", $latestVersionNum, "update-message", "(updated message undefined)")
-				Global $updateMsgBox = MsgBox(4, "Alien's pack converter", "There is a new update out now!" & @CRLF & $updateMsg & @CRLF & @CRLF & "Would you like to download it?")
-				logWrite(0, "New version found")
-
-				If $updateMsgBox = 6 Then
-					Global $versionPage = IniRead(@ScriptDir & "\temp\versions.ini", $latestVersionNum, "version-page", "https://www.thealiendoctor.com/downloads/pack-converter")
-					ShellExecute($versionPage)
-					logWrite(0, "Opened newest version page")
-					exitProgram()
-					Exit
-				EndIf
-
-			EndIf
-
 		Else
 			logWrite(0, "No new updates found")
-			MsgBox(0, "Alien's pack converter", "No new updates found.")
+			If $updateCheckOutputMsg = 1 Then
+				;Do some stuff
+			EndIf
 		EndIf
 
-
-	Else
+	Else ;If ping is below 0 then update server is down, or user is not connected to the internet
 		$NoInternetMsgBox = "clear variable"
 		$NoInternetMsgBox = MsgBox(6, "Alien's pack converter", "Warning: You are not connected to the internet or TheAlienDoctor.com is down. This means the update checker could not run. Continue?")
 		logWrite(0, "No Internet, unable to check for updates")
