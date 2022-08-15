@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <object type="TAForm" name="PackConverter">
 	<properties>
-		<property name="Left" vt="Int16">492</property>
-		<property name="Top" vt="Int16">218</property>
+		<property name="Left" vt="Int16">958</property>
+		<property name="Top" vt="Int16">550</property>
 		<property name="Width" vt="Int16">630</property>
 		<property name="Height" vt="Int16">259</property>
 		<property name="Hint" vt="String">Pack Converter</property>
@@ -103,6 +103,7 @@
 								<property name="Height" vt="Int8">21</property>
 								<property name="Hint" vt="String">Pack description</property>
 								<property name="TabOrder" vt="Int8">1</property>
+								<property name="Text" vt="String">Pack description here</property>
 								<property name="CtrlStyle" vt="Int32">1342374016</property>
 								<property name="CtrlExStyle" vt="Int16">512</property>
 								<property name="Resizing" vt="Set">DockHeight</property>
@@ -134,6 +135,7 @@
 								<property name="Height" vt="Int8">21</property>
 								<property name="Hint" vt="String">Pack name</property>
 								<property name="TabOrder" vt="Int8">4</property>
+								<property name="Text" vt="String">Pack name here</property>
 								<property name="CtrlStyle" vt="Int32">1342374016</property>
 								<property name="CtrlExStyle" vt="Int16">512</property>
 								<property name="Resizing" vt="Set">DockHeight</property>
@@ -163,6 +165,7 @@
 								<property name="Height" vt="Int8">21</property>
 								<property name="Hint" vt="String">Pack description</property>
 								<property name="TabOrder" vt="Int8">0</property>
+								<property name="Text" vt="String">Pack description here</property>
 								<property name="CtrlStyle" vt="Int32">1342374016</property>
 								<property name="CtrlExStyle" vt="Int16">512</property>
 								<property name="Resizing" vt="Set">DockHeight</property>
@@ -177,6 +180,7 @@
 								<property name="Height" vt="Int8">21</property>
 								<property name="Hint" vt="String">Pack name</property>
 								<property name="TabOrder" vt="Int8">1</property>
+								<property name="Text" vt="String">Pack name here</property>
 								<property name="CtrlStyle" vt="Int32">1342374016</property>
 								<property name="CtrlExStyle" vt="Int16">512</property>
 								<property name="Resizing" vt="Set">DockHeight</property>
@@ -257,7 +261,9 @@
 				<property name="Top" vt="Int16">200</property>
 				<property name="Width" vt="Int8">69</property>
 				<property name="Height" vt="Int8">17</property>
-				<property name="Caption" vt="String">Version: 1.0.0</property>
+				<property name="Cursor" vt="Ident">crHandPoint</property>
+				<property name="Hint" vt="String">Check for updates</property>
+				<property name="Caption" vt="String">Version: 1.0.1</property>
 				<property name="TabOrder" vt="Int8">2</property>
 				<property name="HaveVariable" vt="False">False</property>
 				<property name="CtrlStyle" vt="Int32">1342308608</property>
@@ -273,6 +279,7 @@
 				<property name="Width" vt="Int16">273</property>
 				<property name="Height" vt="Int8">17</property>
 				<property name="Cursor" vt="Ident">crHandPoint</property>
+				<property name="Hint" vt="String">Open GitHub repo</property>
 				<property name="Caption" vt="String">View source code,  report bugs and contribute on GitHub</property>
 				<property name="TabOrder" vt="Int8">3</property>
 				<property name="HaveVariable" vt="False">False</property>

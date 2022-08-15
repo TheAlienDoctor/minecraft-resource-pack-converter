@@ -21,22 +21,22 @@
 ;###########################################################################################################################################################################################
 ;GUI (from Koda)
 
-#Region ### START Koda GUI section
+#Region ### START Koda GUI section ###
 Global $PackConverter = GUICreate("Alien's Pack Converter", 615, 221, -1, -1)
 Global $PackConverter = GUICtrlCreateTab(8, 8, 601, 185)
 Global $BedrockToJava = GUICtrlCreateTabItem("Bedrock to Java")
 Global $StartBeToJe = GUICtrlCreateButton("Start conversion", 457, 162, 145, 25)
 GUICtrlSetTip(-1, "Start conversion")
-Global $JEPackDescInput = GUICtrlCreateInput("", 112, 80, 489, 21)
+Global $JEPackDescInput = GUICtrlCreateInput("Pack description here", 112, 80, 489, 21)
 GUICtrlSetTip(-1, "Pack description")
 Global $JEPackDescTitle = GUICtrlCreateLabel("Pack Description:", 15, 80, 88, 17)
 Global $JEPackNameTitle = GUICtrlCreateLabel("Pack Name:", 16, 48, 63, 17)
-Global $JEPackNameInput = GUICtrlCreateInput("", 88, 48, 513, 21)
+Global $JEPackNameInput = GUICtrlCreateInput("Pack name here", 88, 48, 513, 21)
 GUICtrlSetTip(-1, "Pack name")
 Global $JavaToBedrock = GUICtrlCreateTabItem("Java to Bedrock")
-Global $BEPackDescInput = GUICtrlCreateInput("", 112, 80, 489, 21)
+Global $BEPackDescInput = GUICtrlCreateInput("Pack description here", 112, 80, 489, 21)
 GUICtrlSetTip(-1, "Pack description")
-Global $BEPackNameInput = GUICtrlCreateInput("", 88, 48, 513, 21)
+Global $BEPackNameInput = GUICtrlCreateInput("Pack name here", 88, 48, 513, 21)
 GUICtrlSetTip(-1, "Pack name")
 Global $StartJeToBe = GUICtrlCreateButton("Start conversion", 457, 162, 145, 25)
 GUICtrlSetTip(-1, "Start conversion")
@@ -46,8 +46,11 @@ GUICtrlCreateTabItem("")
 Global $CopyrightNotice = GUICtrlCreateLabel("Copyright © 2022, TheAlienDoctor", 8, 200, 167, 17)
 GUICtrlSetTip(-1, "Copyright notice")
 GUICtrlSetCursor(-1, 0)
-Global $VersionNumber = GUICtrlCreateLabel("Version: 1.0.0", 537, 200, 69, 17)
+Global $VersionNumber = GUICtrlCreateLabel("Version: 1.0.1", 537, 200, 69, 17)
+GUICtrlSetTip(-1, "Check for updates")
+GUICtrlSetCursor(-1, 0)
 Global $GitHubNotice = GUICtrlCreateLabel("View source code,  report bugs and contribute on GitHub", 219, 200, 273, 17)
+GUICtrlSetTip(-1, "Open GitHub repo")
 GUICtrlSetCursor(-1, 0)
 GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
@@ -113,7 +116,8 @@ Func uuidGenerator()
 			)
 EndFunc   ;==>uuidGenerator
 
-Func checkForUpdates()
+Func checkForUpdates($updateCheckOutputMsg)
+logWrite(0, "Running update check")
 	Local $ping = Ping("TheAlienDoctor.com")
 	Local $NoInternetMsgBox = 0
 
@@ -123,23 +127,49 @@ Func checkForUpdates()
 		InetGet("https://thealiendoctor.com/software-versions/pack-converter-versions.ini", @ScriptDir & "\temp\versions.ini", 1)
 		Global $latestVersionNum = IniRead(@ScriptDir & "\temp\versions.ini", "latest", "latest-version-num", "100")
 
-		If $latestVersionNum > $currentVersionNumber Then
-			Global $updateMsg = IniRead(@ScriptDir & "\temp\versions.ini", $latestVersionNum, "update-message", "(updated message undefined)")
-			Global $updateMsgBox = MsgBox(4, "Alien's pack converter", "There is a new update out now!" & @CRLF & $updateMsg & @CRLF & @CRLF & "Would you like to download it?")
-			logWrite(0, "New version found")
+		If $updateCheckOutputMsg = 0 Then
+			If $latestVersionNum > $currentVersionNumber Then
+				Global $updateMsg = IniRead(@ScriptDir & "\temp\versions.ini", $latestVersionNum, "update-message", "(updated message undefined)")
+				Global $updateMsgBox = MsgBox(4, "Alien's pack converter", "There is a new update out now!" & @CRLF & $updateMsg & @CRLF & @CRLF & "Would you like to download it?")
+				logWrite(0, "New version found")
 
-			If $updateMsgBox = 6 Then
-				Global $versionPage = IniRead(@ScriptDir & "\temp\versions.ini", $latestVersionNum, "version-page", "https://www.thealiendoctor.com/downloads/apps-software/pack-converter")
-				ShellExecute($versionPage)
-				logWrite(0, "Opened newest version page")
-				exitProgram()
-				Exit
+				If $updateMsgBox = 6 Then
+					Global $versionPage = IniRead(@ScriptDir & "\temp\versions.ini", $latestVersionNum, "version-page", "https://www.thealiendoctor.com/downloads/pack-converter")
+					ShellExecute($versionPage)
+					logWrite(0, "Opened newest version page")
+					exitProgram()
+					Exit
+				EndIf
+			Else
+				logWrite(0, "No new updates found")
+
+			EndIf
+		EndIf
+
+		If $updateCheckOutputMsg = 1 Then
+			If $latestVersionNum > $currentVersionNumber Then
+				Global $updateMsg = IniRead(@ScriptDir & "\temp\versions.ini", $latestVersionNum, "update-message", "(updated message undefined)")
+				Global $updateMsgBox = MsgBox(4, "Alien's pack converter", "There is a new update out now!" & @CRLF & $updateMsg & @CRLF & @CRLF & "Would you like to download it?")
+				logWrite(0, "New version found")
+
+				If $updateMsgBox = 6 Then
+					Global $versionPage = IniRead(@ScriptDir & "\temp\versions.ini", $latestVersionNum, "version-page", "https://www.thealiendoctor.com/downloads/pack-converter")
+					ShellExecute($versionPage)
+					logWrite(0, "Opened newest version page")
+					exitProgram()
+					Exit
+				EndIf
+
 			EndIf
 
+		Else
+			logWrite(0, "No new updates found")
+			MsgBox(0, "Alien's pack converter", "No new updates found.")
 		EndIf
 
 
 	Else
+		$NoInternetMsgBox = "clear variable"
 		$NoInternetMsgBox = MsgBox(6, "Alien's pack converter", "Warning: You are not connected to the internet or TheAlienDoctor.com is down. This means the update checker could not run. Continue?")
 		logWrite(0, "No Internet, unable to check for updates")
 	EndIf
@@ -150,7 +180,7 @@ Func checkForUpdates()
 
 	ElseIf $NoInternetMsgBox = 10 Then ;Try again
 		logWrite(0, "Trying to check for updates again")
-		checkForUpdates()
+		checkForUpdates(1)
 
 	ElseIf $NoInternetMsgBox = 11 Then ;Continue
 		logWrite(0, "Continued without checking for updates (no internet)")
@@ -190,7 +220,7 @@ Func startUp() ;Function to be ran on startup (excluding create logs function)
 	EndIf
 
 	If IniRead("options.ini", "config", "autoCheckUpdates", "Error") = true Then ;Check for updates on startup
-		checkForUpdates()
+		checkForUpdates(0)
 
 	ElseIf IniRead("options.ini", "config", "autoCheckUpdates", "Error") = false Then
 		logWrite(0, "Auto update check is disabled - this is not recommended!")
@@ -482,6 +512,9 @@ While 1
 
 		Case $GitHubNotice
 			ShellExecute("https://github.com/TheAlienDoctor/minecraft-resource-pack-converter")
+
+		Case $VersionNumber
+			checkForUpdates(1)
 
 	EndSwitch
 WEnd
