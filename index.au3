@@ -13,17 +13,17 @@
 #include <StaticConstants.au3>
 #include <TabConstants.au3>
 #include <WindowsConstants.au3>
+#include <InetConstants.au3>
 
 #include "conversions.au3"
 #include "UDF\Zip.au3"
-#include <InetConstants.au3>
 
 ;###########################################################################################################################################################################################
-;GUI (from Koda)
+;GUI
 
-#Region ### START Koda GUI section ### Form=d:\06 code\minecraft-resource-pack-converter\gui.kxf
-Global $PackConverter = GUICreate("Alien's Pack Converter", 615, 221, -1, -1)
-Global $PackConverter = GUICtrlCreateTab(8, 8, 601, 145)
+#Region ### START Koda GUI section ### Form=c:\files\thealiendoctor\code\minecraft-resource-pack-converter\gui.kxf
+Global $PackConverterGUI = GUICreate("Alien's Pack Converter", 615, 221, -1, -1)
+Global $Tabs = GUICtrlCreateTab(8, 8, 601, 145)
 Global $BedrockToJava = GUICtrlCreateTabItem("Bedrock to Java")
 Global $StartBeToJe = GUICtrlCreateButton("Start conversion", 457, 122, 145, 25)
 GUICtrlSetTip(-1, "Start conversion")
@@ -45,13 +45,13 @@ Global $BEPackNameTitle = GUICtrlCreateLabel("Pack Name:", 16, 48, 63, 17)
 GUICtrlCreateTabItem("")
 Global $CopyrightNotice = GUICtrlCreateLabel("Copyright © 2022, TheAlienDoctor", 8, 200, 167, 17)
 GUICtrlSetTip(-1, "Copyright notice")
-GUICtrlSetCursor(-1, 0)
+GUICtrlSetCursor (-1, 0)
 Global $VersionNumber = GUICtrlCreateLabel("Version: 1.1.0", 537, 200, 69, 17)
 GUICtrlSetTip(-1, "Check for updates")
-GUICtrlSetCursor(-1, 0)
+GUICtrlSetCursor (-1, 0)
 Global $GitHubNotice = GUICtrlCreateLabel("View source code,  report bugs and contribute on GitHub", 219, 200, 273, 17)
 GUICtrlSetTip(-1, "Open GitHub repo")
-GUICtrlSetCursor(-1, 0)
+GUICtrlSetCursor (-1, 0)
 Global $ProgressBar = GUICtrlCreateProgress(8, 168, 601, 17)
 GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
@@ -63,6 +63,7 @@ Global $dateTime = @MDAY & '.' & @MON & '.' & @YEAR & '-' & @HOUR & '.' & @MIN &
 Global $inputDir = @ScriptDir & "\" & IniRead("options.ini", "config", "InputDir", "input")
 Global $repeats = IniRead("options.txt", "config", "repeats", 2)
 Global $currentVersionNumber = 110
+Global $guiTitle = "Alien's Pack Converter"
 
 If IniRead("options.ini", "Bedrock to Java", "useCustomDir", "error") = "false" Then
 	Global $javaDir = @ScriptDir & "\Java Pack"
@@ -71,7 +72,7 @@ ElseIf IniRead("options.ini", "Bedrock to Java", "useCustomDir", "error") = "tru
 	Global $javaDir = IniRead("options.ini", "Bedrock to Java", "JavaDir", @ScriptDir & "Java-pack")
 
 Else
-	MsgBox(0, "Alien's pack converter", "Error in config file: useCustomDir can only be set to true or false!")
+	MsgBox(0, $guiTitle, "Error in config file: useCustomDir can only be set to true or false!")
 	exitProgram()
 	Exit
 EndIf
@@ -84,7 +85,7 @@ ElseIf IniRead("options.ini", "Java to Bedrock", "useCustomDir", "false") = "tru
 	Global $bedrockDir = IniRead("options.ini", "Java to Bedrock", "BedrockDir", @ScriptDir & "\Bedrock Pack")
 
 Else
-	MsgBox(0, "Alien's pack converter", "Error in config file: useCustomDir can only be set to true or false!")
+	MsgBox(0, $guiTitle, "Error in config file: useCustomDir can only be set to true or false!")
 	exitProgram()
 	Exit
 EndIf
@@ -96,7 +97,7 @@ ElseIf IniRead("options.ini", "logConfig", "CustomLogDir", "error") = "true" The
 	Global $logDir = IniRead("options.ini", "logConfig", "LogDir", @ScriptDir & "\logs")
 
 Else
-	MsgBox(0, "Alien's pack converter", "Error in config file: CustomLogDir can only be set to true or false!")
+	MsgBox(0, $guiTitle, "Error in config file: CustomLogDir can only be set to true or false!")
 	Exit
 EndIf
 
@@ -130,7 +131,7 @@ Func checkForUpdates($updateCheckOutputMsg)
 
 		If $latestVersionNum > $currentVersionNumber Then
 			Global $updateMsg = IniRead(@ScriptDir & "\temp\versions.ini", $latestVersionNum, "update-message", "(updated message undefined)")
-			Global $updateMsgBox = MsgBox(4, "Alien's pack converter", "There is a new update out now!" & @CRLF & $updateMsg & @CRLF & @CRLF & "Would you like to download it?")
+			Global $updateMsgBox = MsgBox(4, $guiTitle, "There is a new update out now!" & @CRLF & $updateMsg & @CRLF & @CRLF & "Would you like to download it?")
 			logWrite(0, "New version found")
 
 			If $updateMsgBox = 6 Then
@@ -144,14 +145,14 @@ Func checkForUpdates($updateCheckOutputMsg)
 			logWrite(0, "No new updates found")
 
 			If $updateCheckOutputMsg = 1 Then
-				MsgBox(0, "Alien's Pack Converter", "No new updates found")
+				MsgBox(0, $guiTitle, "No new updates found")
 			EndIf
 
 		EndIf
 
 	Else ;If ping is below 0 then update server is down, or user is not connected to the internet
 		$NoInternetMsgBox = "clear variable"
-		$NoInternetMsgBox = MsgBox(6, "Alien's pack converter", "Warning: You are not connected to the internet or TheAlienDoctor.com is down. This means the update checker could not run. Continue?")
+		$NoInternetMsgBox = MsgBox(6, $guiTitle, "Warning: You are not connected to the internet or TheAlienDoctor.com is down. This means the update checker could not run. Continue?")
 		logWrite(0, "No Internet, unable to check for updates")
 	EndIf
 
@@ -206,7 +207,7 @@ Func startUp() ;Function to be ran on startup (excluding create logs function)
 	ElseIf IniRead("options.ini", "config", "autoCheckUpdates", "Error") = false Then
 		logWrite(0, "Auto update check is disabled - this is not recommended!")
 	Else
-		MsgBox(0, "Alien's pack converter", "Error in config file: autoCheckUpdates can only be set to true or false!")
+		MsgBox(0, $guiTitle, "Error in config file: autoCheckUpdates can only be set to true or false!")
 		exitProgram()
 		Exit
 	EndIf
@@ -287,7 +288,7 @@ EndFunc   ;==>convert
 
 Func bedrockToJava()
 	GUICtrlSetData($ProgressBar, 0)
-	Local $confirmBox = MsgBox(1, "Alien's pack converter", "Are you sure you want to start conversion? This will delete everything inside the " & $javaDir & " folder, so make sure you have removed any previous packs from it.")
+	Local $confirmBox = MsgBox(1, $guiTitle, "Are you sure you want to start conversion? This will delete everything inside the " & $javaDir & " folder, so make sure you have removed any previous packs from it.")
 	If $confirmBox = 1 Then
 
 		Local $javaPackName = GUICtrlRead($JEPackNameInput)
@@ -377,7 +378,7 @@ Func bedrockToJava()
 		logWrite(0, ".zip folder renamed!")
 		logWrite(0, "Bedrock to Java pack conversion complete!")
 		GUICtrlSetData($ProgressBar, 70)
-		MsgBox(0, "Alien's pack converter", "Conversion complete! Converted " & $conversionCount & " files to Java edition!")
+		MsgBox(0, $guiTitle, "Conversion complete! Converted " & $conversionCount & " files to Java edition!")
 		GUICtrlSetData($ProgressBar, 80)
 	Else
 		logWrite(0, "Conversion aborted")
@@ -388,7 +389,7 @@ EndFunc   ;==>bedrockToJava
 
 Func javaToBedrock()
 	GUICtrlSetData($ProgressBar, 0)
-	Local $confirmBox = MsgBox(1, "Alien's pack converter", "Are you sure you want to start conversion? This will delete everything inside the " & $bedrockDir & " folder, so make sure you have removed any previous packs from it.")
+	Local $confirmBox = MsgBox(1, $guiTitle, "Are you sure you want to start conversion? This will delete everything inside the " & $bedrockDir & " folder, so make sure you have removed any previous packs from it.")
 
 	If $confirmBox = 1 Then
 		Local $bedrockPackName = GUICtrlRead($BEPackNameInput)
@@ -480,7 +481,7 @@ Func javaToBedrock()
 		logWrite(3, "Java to Bedrock pack conversion complete!")
 		GUICtrlSetData($ProgressBar, 70)
 
-		MsgBox(0, "Alien's pack converter", "Conversion complete! Converted " & $conversionCount & " files to Bedrock edition!")
+		MsgBox(0, $guiTitle, "Conversion complete! Converted " & $conversionCount & " files to Bedrock edition!")
 		GUICtrlSetData($ProgressBar, 80)
 	Else
 		logWrite(0, "Conversion aborted")

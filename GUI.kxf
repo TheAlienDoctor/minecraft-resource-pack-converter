@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="windows-1251"?>
-<object type="TAForm" name="PackConverter">
+<object type="TAForm" name="PackConverterGUI">
 	<properties>
-		<property name="Left" vt="Int16">958</property>
-		<property name="Top" vt="Int16">550</property>
+		<property name="Left" vt="Int16">825</property>
+		<property name="Top" vt="Int16">351</property>
 		<property name="Width" vt="Int16">630</property>
 		<property name="Height" vt="Int16">259</property>
 		<property name="Hint" vt="String">Pack Converter</property>
@@ -32,7 +32,7 @@
 		<property name="TextHeight" vt="Int8">13</property>
 	</properties>
 	<components>
-		<object type="TATab" name="PackConverter">
+		<object type="TATab" name="Tabs">
 			<properties>
 				<property name="Left" vt="Int8">8</property>
 				<property name="Top" vt="Int8">8</property>
