@@ -1,5 +1,4 @@
-List of UDF's that need to be downloaded seperatly in order to run the uncompiled script:
-(This is not part of GitHub repo as UDF's may have other Terms, and I feel bad uploading someone elses work without Permission)
+## List of UDFs if you wish to download them
 
 # Zip.au3
 - Forum post: https://www.autoitscript.com/forum/topic/73425-zipau3-udf-in-pure-autoit/
