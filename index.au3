@@ -1,11 +1,11 @@
 #pragma compile(Compatibility, vista, win7, win8, win81, win10, win11)
 #pragma compile(FileDescription, Converts Minecraft resource packs between Minecraft Bedrock and Java)
 #pragma compile(ProductName, Alien's Minecraft resource pack converter)
-#pragma compile(ProductVersion, 1.0.1)
-#pragma compile(FileVersion, 1.0.1.0)
+#pragma compile(ProductVersion, 1.1.0)
+#pragma compile(FileVersion, 1.1.0.0)
 #pragma compile(LegalCopyright, ©TheAlienDoctor)
 #pragma compile(CompanyName, TheAlienDoctor)
-#pragma compile(OriginalFilename, AliensPackConverter-V1.0.1)
+#pragma compile(OriginalFilename, AliensPackConverter-V1.1.0)
 
 #include <ButtonConstants.au3>
 #include <EditConstants.au3>
@@ -21,11 +21,11 @@
 ;###########################################################################################################################################################################################
 ;GUI (from Koda)
 
-#Region ### START Koda GUI section ###
+#Region ### START Koda GUI section ### Form=d:\06 code\minecraft-resource-pack-converter\gui.kxf
 Global $PackConverter = GUICreate("Alien's Pack Converter", 615, 221, -1, -1)
-Global $PackConverter = GUICtrlCreateTab(8, 8, 601, 185)
+Global $PackConverter = GUICtrlCreateTab(8, 8, 601, 145)
 Global $BedrockToJava = GUICtrlCreateTabItem("Bedrock to Java")
-Global $StartBeToJe = GUICtrlCreateButton("Start conversion", 457, 162, 145, 25)
+Global $StartBeToJe = GUICtrlCreateButton("Start conversion", 457, 122, 145, 25)
 GUICtrlSetTip(-1, "Start conversion")
 Global $JEPackDescInput = GUICtrlCreateInput("Pack description here", 112, 80, 489, 21)
 GUICtrlSetTip(-1, "Pack description")
@@ -38,20 +38,21 @@ Global $BEPackDescInput = GUICtrlCreateInput("Pack description here", 112, 80, 4
 GUICtrlSetTip(-1, "Pack description")
 Global $BEPackNameInput = GUICtrlCreateInput("Pack name here", 88, 48, 513, 21)
 GUICtrlSetTip(-1, "Pack name")
-Global $StartJeToBe = GUICtrlCreateButton("Start conversion", 457, 162, 145, 25)
+Global $StartJeToBe = GUICtrlCreateButton("Start conversion", 457, 122, 145, 25)
 GUICtrlSetTip(-1, "Start conversion")
 Global $BEPackDescTitle = GUICtrlCreateLabel("Pack Description:", 15, 80, 88, 17)
 Global $BEPackNameTitle = GUICtrlCreateLabel("Pack Name:", 16, 48, 63, 17)
 GUICtrlCreateTabItem("")
 Global $CopyrightNotice = GUICtrlCreateLabel("Copyright © 2022, TheAlienDoctor", 8, 200, 167, 17)
 GUICtrlSetTip(-1, "Copyright notice")
-GUICtrlSetCursor(-1, 0)
-Global $VersionNumber = GUICtrlCreateLabel("Version: 1.0.1", 537, 200, 69, 17)
+GUICtrlSetCursor (-1, 0)
+Global $VersionNumber = GUICtrlCreateLabel("Version: 1.1.0", 537, 200, 69, 17)
 GUICtrlSetTip(-1, "Check for updates")
-GUICtrlSetCursor(-1, 0)
+GUICtrlSetCursor (-1, 0)
 Global $GitHubNotice = GUICtrlCreateLabel("View source code,  report bugs and contribute on GitHub", 219, 200, 273, 17)
 GUICtrlSetTip(-1, "Open GitHub repo")
-GUICtrlSetCursor(-1, 0)
+GUICtrlSetCursor (-1, 0)
+Global $ProgressBar = GUICtrlCreateProgress(8, 168, 601, 17)
 GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
 
@@ -61,7 +62,7 @@ GUISetState(@SW_SHOW)
 Global $dateTime = @MDAY & '.' & @MON & '.' & @YEAR & '-' & @HOUR & '.' & @MIN & '.' & @SEC
 Global $inputDir = @ScriptDir & "\" & IniRead("options.ini", "config", "InputDir", "input")
 Global $repeats = IniRead("options.txt", "config", "repeats", 2)
-Global $currentVersionNumber = 101
+Global $currentVersionNumber = 110
 
 If IniRead("options.ini", "Bedrock to Java", "useCustomDir", "error") = "false" Then
 	Global $javaDir = @ScriptDir & "\Java Pack"
@@ -244,10 +245,8 @@ Func exitProgram()
 	DirRemove(@ScriptDir & "\temp\", 1)
 EndFunc   ;==>exitProgram
 
-Func convert($mode, $conversionArray, $arrayDataCount)
-
+Func convert($mode, $conversionArray, $arrayDataCount, $progressBarPercent)
 	$arrayDataCount -= 1 ;ForLoops start at 0, so you need to minus 1 from the total
-
 	If $mode = 0 Then ;BedrockToJava
 		For $index = 0 To $arrayDataCount
 			Local $current = $conversionArray[$index]
@@ -276,12 +275,16 @@ Func convert($mode, $conversionArray, $arrayDataCount)
 			EndIf
 		Next
 	EndIf
+
+	GUICtrlSetData($ProgressBar, $progressBarPercent)
+
 EndFunc   ;==>convert
 
 ;###########################################################################################################################################################################################
 ;Main conversion functions
 
 Func bedrockToJava()
+	GUICtrlSetData($ProgressBar, 0)
 	Local $confirmBox = MsgBox(1, "Alien's pack converter", "Are you sure you want to start conversion? This will delete everything inside the " & $javaDir & " folder, so make sure you have removed any previous packs from it.")
 	If $confirmBox = 1 Then
 
@@ -296,83 +299,95 @@ Func bedrockToJava()
 		DirCreate($javaDir & "\pack")
 
 		logWrite(0, "Generating pack.mcmeta file")
+		GUICtrlSetData($ProgressBar, 5)
 
 		FileOpen($javaDir & "\pack\pack.txt", 8)
 		FileWrite($javaDir & '\pack\pack.txt', '{"pack":{"pack_format":9,"description":"' & $javaPackDesc & '"}}')
 		FileClose($javaDir & "\pack\pack.txt")
 		FileMove($javaDir & "\pack\pack.txt", $javaDir & "\pack\pack.mcmeta")
 
-		FileOpen($logDir & "\log.latest", 1)
+		GUICtrlSetData($ProgressBar, 10)
+
 		logWrite(0, "Generated pack.mcmeta file")
 		logWrite(0, "Beginning texture file conversion")
 
 		While $timesRan < $repeats
-			convert(0, $blockTextures1, 49)
-			convert(0, $blockTextures2, 48)
-			convert(0, $blockTextures3, 46)
-			convert(0, $blockTextures4, 48)
-			convert(0, $blockTextures5, 48)
-			convert(0, $blockTextures6, 48)
-			convert(0, $blockTextures7, 48)
-			convert(0, $blockTextures8, 48)
-			convert(0, $blockTextures9, 48)
-			convert(0, $blockTextures10, 47)
-			convert(0, $blockTextures11, 48)
-			convert(0, $blockTextures12, 48)
-			convert(0, $blockTextures13, 48)
-			convert(0, $blockTextures14, 48)
-			convert(0, $blockTextures15, 48)
-			convert(0, $blockTextures16, 48)
-			convert(0, $blockTextures17, 4)
-			convert(0, $blockTextures18, 43)
+			convert(0, $blockTextures1, 49, 11)
+			convert(0, $blockTextures2, 48, 12)
+			convert(0, $blockTextures3, 46, 13)
+			convert(0, $blockTextures4, 48, 14)
+			convert(0, $blockTextures5, 48, 15)
+			convert(0, $blockTextures6, 48, 16)
+			convert(0, $blockTextures7, 48, 17)
+			convert(0, $blockTextures8, 48, 18)
+			convert(0, $blockTextures9, 48, 19)
+			convert(0, $blockTextures10, 47, 20)
+			convert(0, $blockTextures11, 48, 21)
+			convert(0, $blockTextures12, 48, 22)
+			convert(0, $blockTextures13, 48, 23)
+			convert(0, $blockTextures14, 48, 24)
+			convert(0, $blockTextures15, 48, 25)
+			convert(0, $blockTextures16, 48, 26)
+			convert(0, $blockTextures17, 4, 27)
+			convert(0, $blockTextures18, 43, 28)
 
-			convert(0, $colorMapTextures, 2)
+			convert(0, $colorMapTextures, 2, 29)
 
-			convert(0, $itemTextures1, 86)
-			convert(0, $itemTextures2, 85)
-			convert(0, $itemTextures3, 85)
-			convert(0, $itemTextures4, 85)
-			convert(0, $itemTextures5, 21)
+			convert(0, $itemTextures1, 86, 31)
+			convert(0, $itemTextures2, 85, 32)
+			convert(0, $itemTextures3, 85, 33)
+			convert(0, $itemTextures4, 85, 34)
+			convert(0, $itemTextures5, 21, 35)
 
-			convert(0, $entityTextures1, 94)
-			convert(0, $entityTextures2, 92)
-			convert(0, $entityTextures3, 57)
-			convert(0, $entityTextures4, 43)
+			convert(0, $entityTextures1, 94, 36)
+			convert(0, $entityTextures2, 92, 37)
+			convert(0, $entityTextures3, 57, 38)
+			convert(0, $entityTextures4, 43, 39)
 
-			convert(0, $environmentTextures, 12)
+			convert(0, $environmentTextures, 12, 40)
 
-			convert(0, $armorTextures, 11)
+			convert(0, $armorTextures, 11, 41)
 
-			convert(0, $guiTextures, 1)
+			convert(0, $guiTextures, 1, 42)
 			$timesRan += 1
 			logWrite(1, "Texture conversion function ran " & $timesRan & "/" & $repeats)
 		WEnd
 
+		GUICtrlSetData($ProgressBar, 45)
+
 		logWrite(0, "Texture file conversion complete! Converted " & $conversionCount & " files!")
 		logWrite(0, "Creating pack.zip file")
+
+		GUICtrlSetData($ProgressBar, 50)
 
 		_Zip_Create($javaDir & "\pack.zip")
 
 		logWrite(0, "Created pack.zip file")
 		logWrite(0, "Adding files to pack.zip file")
 
-		_Zip_AddFolderContents($javaDir & "\pack.zip", $javaDir & "\pack", 1)
+		_Zip_AddFolderContents($javaDir & "\pack.zip", $javaDir & "\pack", 0)
 
 		logWrite(0, "Finished adding files to pack.zip!")
+		GUICtrlSetData($ProgressBar, 60)
 
 		FileMove($javaDir & "\pack.zip", $javaDir & "\" & $javaPackName & ".zip")
 
 		logWrite(0, ".zip folder renamed!")
 		logWrite(0, "Bedrock to Java pack conversion complete!")
-
+		GUICtrlSetData($ProgressBar, 70)
 		MsgBox(0, "Alien's pack converter", "Conversion complete! Converted " & $conversionCount & " files to Java edition!")
+		GUICtrlSetData($ProgressBar, 80)
 	Else
 		logWrite(0, "Conversion aborted")
 	EndIf
+
+	GUICtrlSetData($ProgressBar, 100)
 EndFunc   ;==>bedrockToJava
 
 Func javaToBedrock()
+	GUICtrlSetData($ProgressBar, 0)
 	Local $confirmBox = MsgBox(1, "Alien's pack converter", "Are you sure you want to start conversion? This will delete everything inside the " & $bedrockDir & " folder, so make sure you have removed any previous packs from it.")
+
 	If $confirmBox = 1 Then
 		Local $bedrockPackName = GUICtrlRead($BEPackNameInput)
 		Local $bedrockPackDesc = GUICtrlRead($BEPackDescInput)
@@ -385,60 +400,67 @@ Func javaToBedrock()
 		DirCreate($bedrockDir & "\pack")
 
 		logWrite(0, "Generating manifest.json file")
+		GUICtrlSetData($ProgressBar, 5)
 
 		FileOpen($bedrockDir & "\pack\manifest.txt", 8)
 		FileWrite($bedrockDir & '\pack\manifest.txt', '{"format_version":2,"header":{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","name":"' & $bedrockPackName & '","uuid":"' & uuidGenerator() & '","version":[1,0,0],"min_engine_version":[1,19,0]},"modules":[{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","type":"resources","uuid":"' & uuidGenerator() & '","version":[1,0,0]}]}')
 		FileClose($bedrockDir & "\pack\manifest.txt")
 		FileMove($bedrockDir & "\pack\manifest.txt", $bedrockDir & "\pack\manifest.json")
 
+		GUICtrlSetData($ProgressBar, 10)
+
 		logWrite(0, "Generated manifest.json file")
 		logWrite(0, "Beginning texture file conversion")
 
 		While $timesRan < $repeats
-			convert(1, $blockTextures1, 49)
-			convert(1, $blockTextures2, 48)
-			convert(1, $blockTextures3, 46)
-			convert(1, $blockTextures4, 48)
-			convert(1, $blockTextures5, 48)
-			convert(1, $blockTextures6, 48)
-			convert(1, $blockTextures7, 48)
-			convert(1, $blockTextures8, 48)
-			convert(1, $blockTextures9, 48)
-			convert(1, $blockTextures10, 47)
-			convert(1, $blockTextures11, 48)
-			convert(1, $blockTextures12, 48)
-			convert(1, $blockTextures13, 48)
-			convert(1, $blockTextures14, 48)
-			convert(1, $blockTextures15, 48)
-			convert(1, $blockTextures16, 48)
-			convert(1, $blockTextures17, 4)
-			convert(1, $blockTextures18, 43)
+			convert(1, $blockTextures1, 49, 11)
+			convert(1, $blockTextures2, 48, 12)
+			convert(1, $blockTextures3, 46, 13)
+			convert(1, $blockTextures4, 48, 14)
+			convert(1, $blockTextures5, 48, 15)
+			convert(1, $blockTextures6, 48, 16)
+			convert(1, $blockTextures7, 48, 17)
+			convert(1, $blockTextures8, 48, 18)
+			convert(1, $blockTextures9, 48, 19)
+			convert(1, $blockTextures10, 47, 20)
+			convert(1, $blockTextures11, 48, 21)
+			convert(1, $blockTextures12, 48, 22)
+			convert(1, $blockTextures13, 48, 23)
+			convert(1, $blockTextures14, 48, 24)
+			convert(1, $blockTextures15, 48, 25)
+			convert(1, $blockTextures16, 48, 26)
+			convert(1, $blockTextures17, 4, 27)
+			convert(1, $blockTextures18, 43, 28)
 
-			convert(1, $colorMapTextures, 2)
+			convert(1, $colorMapTextures, 2, 29)
 
-			convert(1, $itemTextures1, 86)
-			convert(1, $itemTextures2, 85)
-			convert(1, $itemTextures3, 85)
-			convert(1, $itemTextures4, 85)
-			convert(1, $itemTextures5, 21)
+			convert(1, $itemTextures1, 86, 31)
+			convert(1, $itemTextures2, 85, 32)
+			convert(1, $itemTextures3, 85, 33)
+			convert(1, $itemTextures4, 85, 34)
+			convert(1, $itemTextures5, 21, 35)
 
-			convert(1, $entityTextures1, 94)
-			convert(1, $entityTextures2, 92)
-			convert(1, $entityTextures3, 57)
-			convert(1, $entityTextures4, 43)
+			convert(1, $entityTextures1, 94, 36)
+			convert(1, $entityTextures2, 92, 37)
+			convert(1, $entityTextures3, 57, 38)
+			convert(1, $entityTextures4, 43, 39)
 
-			convert(1, $environmentTextures, 12)
+			convert(1, $environmentTextures, 12, 40)
 
-			convert(1, $armorTextures, 11)
+			convert(1, $armorTextures, 11, 41)
 
-			convert(1, $guiTextures, 1)
+			convert(1, $guiTextures, 1, 42)
 
 			$timesRan += 1
 			Sleep(10)
 		WEnd
 
+		GUICtrlSetData($ProgressBar, 45)
+
 		logWrite(0, "Texture file conversion complete! Converted " & $conversionCount & "files!")
 		logWrite(0, "Creating .mcpack file")
+
+		GUICtrlSetData($ProgressBar, 50)
 
 		_Zip_Create($bedrockDir & "\" & $bedrockPackName & ".zip")
 
@@ -448,15 +470,20 @@ Func javaToBedrock()
 		_Zip_AddFolderContents($bedrockDir & "\" & $bedrockPackName & ".zip", $bedrockDir & "\pack\", 1)
 
 		logWrite(0, "Finished adding files to pack.zip!")
+		GUICtrlSetData($ProgressBar, 60)
 
 		FileMove($bedrockDir & "\" & $bedrockPackName & ".zip", $bedrockDir & "\" & $bedrockPackName & ".mcpack")
 
+		logWrite(0, ".zip folder renamed!")
 		logWrite(3, "Java to Bedrock pack conversion complete!")
+		GUICtrlSetData($ProgressBar, 70)
 
 		MsgBox(0, "Alien's pack converter", "Conversion complete! Converted " & $conversionCount & " files to Bedrock edition!")
+		GUICtrlSetData($ProgressBar, 80)
 	Else
 		logWrite(0, "Conversion aborted")
 	EndIf
+	GUICtrlSetData($ProgressBar, 100)
 EndFunc   ;==>javaToBedrock
 
 
