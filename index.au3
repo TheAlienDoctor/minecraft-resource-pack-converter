@@ -19,9 +19,21 @@
 #include "UDF\Zip.au3"
 
 ;###########################################################################################################################################################################################
+;Code for single instance
+
+$SingeInstance = "AliensPackConverter"
+
+If WinExists($SingeInstance) Then 
+MsgBox(0, "Alien's Pack Converter", "Pack converter already running!" & @CRLF & "You can only have one instance open at a time.")
+Exit ; It's already running
+EndIf
+
+AutoItWinSetTitle($SingeInstance)
+
+;###########################################################################################################################################################################################
 ;GUI
 
-#Region ### START Koda GUI section ### Form=c:\files\thealiendoctor\code\minecraft-resource-pack-converter\gui.kxf
+#Region ### START Koda GUI section ###
 Global $PackConverterGUI = GUICreate("Alien's Pack Converter", 615, 221, -1, -1)
 Global $Tabs = GUICtrlCreateTab(8, 8, 601, 145)
 Global $BedrockToJava = GUICtrlCreateTabItem("Bedrock to Java")
