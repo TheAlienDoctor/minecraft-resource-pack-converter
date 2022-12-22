@@ -77,6 +77,7 @@ Global $repeats = IniRead("options.txt", "config", "repeats", 2)
 Global $currentVersionNumber = 110
 Global $guiTitle = "Alien's Pack Converter"
 
+;Config file error checking
 If IniRead("options.ini", "Bedrock to Java", "useCustomDir", "error") = "false" Then
 	Global $javaDir = @ScriptDir & "\Java Pack"
 
@@ -165,7 +166,7 @@ Func checkForUpdates($updateCheckOutputMsg)
 	Else ;If ping is below 0 then update server is down, or user is not connected to the internet
 		$NoInternetMsgBox = "clear variable"
 		$NoInternetMsgBox = MsgBox(6, $guiTitle, "Warning: You are not connected to the internet or TheAlienDoctor.com is down. This means the update checker could not run. Continue?")
-		logWrite(0, "No Internet, unable to check for updates")
+		logWrite(0, "Failed to connect to update server, unable to check for updates")
 	EndIf
 
 	If $NoInternetMsgBox = 2 Then ;Cancel
@@ -237,7 +238,7 @@ Func logWrite($spaces, $content)
 	EndIf
 
 	FileOpen($logDir & "\log.latest", 1)
-	FileWrite($logDir & "\log.latest", $content & @CRLF)
+	FileWrite($logDir & "\log.latest", @MDAY & "/" & @MON & "/" & @YEAR & " @ " & @HOUR & ":" & @MIN & ":" & @SEC & "> " & $content & @CRLF)
 	FileClose($logDir & "\log.latest")
 
 	If $spaces = 1 Then
