@@ -23,9 +23,9 @@
 
 $SingeInstance = "AliensPackConverter"
 
-If WinExists($SingeInstance) Then 
-MsgBox(0, "Alien's Pack Converter", "Pack converter already running!" & @CRLF & "You can only have one instance open at a time.")
-Exit ; It's already running
+If WinExists($SingeInstance) Then
+	MsgBox(0, "Alien's Pack Converter", "Pack converter already running!" & @CRLF & "You can only have one instance open at a time.")
+	Exit ; It's already running
 EndIf
 
 AutoItWinSetTitle($SingeInstance)
@@ -57,13 +57,13 @@ Global $BEPackNameTitle = GUICtrlCreateLabel("Pack Name:", 16, 48, 63, 17)
 GUICtrlCreateTabItem("")
 Global $CopyrightNotice = GUICtrlCreateLabel("Copyright © 2022, TheAlienDoctor", 8, 200, 167, 17)
 GUICtrlSetTip(-1, "Copyright notice")
-GUICtrlSetCursor (-1, 0)
+GUICtrlSetCursor(-1, 0)
 Global $VersionNumber = GUICtrlCreateLabel("Version: 1.1.0", 537, 200, 69, 17)
 GUICtrlSetTip(-1, "Check for updates")
-GUICtrlSetCursor (-1, 0)
+GUICtrlSetCursor(-1, 0)
 Global $GitHubNotice = GUICtrlCreateLabel("View source code,  report bugs and contribute on GitHub", 219, 200, 273, 17)
 GUICtrlSetTip(-1, "Open GitHub repo")
-GUICtrlSetCursor (-1, 0)
+GUICtrlSetCursor(-1, 0)
 Global $ProgressBar = GUICtrlCreateProgress(8, 168, 601, 17)
 GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
@@ -296,6 +296,21 @@ Func convert($mode, $conversionArray, $arrayDataCount, $progressBarPercent)
 
 EndFunc   ;==>convert
 
+Func convertPackIcon()
+
+	If FileExists($inputDir & "\pack_icon.png") Then ;Bedrock Pack
+		FileMove($inputDir & "\pack_icon.png", $javaDir & "\pack\pack.png", 8)
+		logWrite(0, "Converted pack icon")
+		$conversionCount += 1
+	ElseIf FileExists($inputDir & "\pack.png") Then ;Java Pack
+		FileMove($inputDir & "\pack.png", $bedrockDir & "\pack\pack_icon.png", 8)
+		logWrite(0, "Converted pack icon")
+		$conversionCount += 1
+	Else
+		logWrite(0, "Pack Icon not found!")
+	EndIf
+EndFunc   ;==>convertPackIcon
+
 ;###########################################################################################################################################################################################
 ;Main conversion functions
 
@@ -369,9 +384,11 @@ Func bedrockToJava()
 			logWrite(1, "Texture conversion function ran " & $timesRan & "/" & $repeats)
 		WEnd
 
+		convertPackIcon()
+
 		GUICtrlSetData($ProgressBar, 45)
 
-		logWrite(0, "Texture file conversion complete! Converted " & $conversionCount & " files!")
+		logWrite(0, "Finished converting files! Converted " & $conversionCount & " files!")
 		logWrite(0, "Creating pack.zip file")
 
 		GUICtrlSetData($ProgressBar, 50)
@@ -470,10 +487,12 @@ Func javaToBedrock()
 			$timesRan += 1
 			Sleep(10)
 		WEnd
+		
+		convertPackIcon()
 
 		GUICtrlSetData($ProgressBar, 45)
 
-		logWrite(0, "Texture file conversion complete! Converted " & $conversionCount & "files!")
+		logWrite(0, "Finished converting files! Converted " & $conversionCount & " files!")
 		logWrite(0, "Creating .mcpack file")
 
 		GUICtrlSetData($ProgressBar, 50)
