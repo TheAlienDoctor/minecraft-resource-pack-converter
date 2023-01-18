@@ -239,7 +239,7 @@ Func logWrite($spaces, $content)
 	EndIf
 
 	FileOpen($logDir & "\log.latest", 1)
-	FileWrite($logDir & "\log.latest", "[" & @MDAY & "/" & @MON & "/" & @YEAR & " @ " & @HOUR & ":" & @MIN & ":" & @SEC & "]: " & $content & @CRLF)
+	FileWrite($logDir & "\log.latest", @MDAY & "/" & @MON & "/" & @YEAR & " @ " & @HOUR & ":" & @MIN & ":" & @SEC & " > " & $content & @CRLF)
 	FileClose($logDir & "\log.latest")
 
 	If $spaces = 1 Then
