@@ -1,11 +1,11 @@
 #pragma compile(Compatibility, vista, win7, win8, win81, win10, win11)
 #pragma compile(FileDescription, Converts Minecraft resource packs between Minecraft Bedrock and Java)
 #pragma compile(ProductName, Alien's Minecraft resource pack converter)
-#pragma compile(ProductVersion, 1.1.0)
-#pragma compile(FileVersion, 1.1.0.0)
+#pragma compile(ProductVersion, 1.2.0)
+#pragma compile(FileVersion, 1.2.0.0)
 #pragma compile(LegalCopyright, ©TheAlienDoctor)
 #pragma compile(CompanyName, TheAlienDoctor)
-#pragma compile(OriginalFilename, AliensPackConverter-V1.1.0)
+#pragma compile(OriginalFilename, AliensPackConverter-V1.2.0)
 
 #include <ButtonConstants.au3>
 #include <EditConstants.au3>
