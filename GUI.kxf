@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <object type="TAForm" name="PackConverterGUI">
 	<properties>
-		<property name="Left" vt="Int16">825</property>
-		<property name="Top" vt="Int16">351</property>
+		<property name="Left" vt="Int16">897</property>
+		<property name="Top" vt="Int16">345</property>
 		<property name="Width" vt="Int16">630</property>
 		<property name="Height" vt="Int16">259</property>
 		<property name="Hint" vt="String">Pack Converter</property>
@@ -263,7 +263,7 @@
 				<property name="Height" vt="Int8">17</property>
 				<property name="Cursor" vt="Ident">crHandPoint</property>
 				<property name="Hint" vt="String">Check for updates</property>
-				<property name="Caption" vt="String">Version: 1.1.0</property>
+				<property name="Caption" vt="String">Version: 1.2.1</property>
 				<property name="TabOrder" vt="Int8">2</property>
 				<property name="HaveVariable" vt="False">False</property>
 				<property name="CtrlStyle" vt="Int32">1342308608</property>

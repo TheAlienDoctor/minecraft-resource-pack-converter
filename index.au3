@@ -22,19 +22,21 @@
 ;###########################################################################################################################################################################################
 ;Code for single instance
 
-$SingeInstance = "AliensPackConverter"
+;$SingeInstance = "AliensPackConverter"
+;
+;If WinExists($SingeInstance) Then
+;	MsgBox(0, "Alien's Pack Converter", "Pack converter already running!" & @CRLF & "You can only have one instance open at a time.")
+;	Exit ; It's already running
+;EndIf
 
-If WinExists($SingeInstance) Then
-	MsgBox(0, "Alien's Pack Converter", "Pack converter already running!" & @CRLF & "You can only have one instance open at a time.")
-	Exit ; It's already running
-EndIf
+;AutoItWinSetTitle($SingeInstance)
 
-AutoItWinSetTitle($SingeInstance)
+;Commented out because it seems to break when compiled.
 
 ;###########################################################################################################################################################################################
 ;GUI
 
-#Region ### START Koda GUI section ###
+#Region ### START Koda GUI section ### Form=d:\06 code\minecraft-resource-pack-converter\gui.kxf
 Global $PackConverterGUI = GUICreate("Alien's Pack Converter", 615, 221, -1, -1)
 Global $Tabs = GUICtrlCreateTab(8, 8, 601, 145)
 Global $BedrockToJava = GUICtrlCreateTabItem("Bedrock to Java")
@@ -58,13 +60,13 @@ Global $BEPackNameTitle = GUICtrlCreateLabel("Pack Name:", 16, 48, 63, 17)
 GUICtrlCreateTabItem("")
 Global $CopyrightNotice = GUICtrlCreateLabel("Copyright © 2022, TheAlienDoctor", 8, 200, 167, 17)
 GUICtrlSetTip(-1, "Copyright notice")
-GUICtrlSetCursor(-1, 0)
-Global $VersionNumber = GUICtrlCreateLabel("Version: 1.1.0", 537, 200, 69, 17)
+GUICtrlSetCursor (-1, 0)
+Global $VersionNumber = GUICtrlCreateLabel("Version: 1.2.1", 537, 200, 69, 17)
 GUICtrlSetTip(-1, "Check for updates")
-GUICtrlSetCursor(-1, 0)
+GUICtrlSetCursor (-1, 0)
 Global $GitHubNotice = GUICtrlCreateLabel("View source code,  report bugs and contribute on GitHub", 219, 200, 273, 17)
 GUICtrlSetTip(-1, "Open GitHub repo")
-GUICtrlSetCursor(-1, 0)
+GUICtrlSetCursor (-1, 0)
 Global $ProgressBar = GUICtrlCreateProgress(8, 168, 601, 17)
 GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
@@ -75,7 +77,7 @@ GUISetState(@SW_SHOW)
 Global $dateTime = @MDAY & '.' & @MON & '.' & @YEAR & '-' & @HOUR & '.' & @MIN & '.' & @SEC
 Global $inputDir = @ScriptDir & "\" & IniRead("options.ini", "config", "InputDir", "input")
 Global $repeats = IniRead("options.txt", "config", "repeats", 2)
-Global $currentVersionNumber = 110
+Global $currentVersionNumber = 121
 Global $guiTitle = "Alien's Pack Converter"
 
 ;Config file error checking
