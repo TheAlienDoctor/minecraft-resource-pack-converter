@@ -16,6 +16,7 @@
 #include <InetConstants.au3>
 
 #include "conversions.au3"
+#include "animeTextures.au3"
 #include "UDF\Zip.au3"
 
 ;###########################################################################################################################################################################################
@@ -296,6 +297,37 @@ Func convert($mode, $conversionArray, $arrayDataCount, $progressBarPercent)
 
 EndFunc   ;==>convert
 
+Func convertAnime() ;Converts animated block textures
+	Global $animeCount = 0
+	For $index = 0 To 25
+		Local $current = $animeTextures1[$index]
+
+		If FileExists($javaDir & "\pack\assets\minecraft\textures\block\" & $current[0]) Then
+			FileOpen($javaDir & "\pack\assets\minecraft\textures\block\" & $current[0] & ".mcmeta")
+			FileWrite($javaDir & "\pack\assets\minecraft\textures\block\" & $current[0] & ".mcmeta", $current[1])
+			FileClose($javaDir & "\pack\assets\minecraft\textures\block\" & $current[0] & ".mcmeta")
+			logWrite(0, "Found file " & $javaDir & "\pack\assets\minecraft\textures\block\" & $current[0] & " and generated a .mcmeta file for it")
+			$animeCount += 1
+		Else
+			logWrite(0, "Could not find animated file " & $javaDir & "\pack\assets\minecraft\textures\block\" & $current[0] & " so did not generate an .mcmeta file.")
+		EndIf
+	Next
+
+	For $index = 0 To 19
+		Local $current = $animeTextures2[$index]
+
+		If FileExists($javaDir & "\pack\assets\minecraft\textures\block\" & $current[0]) Then
+			FileOpen($javaDir & "\pack\assets\minecraft\textures\block\" & $current[0] & ".mcmeta")
+			FileWrite($javaDir & "\pack\assets\minecraft\textures\block\" & $current[0] & ".mcmeta", $current[1])
+			FileClose($javaDir & "\pack\assets\minecraft\textures\block\" & $current[0] & ".mcmeta")
+			logWrite(0, "Found file " & $javaDir & "\pack\assets\minecraft\textures\block\" & $current[0] & " and generated a .mcmeta file for it")
+			$animeCount += 1
+		Else
+			logWrite(0, "Could not find animated file " & $javaDir & "\pack\assets\minecraft\textures\block\" & $current[0] & " so did not generate an .mcmeta file.")
+		EndIf
+	Next
+EndFunc   ;==>convertAnime
+
 Func convertPackIcon()
 
 	If FileExists($inputDir & "\pack_icon.png") Then ;Bedrock Pack
@@ -384,10 +416,15 @@ Func bedrockToJava()
 			logWrite(1, "Texture conversion function ran " & $timesRan & "/" & $repeats)
 		WEnd
 
+		convertAnime()
+
+		GUICtrlSetData($ProgressBar, 43)
+
 		convertPackIcon()
 
 		GUICtrlSetData($ProgressBar, 45)
 
+		logWrite(0, "Generated " & $animeCount & " .mcmeta files for animated textures.")
 		logWrite(0, "Finished converting files! Converted " & $conversionCount & " files!")
 		logWrite(0, "Creating pack.zip file")
 
