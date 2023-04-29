@@ -1577,5 +1577,12 @@ Global $turtle_1[2] = ["textures\models\armor\turtle_1.png", "assets\minecraft\t
 Global $armorTextures[11] = [$chain_1, $chain_2, $diamond_1, $diamond_2, $gold_1, $gold_2, $iron_1, $iron_2, $netherite_1, $netherite_2, $turtle_1]
 
 Global $icons[2] = ["textures\gui\icons.png", "assets\minecraft\textures\gui\icons.png"]
+Global $panorama_0[2] = ["textures\ui\panorama_0.png", "assets\minecraft\textures\gui\title\background\panorama_0.png"]
+Global $panorama_1[2] = ["textures\ui\panorama_1.png", "assets\minecraft\textures\gui\title\background\panorama_1.png"]
+Global $panorama_2[2] = ["textures\ui\panorama_2.png", "assets\minecraft\textures\gui\title\background\panorama_2.png"]
+Global $panorama_3[2] = ["textures\ui\panorama_3.png", "assets\minecraft\textures\gui\title\background\panorama_3.png"]
+Global $panorama_4[2] = ["textures\ui\panorama_4.png", "assets\minecraft\textures\gui\title\background\panorama_4.png"]
+Global $panorama_5[2] = ["textures\ui\panorama_5.png", "assets\minecraft\textures\gui\title\background\panorama_5.png"]
+Global $panorama_overlay = ["textures\ui\panorama_overlay.png", "assets\minecraft\textures\gui\title\background\panorama_overlay.png"]
 
-Global $guiTextures[1] = [$icons]
+Global $guiTextures[8] = [$icons, $panorama_0, $panorama_1, $panorama_2, $panorama_3, $panorama_4, $panorama_5, $panorama_overlay]

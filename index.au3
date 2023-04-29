@@ -331,7 +331,6 @@ Func convertAnime() ;Converts animated block textures
 EndFunc   ;==>convertAnime
 
 Func convertPackIcon()
-
 	If FileExists($inputDir & "\pack_icon.png") Then ;Bedrock Pack
 		FileMove($inputDir & "\pack_icon.png", $javaDir & "\pack\pack.png", 8)
 		logWrite(0, "Converted pack icon")
@@ -413,7 +412,7 @@ Func bedrockToJava()
 
 			convert(0, $armorTextures, 11, 41)
 
-			convert(0, $guiTextures, 1, 42)
+			convert(0, $guiTextures, 8, 42)
 			$timesRan += 1
 			logWrite(1, "Texture conversion function ran " & $timesRan & "/" & $repeats)
 		WEnd
@@ -521,7 +520,7 @@ Func javaToBedrock()
 
 			convert(1, $armorTextures, 11, 41)
 
-			convert(1, $guiTextures, 1, 42)
+			convert(1, $guiTextures, 8, 42)
 
 			$timesRan += 1
 			Sleep(10)
