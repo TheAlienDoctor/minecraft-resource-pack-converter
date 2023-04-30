@@ -21,24 +21,22 @@
 #include "UDF\JSON.au3"
 #include "UDF\BinaryCall.au3"
 
+Global $guiTitle = "Alien's Pack Converter V1.3.0"
+
 ;###########################################################################################################################################################################################
 ;Code for single instance
 
-;$SingeInstance = "AliensPackConverter"
-;
-;If WinExists($SingeInstance) Then
-;	MsgBox(0, "Alien's Pack Converter", "Pack converter already running!" & @CRLF & "You can only have one instance open at a time.")
-;	Exit ; It's already running
-;EndIf
+$SingeInstance = "fbdb8ca2-20d5-4c23-9e39-d10deb31f095"
 
-;AutoItWinSetTitle($SingeInstance)
+If WinExists($SingeInstance) Then
+	MsgBox(0, $guiTitle, "Pack converter already running!" & @CRLF & "You can only have one instance open at a time.")
+	Exit ; It's already running
+EndIf
 
-;Commented out because it seems to break when compiled.
+AutoItWinSetTitle($SingeInstance)
 
 ;###########################################################################################################################################################################################
 ;GUI
-
-Global $guiTitle = "Alien's Pack Converter V1.3.0"
 
 #Region ### START Koda GUI section ###
 Global $PackConverterGUI = GUICreate("" & $guiTitle & "", 617, 221, -1, -1)
