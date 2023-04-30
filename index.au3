@@ -1,5 +1,5 @@
 #pragma compile(Compatibility, XP, vista, win7, win8, win81, win10, win11)
-#pragma compile(FileDescription, Converts Minecraft resource packs between Minecraft Bedrock and Java)
+#pragma compile(FileDescription, Alien's Minecraft resource pack converter)
 #pragma compile(ProductName, Alien's Minecraft resource pack converter)
 #pragma compile(ProductVersion, 1.3.0)
 #pragma compile(FileVersion, 1.3.0.0)
@@ -84,6 +84,7 @@ Global $dateTime = @MDAY & '.' & @MON & '.' & @YEAR & '-' & @HOUR & '.' & @MIN &
 Global $inputDir = @ScriptDir & "\" & IniRead("options.ini", "config", "InputDir", "input")
 Global $repeats = IniRead("options.txt", "config", "repeats", 2)
 Global $currentVersionNumber = 130
+Global $conversionCount = 0
 
 ;Config file error checking
 If IniRead("options.ini", "Bedrock to Java", "useCustomDir", "error") = "false" Then
