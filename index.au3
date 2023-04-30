@@ -1,11 +1,11 @@
-#pragma compile(Compatibility, vista, win7, win8, win81, win10, win11)
+#pragma compile(Compatibility, XP, vista, win7, win8, win81, win10, win11)
 #pragma compile(FileDescription, Converts Minecraft resource packs between Minecraft Bedrock and Java)
 #pragma compile(ProductName, Alien's Minecraft resource pack converter)
-#pragma compile(ProductVersion, 1.2.2)
-#pragma compile(FileVersion, 1.2.2.0)
+#pragma compile(ProductVersion, 1.3.0)
+#pragma compile(FileVersion, 1.3.0.0)
 #pragma compile(LegalCopyright, ©TheAlienDoctor)
 #pragma compile(CompanyName, TheAlienDoctor)
-#pragma compile(OriginalFilename, AliensPackConverter-V1.2.2)
+#pragma compile(OriginalFilename, AliensPackConverter-V1.3.0)
 
 #include <ButtonConstants.au3>
 #include <EditConstants.au3>
@@ -18,6 +18,8 @@
 #include "conversions.au3"
 #include "animeTextures.au3"
 #include "UDF\Zip.au3"
+#include "UDF\JSON.au3"
+#include "UDF\BinaryCall.au3"
 
 ;###########################################################################################################################################################################################
 ;Code for single instance
@@ -36,37 +38,43 @@
 ;###########################################################################################################################################################################################
 ;GUI
 
-#Region ### START Koda GUI section ### Form=d:\06 code\minecraft-resource-pack-converter\gui.kxf
-Global $PackConverterGUI = GUICreate("Alien's Pack Converter", 615, 221, -1, -1)
+Global $guiTitle = "Alien's Pack Converter V1.3.0"
+
+#Region ### START Koda GUI section ###
+Global $PackConverterGUI = GUICreate("" & $guiTitle & "", 617, 221, -1, -1)
 Global $Tabs = GUICtrlCreateTab(8, 8, 601, 145)
 Global $BedrockToJava = GUICtrlCreateTabItem("Bedrock to Java")
-Global $StartBeToJe = GUICtrlCreateButton("Start conversion", 457, 122, 145, 25)
-GUICtrlSetTip(-1, "Start conversion")
-Global $JEPackDescInput = GUICtrlCreateInput("Pack description here", 112, 80, 489, 21)
-GUICtrlSetTip(-1, "Pack description")
 Global $JEPackDescTitle = GUICtrlCreateLabel("Pack Description:", 15, 80, 88, 17)
-Global $JEPackNameTitle = GUICtrlCreateLabel("Pack Name:", 16, 48, 63, 17)
 Global $JEPackNameInput = GUICtrlCreateInput("Pack name here", 88, 48, 513, 21)
 GUICtrlSetTip(-1, "Pack name")
-Global $JavaToBedrock = GUICtrlCreateTabItem("Java to Bedrock")
-Global $BEPackDescInput = GUICtrlCreateInput("Pack description here", 112, 80, 489, 21)
+Global $JEPackDescInput = GUICtrlCreateInput("Pack description here", 112, 80, 489, 21)
 GUICtrlSetTip(-1, "Pack description")
+Global $BELoadInfo = GUICtrlCreateButton("Load original pack info", 13, 122, 145, 25)
+GUICtrlSetTip(-1, "Load original pack name and description")
+Global $StartBeToJe = GUICtrlCreateButton("Start conversion", 457, 122, 145, 25)
+GUICtrlSetTip(-1, "Start conversion")
+Global $JEPackNameTitle = GUICtrlCreateLabel("Pack Name:", 16, 48, 63, 17)
+Global $JavaToBedrock = GUICtrlCreateTabItem("Java to Bedrock")
 Global $BEPackNameInput = GUICtrlCreateInput("Pack name here", 88, 48, 513, 21)
 GUICtrlSetTip(-1, "Pack name")
+Global $BEPackDescInput = GUICtrlCreateInput("Pack description here", 112, 80, 489, 21)
+GUICtrlSetTip(-1, "Pack description")
+Global $JELoadInfo = GUICtrlCreateButton("Load original pack info", 13, 122, 145, 25)
+GUICtrlSetTip(-1, "Load original pack name and description")
+Global $BEPackDescTitle = GUICtrlCreateLabel("Pack Description:", 15, 80, 88, 17)
 Global $StartJeToBe = GUICtrlCreateButton("Start conversion", 457, 122, 145, 25)
 GUICtrlSetTip(-1, "Start conversion")
-Global $BEPackDescTitle = GUICtrlCreateLabel("Pack Description:", 15, 80, 88, 17)
 Global $BEPackNameTitle = GUICtrlCreateLabel("Pack Name:", 16, 48, 63, 17)
 GUICtrlCreateTabItem("")
 Global $CopyrightNotice = GUICtrlCreateLabel("Copyright © 2022 - 2023, TheAlienDoctor", 8, 200, 200, 17)
 GUICtrlSetTip(-1, "Copyright notice")
-GUICtrlSetCursor(-1, 0)
-Global $VersionNumber = GUICtrlCreateLabel("Version: 1.2.2", 537, 200, 69, 17)
+GUICtrlSetCursor (-1, 0)
+Global $VersionNumber = GUICtrlCreateLabel("Version: 1.3.0", 537, 200, 69, 17)
 GUICtrlSetTip(-1, "Check for updates")
-GUICtrlSetCursor(-1, 0)
+GUICtrlSetCursor (-1, 0)
 Global $GitHubNotice = GUICtrlCreateLabel("View source code,  report bugs and contribute on GitHub", 235, 200, 273, 17)
 GUICtrlSetTip(-1, "Open GitHub repo")
-GUICtrlSetCursor(-1, 0)
+GUICtrlSetCursor (-1, 0)
 Global $ProgressBar = GUICtrlCreateProgress(8, 168, 601, 17)
 GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
@@ -77,8 +85,7 @@ GUISetState(@SW_SHOW)
 Global $dateTime = @MDAY & '.' & @MON & '.' & @YEAR & '-' & @HOUR & '.' & @MIN & '.' & @SEC
 Global $inputDir = @ScriptDir & "\" & IniRead("options.ini", "config", "InputDir", "input")
 Global $repeats = IniRead("options.txt", "config", "repeats", 2)
-Global $currentVersionNumber = 121
-Global $guiTitle = "Alien's Pack Converter"
+Global $currentVersionNumber = 130
 
 ;Config file error checking
 If IniRead("options.ini", "Bedrock to Java", "useCustomDir", "error") = "false" Then
@@ -263,6 +270,32 @@ Func exitProgram()
 
 	DirRemove(@ScriptDir & "\temp\", 1)
 EndFunc   ;==>exitProgram
+
+Func loadInfo()
+	logWrite(0, "Began loading original pack information")
+	If FileExists($inputDir & "\manifest.json") Then
+		logWrite(0, "Detected manifest.json")
+		Local $file = FileRead($inputDir & "\manifest.json")
+		Local $decoded_json = Json_Decode($file)
+		Local $name = Json_Get($decoded_json, '["header"]["name"]')
+		Local $description = Json_Get($decoded_json, '["header"]["description"]')
+		logWrite(0, "Decoded json")
+		GUICtrlSetData($JEPackNameInput, $name)
+		GUICtrlSetData($JEPackDescInput, $description)
+		logWrite(0, "Loaded original pack info")
+	ElseIf FileExists($inputDir & "\pack.mcmeta") Then
+		logWrite(0, "Detected pack.mcmeta")
+		Local $file = FileRead($inputDir & "\pack.mcmeta")
+		Local $decoded_json = Json_Decode($file)
+		Local $description = Json_Get($decoded_json, '["pack"]["description"]')
+		logWrite(0, "Decoded json")
+		GUICtrlSetData($BEPackDescInput, $description)
+		logWrite(0, "Loaded original pack info")
+	Else
+		logWrite(0, "Error: Unable to find manifest.json or pack.mcmeta")
+		MsgBox(0, $guiTitle, "Error: Unable to find manifest.json or pack.mcmeta")
+	EndIf
+EndFunc
 
 Func convert($mode, $conversionArray, $arrayDataCount, $progressBarPercent)
 	$arrayDataCount -= 1 ;ForLoops start at 0, so you need to minus 1 from the total
@@ -572,6 +605,12 @@ While 1
 		Case $GUI_EVENT_CLOSE
 			exitProgram()
 			Exit
+
+		Case $BELoadInfo
+			loadInfo()
+
+		Case $JELoadInfo
+			loadInfo()
 
 		Case $StartBeToJe
 			bedrockToJava()

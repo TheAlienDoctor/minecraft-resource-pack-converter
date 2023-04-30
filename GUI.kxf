@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <object type="TAForm" name="PackConverterGUI">
 	<properties>
-		<property name="Left" vt="Int16">911</property>
+		<property name="Left" vt="Int16">909</property>
 		<property name="Top" vt="Int16">485</property>
-		<property name="Width" vt="Int16">630</property>
+		<property name="Width" vt="Int16">632</property>
 		<property name="Height" vt="Int16">259</property>
 		<property name="Hint" vt="String">Pack Converter</property>
-		<property name="Caption" vt="String">Alien's Pack Converter</property>
+		<property name="Caption" vt="String">&quot; &amp; $guiTitle &amp; &quot;</property>
 		<property name="Color" vt="Ident">clBtnFace</property>
 		<property name="Font.Charset" vt="Ident">DEFAULT_CHARSET</property>
 		<property name="Font.Color" vt="Ident">clWindowText</property>
@@ -70,7 +70,7 @@
 								<property name="Width" vt="Int8">88</property>
 								<property name="Height" vt="Int8">17</property>
 								<property name="Caption" vt="String">Pack Description:</property>
-								<property name="TabOrder" vt="Int8">2</property>
+								<property name="TabOrder" vt="Int8">0</property>
 								<property name="HaveVariable" vt="False">False</property>
 								<property name="CtrlStyle" vt="Int32">1342308608</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
@@ -87,7 +87,7 @@
 								<property name="Height" vt="Int8">25</property>
 								<property name="Hint" vt="String">Start conversion</property>
 								<property name="Caption" vt="String">Start conversion</property>
-								<property name="TabOrder" vt="Int8">0</property>
+								<property name="TabOrder" vt="Int8">4</property>
 								<property name="Color" vt="Ident">clBtnFace</property>
 								<property name="CtrlStyle" vt="Int32">1342373888</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
@@ -102,7 +102,7 @@
 								<property name="Width" vt="Int16">489</property>
 								<property name="Height" vt="Int8">21</property>
 								<property name="Hint" vt="String">Pack description</property>
-								<property name="TabOrder" vt="Int8">1</property>
+								<property name="TabOrder" vt="Int8">2</property>
 								<property name="Text" vt="String">Pack description here</property>
 								<property name="CtrlStyle" vt="Int32">1342374016</property>
 								<property name="CtrlExStyle" vt="Int16">512</property>
@@ -118,7 +118,7 @@
 								<property name="Width" vt="Int8">63</property>
 								<property name="Height" vt="Int8">17</property>
 								<property name="Caption" vt="String">Pack Name:</property>
-								<property name="TabOrder" vt="Int8">3</property>
+								<property name="TabOrder" vt="Int8">5</property>
 								<property name="HaveVariable" vt="False">False</property>
 								<property name="CtrlStyle" vt="Int32">1342308608</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
@@ -134,12 +134,28 @@
 								<property name="Width" vt="Int16">513</property>
 								<property name="Height" vt="Int8">21</property>
 								<property name="Hint" vt="String">Pack name</property>
-								<property name="TabOrder" vt="Int8">4</property>
+								<property name="TabOrder" vt="Int8">1</property>
 								<property name="Text" vt="String">Pack name here</property>
 								<property name="CtrlStyle" vt="Int32">1342374016</property>
 								<property name="CtrlExStyle" vt="Int16">512</property>
 								<property name="Resizing" vt="Set">DockHeight</property>
 								<property name="Description" vt="String">JEPackNameInput</property>
+							</properties>
+							<components/>
+						</object>
+						<object type="TAButton" name="BELoadInfo">
+							<properties>
+								<property name="Left" vt="Int8">1</property>
+								<property name="Top" vt="Int8">89</property>
+								<property name="Width" vt="Int16">145</property>
+								<property name="Height" vt="Int8">25</property>
+								<property name="Hint" vt="String">Load original pack name and description</property>
+								<property name="Caption" vt="String">Load original pack info</property>
+								<property name="TabOrder" vt="Int8">3</property>
+								<property name="Color" vt="Ident">clBtnFace</property>
+								<property name="CtrlStyle" vt="Int32">1342373888</property>
+								<property name="CtrlExStyle" vt="Int8">0</property>
+								<property name="Resizing" vt="Set">DockWidth, DockHeight</property>
 							</properties>
 							<components/>
 						</object>
@@ -164,7 +180,7 @@
 								<property name="Width" vt="Int16">489</property>
 								<property name="Height" vt="Int8">21</property>
 								<property name="Hint" vt="String">Pack description</property>
-								<property name="TabOrder" vt="Int8">0</property>
+								<property name="TabOrder" vt="Int8">1</property>
 								<property name="Text" vt="String">Pack description here</property>
 								<property name="CtrlStyle" vt="Int32">1342374016</property>
 								<property name="CtrlExStyle" vt="Int16">512</property>
@@ -179,7 +195,7 @@
 								<property name="Width" vt="Int16">513</property>
 								<property name="Height" vt="Int8">21</property>
 								<property name="Hint" vt="String">Pack name</property>
-								<property name="TabOrder" vt="Int8">1</property>
+								<property name="TabOrder" vt="Int8">0</property>
 								<property name="Text" vt="String">Pack name here</property>
 								<property name="CtrlStyle" vt="Int32">1342374016</property>
 								<property name="CtrlExStyle" vt="Int16">512</property>
@@ -195,7 +211,7 @@
 								<property name="Height" vt="Int8">25</property>
 								<property name="Hint" vt="String">Start conversion</property>
 								<property name="Caption" vt="String">Start conversion</property>
-								<property name="TabOrder" vt="Int8">2</property>
+								<property name="TabOrder" vt="Int8">4</property>
 								<property name="Color" vt="Ident">clBtnFace</property>
 								<property name="CtrlStyle" vt="Int32">1342373888</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
@@ -226,11 +242,27 @@
 								<property name="Width" vt="Int8">63</property>
 								<property name="Height" vt="Int8">17</property>
 								<property name="Caption" vt="String">Pack Name:</property>
-								<property name="TabOrder" vt="Int8">4</property>
+								<property name="TabOrder" vt="Int8">5</property>
 								<property name="HaveVariable" vt="False">False</property>
 								<property name="CtrlStyle" vt="Int32">1342308608</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
 								<property name="Resizing" vt="Set"/>
+							</properties>
+							<components/>
+						</object>
+						<object type="TAButton" name="JELoadInfo">
+							<properties>
+								<property name="Left" vt="Int8">1</property>
+								<property name="Top" vt="Int8">89</property>
+								<property name="Width" vt="Int16">145</property>
+								<property name="Height" vt="Int8">25</property>
+								<property name="Hint" vt="String">Load original pack name and description</property>
+								<property name="Caption" vt="String">Load original pack info</property>
+								<property name="TabOrder" vt="Int8">2</property>
+								<property name="Color" vt="Ident">clBtnFace</property>
+								<property name="CtrlStyle" vt="Int32">1342373888</property>
+								<property name="CtrlExStyle" vt="Int8">0</property>
+								<property name="Resizing" vt="Set">DockWidth, DockHeight</property>
 							</properties>
 							<components/>
 						</object>
@@ -263,7 +295,7 @@
 				<property name="Height" vt="Int8">17</property>
 				<property name="Cursor" vt="Ident">crHandPoint</property>
 				<property name="Hint" vt="String">Check for updates</property>
-				<property name="Caption" vt="String">Version: 1.2.2</property>
+				<property name="Caption" vt="String">Version: 1.3.0</property>
 				<property name="TabOrder" vt="Int8">2</property>
 				<property name="HaveVariable" vt="False">False</property>
 				<property name="CtrlStyle" vt="Int32">1342308608</property>
