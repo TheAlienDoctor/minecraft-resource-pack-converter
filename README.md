@@ -1,7 +1,5 @@
 ### Minecraft resource pack converter
 
-<b>Please note: This is currently working progress and not done!</b>
-
 ## What is this?
 Well, if you couldn't tell by the name then its a Minecraft resource pack converter! What does it do? Well it converts Minecraft resource packs between Bedrock and Java, using the powers of magic it is actually able to convert Bedrock to Java, or Java to Bedrock (unlike most other pack converters I have seen)
 
