@@ -66,13 +66,13 @@ Global $BEPackNameTitle = GUICtrlCreateLabel("Pack Name:", 16, 48, 63, 17)
 GUICtrlCreateTabItem("")
 Global $CopyrightNotice = GUICtrlCreateLabel("Copyright © 2022 - 2023, TheAlienDoctor", 8, 200, 200, 17)
 GUICtrlSetTip(-1, "Copyright notice")
-GUICtrlSetCursor (-1, 0)
+GUICtrlSetCursor(-1, 0)
 Global $VersionNumber = GUICtrlCreateLabel("Version: 1.3.0", 537, 200, 69, 17)
 GUICtrlSetTip(-1, "Check for updates")
-GUICtrlSetCursor (-1, 0)
+GUICtrlSetCursor(-1, 0)
 Global $GitHubNotice = GUICtrlCreateLabel("View source code,  report bugs and contribute on GitHub", 235, 200, 273, 17)
 GUICtrlSetTip(-1, "Open GitHub repo")
-GUICtrlSetCursor (-1, 0)
+GUICtrlSetCursor(-1, 0)
 Global $ProgressBar = GUICtrlCreateProgress(8, 168, 601, 17)
 GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
@@ -294,7 +294,7 @@ Func loadInfo()
 		logWrite(0, "Error: Unable to find manifest.json or pack.mcmeta")
 		MsgBox(0, $guiTitle, "Error: Unable to find manifest.json or pack.mcmeta")
 	EndIf
-EndFunc
+EndFunc   ;==>loadInfo
 
 Func convert($mode, $conversionArray, $arrayDataCount, $progressBarPercent)
 	$arrayDataCount -= 1 ;ForLoops start at 0, so you need to minus 1 from the total
