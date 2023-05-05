@@ -85,6 +85,7 @@ Global $inputDir = @ScriptDir & "\" & IniRead("options.ini", "config", "InputDir
 Global $repeats = IniRead("options.txt", "config", "repeats", 2)
 Global $currentVersionNumber = 130
 Global $conversionCount = 0
+Global $je_unsupportedVersions[3] = [1, 2, 3]
 
 ;Config file error checking
 If IniRead("options.ini", "Bedrock to Java", "useCustomDir", "error") = "false" Then
@@ -272,7 +273,7 @@ EndFunc   ;==>exitProgram
 
 Func loadInfo()
 	logWrite(0, "Began loading original pack information")
-	If FileExists($inputDir & "\manifest.json") Then
+	If FileExists($inputDir & "\manifest.json") Then ;Bedrock Pack
 		logWrite(0, "Detected manifest.json")
 		Local $file = FileRead($inputDir & "\manifest.json")
 		Local $decoded_json = Json_Decode($file)
@@ -282,7 +283,7 @@ Func loadInfo()
 		GUICtrlSetData($JEPackNameInput, $name)
 		GUICtrlSetData($JEPackDescInput, $description)
 		logWrite(0, "Loaded original pack info")
-	ElseIf FileExists($inputDir & "\pack.mcmeta") Then
+	ElseIf FileExists($inputDir & "\pack.mcmeta") Then ;Java Pack
 		logWrite(0, "Detected pack.mcmeta")
 		Local $file = FileRead($inputDir & "\pack.mcmeta")
 		Local $decoded_json = Json_Decode($file)
@@ -295,6 +296,36 @@ Func loadInfo()
 		MsgBox(0, $guiTitle, "Error: Unable to find manifest.json or pack.mcmeta")
 	EndIf
 EndFunc   ;==>loadInfo
+
+Func compatCheck() ;Check compatibility
+	logWrite(0, "Began checking input pack compatibility")
+
+	If FileExists($inputDir & "\manifest.json") Then
+		logWrite(0, "Detected manifest.json")
+		;Unfinished
+	ElseIf FileExists($inputDir & "\pack.mcmeta") Then ;Java pack
+		logWrite(0, "Detected pack.mcmeta")
+		logWrite(0, "Detected pack.mcmeta")
+		Local $file = FileRead($inputDir & "\pack.mcmeta")
+		Local $decoded_json = Json_Decode($file)
+		Local $pack_version = Json_Get($decoded_json, '["pack"]["pack_format"]')
+		logWrite(0, "Decoded json")
+	Else
+		logWrite(0, "Error: Unable to find manifest.json or pack.mcmeta")
+		MsgBox(0, $guiTitle, "Error: Unable to find manifest.json or pack.mcmeta")
+	EndIf
+
+	For $index = 0 to 2
+		If $pack_version = $je_unsupportedVersions[$index] Then
+			Global $compatible_result = False
+		Else
+			Global $compatible_result = True
+		EndIf
+	Next
+EndFunc
+
+;###########################################################################################################################################################################################
+;Other conversion functions
 
 Func convert($mode, $conversionArray, $arrayDataCount, $progressBarPercent)
 	$arrayDataCount -= 1 ;ForLoops start at 0, so you need to minus 1 from the total
@@ -492,6 +523,16 @@ Func javaToBedrock()
 	Local $confirmBox = MsgBox(1, $guiTitle, "Are you sure you want to start conversion? This will delete everything inside the " & $bedrockDir & " folder, so make sure you have removed any previous packs from it.")
 
 	If $confirmBox = 1 Then
+		compatCheck()
+If $compatible_result = False Then
+	$incompatible_msg = MsgBox(4, $guiTitle, "Error: Outdated pack conversion detected!" & @CRLF & "The input pack may not convert properly due to being made for an older version of Minecraft" & @CRLF & "Continue?")
+	If $incompatible_msg = 6 Then
+		;Do nothing
+	ElseIf $incompatible_msg = 7 Then
+		Return
+	EndIf
+EndIf
+
 		Local $bedrockPackName = GUICtrlRead($BEPackNameInput)
 		Local $bedrockPackDesc = GUICtrlRead($BEPackDescInput)
 		Global $conversionCount = 0
