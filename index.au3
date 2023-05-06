@@ -299,10 +299,15 @@ EndFunc   ;==>loadInfo
 
 Func compatCheck() ;Check compatibility
 	logWrite(0, "Began checking input pack compatibility")
+	Global $compatible_result = True
 
-	If FileExists($inputDir & "\manifest.json") Then
-		logWrite(0, "Detected manifest.json")
-		;Unfinished
+	If FileExists($inputDir & "\pack_manifest.json") Then ;Outdated Bedrock pack manifest
+		logWrite(0, "Detected pack_manifest.json, which is an outdated version of the up to date manifest.json") ;
+		Global $compatible_result = False
+		logWrite(0, "Pack compatible result: " & $compatible_result)
+	ElseIf FileExists($inputDir & "\manifest.json") Then ;Everything should be fine, Bedrock resource packs haven't undergone major updates like Java, except when they were first released.
+		Global $compatible_result = True ;...and back then the manifest.json was called pack_manifest.json, which makes it very easy to check.
+		Return
 	ElseIf FileExists($inputDir & "\pack.mcmeta") Then ;Java pack
 		logWrite(0, "Detected pack.mcmeta")
 		logWrite(0, "Detected pack.mcmeta")
@@ -310,19 +315,20 @@ Func compatCheck() ;Check compatibility
 		Local $decoded_json = Json_Decode($file)
 		Local $pack_version = Json_Get($decoded_json, '["pack"]["pack_format"]')
 		logWrite(0, "Decoded json")
+		For $index = 0 to 2
+			If $pack_version = $je_unsupportedVersions[$index] Then
+				Global $compatible_result = False
+			Else
+				Global $compatible_result = True
+			EndIf
+		Next
+		logWrite(0, "Pack compatible result: " & $compatible_result)
 	Else
 		logWrite(0, "Error: Unable to find manifest.json or pack.mcmeta")
 		MsgBox(0, $guiTitle, "Error: Unable to find manifest.json or pack.mcmeta")
 	EndIf
 
-	For $index = 0 to 2
-		If $pack_version = $je_unsupportedVersions[$index] Then
-			Global $compatible_result = False
-		Else
-			Global $compatible_result = True
-		EndIf
-	Next
-EndFunc
+EndFunc   ;==>compatCheck
 
 ;###########################################################################################################################################################################################
 ;Other conversion functions
@@ -415,12 +421,25 @@ Func bedrockToJava()
 	Local $confirmBox = MsgBox(1, $guiTitle, "Are you sure you want to start conversion? This will delete everything inside the " & $javaDir & " folder, so make sure you have removed any previous packs from it.")
 	If $confirmBox = 1 Then
 
+		logWrite(1, "Began converting Bedrock to Java")
+
+		compatCheck()
+		If $compatible_result = False Then
+			logWrite(0, "Outdated pack version detected")
+			$incompatible_msg = MsgBox(4, $guiTitle, "Error: Outdated pack version detected!" & @CRLF & "The input pack may not convert properly due to being made for an older version of Minecraft" & @CRLF & "Continue?")
+			If $incompatible_msg = 6 Then
+				;Do nothing, continue with pack conversion
+				logWrite(0, "Continued pack conversion")
+			ElseIf $incompatible_msg = 7 Then
+				logWrite(3, "Pack conversion aborted due to outdated version")
+				Return ;Stop function
+			EndIf
+		EndIf
+
 		Local $javaPackName = GUICtrlRead($JEPackNameInput)
 		Local $javaPackDesc = GUICtrlRead($JEPackDescInput)
 		Global $conversionCount = 0
 		Local $timesRan = 0
-
-		logWrite(0, "Began converting Bedrock to Java")
 
 		DirRemove($javaDir, 1)
 		DirCreate($javaDir & "\pack")
@@ -522,23 +541,26 @@ Func javaToBedrock()
 	GUICtrlSetData($ProgressBar, 0)
 	Local $confirmBox = MsgBox(1, $guiTitle, "Are you sure you want to start conversion? This will delete everything inside the " & $bedrockDir & " folder, so make sure you have removed any previous packs from it.")
 
+	logWrite(1, "Began converting Java to Bedrock")
+
 	If $confirmBox = 1 Then
 		compatCheck()
-If $compatible_result = False Then
-	$incompatible_msg = MsgBox(4, $guiTitle, "Error: Outdated pack conversion detected!" & @CRLF & "The input pack may not convert properly due to being made for an older version of Minecraft" & @CRLF & "Continue?")
-	If $incompatible_msg = 6 Then
-		;Do nothing
-	ElseIf $incompatible_msg = 7 Then
-		Return
-	EndIf
-EndIf
+		If $compatible_result = False Then
+			logWrite(0, "Outdated pack version detected")
+			$incompatible_msg = MsgBox(4, $guiTitle, "Error: Outdated pack version detected!" & @CRLF & "The input pack may not convert properly due to being made for an older version of Minecraft" & @CRLF & "Continue?")
+			If $incompatible_msg = 6 Then
+				;Do nothing, continue with pack conversion
+				logWrite(0, "Continued pack conversion")
+			ElseIf $incompatible_msg = 7 Then
+				logWrite(3, "Pack conversion aborted due to outdated version")
+				Return ;Stop function
+			EndIf
+		EndIf
 
 		Local $bedrockPackName = GUICtrlRead($BEPackNameInput)
 		Local $bedrockPackDesc = GUICtrlRead($BEPackDescInput)
 		Global $conversionCount = 0
 		Local $timesRan = 0
-
-		logWrite(0, "Began converting Java to Bedrock")
 
 		DirRemove($bedrockDir, 1)
 		DirCreate($bedrockDir & "\pack")
