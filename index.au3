@@ -21,12 +21,12 @@
 #include "UDF\JSON.au3"
 #include "UDF\BinaryCall.au3"
 
-Global $guiTitle = "Alien's Pack Converter V1.4.0"
+Global Const $guiTitle = "Alien's Pack Converter V1.4.0"
 
 ;###########################################################################################################################################################################################
 ;Code for single instance
 
-$SingeInstance = "fbdb8ca2-20d5-4c23-9e39-d10deb31f095"
+Global Const $SingeInstance = "fbdb8ca2-20d5-4c23-9e39-d10deb31f095"
 
 If WinExists($SingeInstance) Then
 	MsgBox(0, $guiTitle, "Pack converter already running!" & @CRLF & "You can only have one instance open at a time.")
@@ -38,7 +38,7 @@ AutoItWinSetTitle($SingeInstance)
 ;###########################################################################################################################################################################################
 ;GUI
 
-#Region ### START Koda GUI section
+#Region ### START Koda GUI section ### Form=d:\06 code\minecraft-resource-pack-converter\gui.kxf
 Global $PackConverterGUI = GUICreate("" & $guiTitle & "", 617, 221, -1, -1)
 Global $Tabs = GUICtrlCreateTab(8, 8, 601, 145)
 Global $BedrockToJava = GUICtrlCreateTabItem("Bedrock to Java")
@@ -83,9 +83,11 @@ GUISetState(@SW_SHOW)
 Global $dateTime = @MDAY & '.' & @MON & '.' & @YEAR & '-' & @HOUR & '.' & @MIN & '.' & @SEC
 Global $inputDir = @ScriptDir & "\" & IniRead("options.ini", "config", "InputDir", "input")
 Global $repeats = IniRead("options.txt", "config", "repeats", 2)
-Global $currentVersionNumber = 130
 Global $conversionCount = 0
-Global $je_unsupportedVersions[3] = [1, 2, 3]
+Global $cancel = False
+
+Global Const $currentVersionNumber = 130
+Global Const $je_unsupportedVersions[3] = [1, 2, 3]
 
 ;Config file error checking
 If IniRead("options.ini", "Bedrock to Java", "useCustomDir", "error") = "false" Then
@@ -271,6 +273,28 @@ Func exitProgram()
 	DirRemove(@ScriptDir & "\temp\", 1)
 EndFunc   ;==>exitProgram
 
+Func GuiDisable()
+	GuiCtrlSetState($JEPackDescInput, $GUI_DISABLE)
+	GuiCtrlSetState($BEPackDescInput, $GUI_DISABLE)
+	GuiCtrlSetState($JEPackNameInput, $GUI_DISABLE)
+	GuiCtrlSetState($BEPackNameInput, $GUI_DISABLE)
+	GuiCtrlSetState($StartBeToJe, $GUI_DISABLE)
+	GuiCtrlSetState($StartJeToBe, $GUI_DISABLE)
+	GuiCtrlSetState($JELoadInfo, $GUI_DISABLE)
+	GuiCtrlSetState($BELoadInfo, $GUI_DISABLE)
+EndFunc   ;==>GuiDisable
+
+Func GuiEnable()
+	GuiCtrlSetState($JEPackDescInput, $GUI_ENABLE)
+	GuiCtrlSetState($BEPackDescInput, $GUI_ENABLE)
+	GuiCtrlSetState($JEPackNameInput, $GUI_ENABLE)
+	GuiCtrlSetState($BEPackNameInput, $GUI_ENABLE)
+	GuiCtrlSetState($StartBeToJe, $GUI_ENABLE)
+	GuiCtrlSetState($StartJeToBe, $GUI_ENABLE)
+	GuiCtrlSetState($JELoadInfo, $GUI_ENABLE)
+	GuiCtrlSetState($BELoadInfo, $GUI_ENABLE)
+EndFunc   ;==>GuiEnable
+
 Func loadInfo()
 	logWrite(0, "Began loading original pack information")
 	If FileExists($inputDir & "\manifest.json") Then ;Bedrock Pack
@@ -422,6 +446,7 @@ Func bedrockToJava()
 	If $confirmBox = 1 Then
 
 		logWrite(1, "Began converting Bedrock to Java")
+		GuiDisable()
 
 		compatCheck()
 		If $compatible_result = False Then
@@ -432,6 +457,7 @@ Func bedrockToJava()
 				logWrite(0, "Continued pack conversion")
 			ElseIf $incompatible_msg = 7 Then
 				logWrite(3, "Pack conversion aborted due to outdated version")
+				GuiEnable()
 				Return ;Stop function
 			EndIf
 		EndIf
@@ -458,6 +484,10 @@ Func bedrockToJava()
 		logWrite(0, "Beginning texture file conversion")
 
 		While $timesRan < $repeats
+			If $cancel = True Then
+				GuiEnable()
+			EndIf
+			
 			convert(0, $blockTextures1, 49, 11)
 			convert(0, $blockTextures2, 48, 12)
 			convert(0, $blockTextures3, 46, 13)
@@ -535,15 +565,17 @@ Func bedrockToJava()
 	EndIf
 
 	GUICtrlSetData($ProgressBar, 100)
+	GuiEnable()
 EndFunc   ;==>bedrockToJava
 
 Func javaToBedrock()
 	GUICtrlSetData($ProgressBar, 0)
 	Local $confirmBox = MsgBox(1, $guiTitle, "Are you sure you want to start conversion? This will delete everything inside the " & $bedrockDir & " folder, so make sure you have removed any previous packs from it.")
 
-	logWrite(1, "Began converting Java to Bedrock")
-
 	If $confirmBox = 1 Then
+		logWrite(1, "Began converting Java to Bedrock")
+		GuiDisable()
+
 		compatCheck()
 		If $compatible_result = False Then
 			logWrite(0, "Outdated pack version detected")
@@ -553,6 +585,7 @@ Func javaToBedrock()
 				logWrite(0, "Continued pack conversion")
 			ElseIf $incompatible_msg = 7 Then
 				logWrite(3, "Pack conversion aborted due to outdated version")
+				GuiEnable()
 				Return ;Stop function
 			EndIf
 		EndIf
@@ -651,6 +684,7 @@ Func javaToBedrock()
 	Else
 		logWrite(0, "Conversion aborted")
 	EndIf
+	GuiEnable()
 	GUICtrlSetData($ProgressBar, 100)
 EndFunc   ;==>javaToBedrock
 
