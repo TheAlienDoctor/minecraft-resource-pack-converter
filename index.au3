@@ -506,25 +506,27 @@ Func bedrockToJava()
 			convert(0, $blockTextures16, 48, 26)
 			convert(0, $blockTextures17, 4, 27)
 			convert(0, $blockTextures18, 43, 28)
+			convert(0, $blockTextures19, 45, 29)
+			convert(0, $blockTextures20, 45, 30)
 
-			convert(0, $colorMapTextures, 2, 29)
+			convert(0, $colorMapTextures, 2, 31)
 
-			convert(0, $itemTextures1, 86, 31)
-			convert(0, $itemTextures2, 85, 32)
-			convert(0, $itemTextures3, 85, 33)
-			convert(0, $itemTextures4, 85, 34)
-			convert(0, $itemTextures5, 21, 35)
+			convert(0, $itemTextures1, 86, 32)
+			convert(0, $itemTextures2, 85, 33)
+			convert(0, $itemTextures3, 85, 34)
+			convert(0, $itemTextures4, 85, 35)
+			convert(0, $itemTextures5, 21, 36)
 
-			convert(0, $entityTextures1, 94, 36)
-			convert(0, $entityTextures2, 92, 37)
-			convert(0, $entityTextures3, 57, 38)
-			convert(0, $entityTextures4, 43, 39)
+			convert(0, $entityTextures1, 94, 37)
+			convert(0, $entityTextures2, 92, 38)
+			convert(0, $entityTextures3, 57, 39)
+			convert(0, $entityTextures4, 43, 40)
 
-			convert(0, $environmentTextures, 12, 40)
+			convert(0, $environmentTextures, 12, 41)
 
-			convert(0, $armorTextures, 11, 41)
+			convert(0, $armorTextures, 11, 42)
 
-			convert(0, $guiTextures, 8, 42)
+			convert(0, $guiTextures, 8, 43)
 			$timesRan += 1
 			logWrite(1, "Texture conversion function ran " & $timesRan & "/" & $repeats)
 		WEnd
@@ -630,25 +632,27 @@ Func javaToBedrock()
 			convert(1, $blockTextures16, 48, 26)
 			convert(1, $blockTextures17, 4, 27)
 			convert(1, $blockTextures18, 43, 28)
+			convert(1, $blockTextures19, 45, 29)
+			convert(1, $blockTextures20, 45, 30)
 
-			convert(1, $colorMapTextures, 2, 29)
+			convert(1, $colorMapTextures, 2, 31)
 
-			convert(1, $itemTextures1, 86, 31)
-			convert(1, $itemTextures2, 85, 32)
-			convert(1, $itemTextures3, 85, 33)
-			convert(1, $itemTextures4, 85, 34)
-			convert(1, $itemTextures5, 21, 35)
+			convert(1, $itemTextures1, 86, 32)
+			convert(1, $itemTextures2, 85, 33)
+			convert(1, $itemTextures3, 85, 34)
+			convert(1, $itemTextures4, 85, 35)
+			convert(1, $itemTextures5, 21, 36)
 
-			convert(1, $entityTextures1, 94, 36)
-			convert(1, $entityTextures2, 92, 37)
-			convert(1, $entityTextures3, 57, 38)
-			convert(1, $entityTextures4, 43, 39)
+			convert(1, $entityTextures1, 94, 37)
+			convert(1, $entityTextures2, 92, 38)
+			convert(1, $entityTextures3, 57, 39)
+			convert(1, $entityTextures4, 43, 40)
 
-			convert(1, $environmentTextures, 12, 40)
+			convert(1, $environmentTextures, 12, 41)
 
-			convert(1, $armorTextures, 11, 41)
+			convert(1, $armorTextures, 11, 42)
 
-			convert(1, $guiTextures, 8, 42)
+			convert(1, $guiTextures, 8, 43)
 
 			$timesRan += 1
 			Sleep(10)
