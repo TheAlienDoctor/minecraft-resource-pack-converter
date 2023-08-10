@@ -523,23 +523,26 @@ Func bedrockToJava()
 			convert(0, $entityTextures2, 92, 40)
 			convert(0, $entityTextures3, 57, 41)
 			convert(0, $entityTextures4, 43, 42)
+			convert(0, $entityTextures5, 19, 43)
 
-			convert(0, $environmentTextures, 12, 42)
+			convert(0, $environmentTextures, 12, 43)
 
-			convert(0, $armorTextures, 11, 43)
+			convert(0, $armorTextures, 11, 44)
 
-			convert(0, $guiTextures, 8, 44)
+			convert(0, $guiTextures, 8, 45)
+
+			convert(0, $trimTextures, 51, 46)
 			$timesRan += 1
 			logWrite(1, "Texture conversion function ran " & $timesRan & "/" & $repeats)
 		WEnd
 
 		convertAnime()
 
-		GUICtrlSetData($ProgressBar, 43)
+		GUICtrlSetData($ProgressBar, 47)
 
 		convertPackIcon()
 
-		GUICtrlSetData($ProgressBar, 45)
+		GUICtrlSetData($ProgressBar, 48)
 
 		logWrite(0, "Generated " & $animeCount & " .mcmeta files for animated textures.")
 		logWrite(0, "Finished converting files! Converted " & $conversionCount & " files!")
@@ -651,20 +654,22 @@ Func javaToBedrock()
 			convert(1, $entityTextures2, 92, 40)
 			convert(1, $entityTextures3, 57, 41)
 			convert(1, $entityTextures4, 43, 42)
+			convert(1, $entityTextures5, 19, 43)
 
-			convert(1, $environmentTextures, 12, 42)
+			convert(1, $environmentTextures, 12, 43)
 
-			convert(1, $armorTextures, 11, 43)
+			convert(1, $armorTextures, 11, 44)
 
-			convert(1, $guiTextures, 8, 44)
+			convert(1, $guiTextures, 8, 45)
 
+			convert(1, $trimTextures, 51, 46)
 			$timesRan += 1
-			Sleep(10)
+			logWrite(1, "Texture conversion function ran " & $timesRan & "/" & $repeats)
 		WEnd
 
 		convertPackIcon()
 
-		GUICtrlSetData($ProgressBar, 45)
+		GUICtrlSetData($ProgressBar, 47)
 
 		logWrite(0, "Finished converting files! Converted " & $conversionCount & " files!")
 		logWrite(0, "Creating .mcpack file")
