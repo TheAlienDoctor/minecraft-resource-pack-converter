@@ -854,7 +854,7 @@ Global $heartbreak_pottery_pattern[2] = ["textures\blocks\heartbreak_pottery_pat
 Global $howl_pottery_pattern[2] = ["textures\blocks\howl_pottery_pattern.png", "assets\minecraft\textures\entity\decorated_pot\howl_pottery_pattern.png"]
 Global $miner_pottery_pattern[2] = ["textures\blocks\miner_pottery_pattern.png", "assets\minecraft\textures\entity\decorated_pot\miner_pottery_pattern.png"]
 Global $mourner_pottery_pattern[2] = ["textures\blocks\mourner_pottery_pattern.png", "assets\minecraft\textures\entity\decorated_pot\mourner_pottery_pattern.png"]
-Global $pink_petals[2] = ["textures\blocks\.png", "assets\minecraft\textures\block\pink_petals.png"]
+Global $pink_petals[2] = ["textures\blocks\pink_petals.png", "assets\minecraft\textures\block\pink_petals.png"]
 Global $pink_petals_stem[2] = ["textures\blocks\pink_petals_stem.png", "assets\minecraft\textures\block\pink_petals_stem.png"]
 Global $pitcher_crop_bottom[2] = ["textures\blocks\pitcher_crop_bottom.png", "assets\minecraft\textures\block\pitcher_crop_bottom.png"]
 Global $pitcher_crop_bottom_stage_1[2] = ["textures\blocks\pitcher_crop_bottom_stage_1.png", "assets\minecraft\textures\block\pitcher_crop_bottom_stage_1.png"]
@@ -1394,7 +1394,7 @@ Global $itemTextures4[85] = [$potato_poisonous, $chorus_fruit_popped, $porkchop_
 
 Global $itemTextures5[21] = [$map_filled, $boat_dark_oak, $dragon_fireball, $honeycombItem, $iron_horse_armor, $light_block_0, $light_block_1, $light_block_2, $light_block_3, $light_block_4, $light_block_5, $light_block_6, $light_block_7, $light_block_8, $light_block_9, $light_block_10, $light_block_11, $light_block_12, $light_block_13, $light_block_14, $light_block_15]
 
-Global $itemTextures6[31] = [$acacia_hanging_sign, $angler_pottery_sherd, $archer_pottery_sherd, $arms_up_pottery_sherd, $bamboo_chest_raft, $bamboo_door, $bamboo_hanging_sign, $bamboo_raft, $bamboo_sign, $blade_pottery_sherd, $brewer_pottery_sherd, $brush, $burn_pottery_sherd, $cherry_boat, $cherry_chest_boat, $cherry_door, $cherry_hanging_sign, $cherry_sign, $coast_armor_trim_smithing_template, $crimson_hanging_sign, $danger_pottery_sherd, $dark_oak_hanging_sign, $dune_armor_trim_smithing_template, $explorer_pottery_sherd, $eye_armor_trim_smithing_template, $friend_pottery_sherd, $heart_pottery_sherd, $heartbreak_pottery_sherd, $host_armor_trim_smithing_template, $howl_pottery_sherd]
+Global $itemTextures6[30] = [$acacia_hanging_sign, $angler_pottery_sherd, $archer_pottery_sherd, $arms_up_pottery_sherd, $bamboo_chest_raft, $bamboo_door, $bamboo_hanging_sign, $bamboo_raft, $bamboo_sign, $blade_pottery_sherd, $brewer_pottery_sherd, $brush, $burn_pottery_sherd, $cherry_boat, $cherry_chest_boat, $cherry_door, $cherry_hanging_sign, $cherry_sign, $coast_armor_trim_smithing_template, $crimson_hanging_sign, $danger_pottery_sherd, $dark_oak_hanging_sign, $dune_armor_trim_smithing_template, $explorer_pottery_sherd, $eye_armor_trim_smithing_template, $friend_pottery_sherd, $heart_pottery_sherd, $heartbreak_pottery_sherd, $host_armor_trim_smithing_template, $howl_pottery_sherd]
 
 Global $itemTextures7[31] = [$jungle_hanging_sign, $mangrove_hanging_sign, $miner_pottery_sherd, $mourner_pottery_sherd, $music_disc_relic, $netherite_upgrade_smithing_template, $oak_hanging_sign, $pink_petals, $pitcher_pod, $plenty_pottery_sherd, $prize_pottery_sherd, $raiser_armor_trim_smithing_template, $rib_armor_trim_smithing_template, $sentry_armor_trim_smithing_template, $shaper_armor_trim_smithing_template, $sheaf_pottery_pattern, $shelter_pottery_sherd, $silence_armor_trim_smithing_template, $skull_pottery_sherd, $sniffer_egg, $snort_pottery_sherd, $snout_armor_trim_smithing_template, $spire_armor_trim_smithing_template, $spruce_hanging_sign, $tide_armor_trim_smithing_template, $torchflower_seeds, $vex_armor_trim_smithing_template, $ward_armor_trim_smithing_template, $warped_hanging_sign, $wayfinder_armor_trim_smithing_template, $wild_armor_trim_smithing_template]
 
@@ -1772,7 +1772,7 @@ Global $panorama_overlay = ["textures\ui\panorama_overlay.png", "assets\minecraf
 
 Global $guiTextures[8] = [$icons, $panorama_0, $panorama_1, $panorama_2, $panorama_3, $panorama_4, $panorama_5, $panorama_overlay]
 
-Global $amethyst[2] = ["textures\trims\color_palettes\.png", "assets\minecraft\textures\trims\color_palettes\amethyst.png"]
+Global $amethyst[2] = ["textures\trims\color_palettes\amethyst.png", "assets\minecraft\textures\trims\color_palettes\amethyst.png"]
 Global $copper[2] = ["textures\trims\color_palettes\copper.png", "assets\minecraft\textures\trims\color_palettes\copper.png"]
 Global $diamond[2] = ["textures\trims\color_palettes\diamond.png", "assets\minecraft\textures\trims\color_palettes\diamond.png"]
 Global $diamond_darker[2] = ["textures\trims\color_palettes\diamond_darker.png", "assets\minecraft\textures\trims\color_palettes\diamond_darker.png"]
@@ -1786,7 +1786,7 @@ Global $netherite[2] = ["textures\trims\color_palettes\netherite.png", "assets\m
 Global $netherite_darker[2] = ["textures\trims\color_palettes\netherite_darker.png", "assets\minecraft\textures\trims\color_palettes\netherite_darker.png"]
 Global $quartz[2] = ["textures\trims\color_palettes\quartz.png", "assets\minecraft\textures\trims\color_palettes\quartz.png"]
 Global $redstone[2] = ["textures\trims\color_palettes\redstone.png", "assets\minecraft\textures\trims\color_palettes\redstone.png"]
-Global $trim_palette[2] = ["textures\trims\color_palettes\.png", "assets\minecraft\textures\trims\color_palettes\trim_palette.png"]
+Global $trim_palette[2] = ["textures\trims\color_palettes\trim_palette.png", "assets\minecraft\textures\trims\color_palettes\trim_palette.png"]
 Global $boots_trim[2] = ["textures\trims\items\boots_trim.png", "assets\minecraft\textures\trims\items\boots_trim.png"]
 Global $chestplate_trim[2] = ["textures\trims\items\chestplate_trim.png", "assets\minecraft\textures\trims\items\chestplate_trim.png"]
 Global $helmet_trim[2] = ["textures\trims\items\helmet_trim.png", "assets\minecraft\textures\trims\items\helmet_trim.png"]
@@ -1814,14 +1814,14 @@ Global $snout_leggings[2] = ["textures\trims\snout_leggings.png", "assets\minecr
 Global $spire[2] = ["textures\trims\spire.png", "assets\minecraft\textures\trims\models\armor\spire.png"]
 Global $spire_leggings[2] = ["textures\trims\spire_leggings.png", "assets\minecraft\textures\trims\models\armor\spire_leggings.png"]
 Global $tide[2] = ["textures\trims\tide.png", "assets\minecraft\textures\trims\models\armor\tide.png"]
-Global $tide_leggings[2] = ["textures\trims\.png", "assets\minecraft\textures\trims\models\armor\tide_leggings.png"]
+Global $tide_leggings[2] = ["textures\trims\tide_leggings.png", "assets\minecraft\textures\trims\models\armor\tide_leggings.png"]
 Global $vex[2] = ["textures\trims\vex.png", "assets\minecraft\textures\trims\models\armor\vex.png"]
 Global $vex_leggings[2] = ["textures\trims\vex_leggings.png", "assets\minecraft\textures\trims\models\armor\vex_leggings.png"]
 Global $ward[2] = ["textures\trims\ward.png", "assets\minecraft\textures\trims\models\armor\ward.png"]
-Global $ward_leggings[2] = ["textures\trims\.png", "assets\minecraft\textures\trims\models\armor\ward_leggings.png"]
+Global $ward_leggings[2] = ["textures\trims\ward_leggings.png", "assets\minecraft\textures\trims\models\armor\ward_leggings.png"]
 Global $wayfinder[2] = ["textures\trims\wayfinder.png", "assets\minecraft\textures\trims\models\armor\wayfinder.png"]
 Global $wayfinder_leggings[2] = ["textures\trims\wayfinder_leggings.png", "assets\minecraft\textures\trims\models\armor\wayfinder_leggings.png"]
 Global $wild[2] = ["textures\trims\wild.png", "assets\minecraft\textures\trims\models\armor\wild.png"]
-Global $wild_leggings[2] = ["textures\trims\.png", "assets\minecraft\textures\trims\models\armor\wild_leggings.png"]
+Global $wild_leggings[2] = ["textures\trims\wild_leggings.png", "assets\minecraft\textures\trims\models\armor\wild_leggings.png"]
 
-Global $trimTextures[51] = [$amethyst, $copper, $diamond, $diamond_darker, $emerald, $gold, $gold_darker, $iron, $iron_darker, $lapis, $netherite, $netherite_darker, $quartz, $redstone, $trim_palette, $boots_trim, $chestplate_trim, $helmet_trim, $leggings_trim, $coast, $coast_leggings, $dune, $dune_leggings, $eye, $eye_leggings, $host, $host_leggings, $raiser, $raiser_leggings, $rib, $rib_leggings, $sentry_leggings, $shaper, $shaper_leggings, $silence, $silence_leggings, $spire, $spire_leggings, $tide, $tide_leggings, $vex, $vex_leggings, $ward, $ward_leggings, $wayfinder, $wayfinder_leggings, $wild, $wild_leggings]
+Global $trimTextures[48] = [$amethyst, $copper, $diamond, $diamond_darker, $emerald, $gold, $gold_darker, $iron, $iron_darker, $lapis, $netherite, $netherite_darker, $quartz, $redstone, $trim_palette, $boots_trim, $chestplate_trim, $helmet_trim, $leggings_trim, $coast, $coast_leggings, $dune, $dune_leggings, $eye, $eye_leggings, $host, $host_leggings, $raiser, $raiser_leggings, $rib, $rib_leggings, $sentry_leggings, $shaper, $shaper_leggings, $silence, $silence_leggings, $spire, $spire_leggings, $tide, $tide_leggings, $vex, $vex_leggings, $ward, $ward_leggings, $wayfinder, $wayfinder_leggings, $wild, $wild_leggings]

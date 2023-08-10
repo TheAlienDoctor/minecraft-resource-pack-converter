@@ -506,8 +506,8 @@ Func bedrockToJava()
 			convert(0, $blockTextures16, 48, 26)
 			convert(0, $blockTextures17, 4, 27)
 			convert(0, $blockTextures18, 43, 28)
-			convert(0, $blockTextures19, 45, 29)
-			convert(0, $blockTextures20, 45, 30)
+			convert(0, $blockTextures19, 44, 29)
+			convert(0, $blockTextures20, 44, 30)
 
 			convert(0, $colorMapTextures, 2, 31)
 
@@ -516,7 +516,7 @@ Func bedrockToJava()
 			convert(0, $itemTextures3, 85, 34)
 			convert(0, $itemTextures4, 85, 35)
 			convert(0, $itemTextures5, 21, 36)
-			convert(0, $itemTextures6, 31, 37)
+			convert(0, $itemTextures6, 30, 37)
 			convert(0, $itemTextures7, 31, 38)
 
 			convert(0, $entityTextures1, 94, 39)
@@ -531,7 +531,7 @@ Func bedrockToJava()
 
 			convert(0, $guiTextures, 8, 45)
 
-			convert(0, $trimTextures, 51, 46)
+			convert(0, $trimTextures, 48, 46)
 			$timesRan += 1
 			logWrite(1, "Texture conversion function ran " & $timesRan & "/" & $repeats)
 		WEnd
@@ -637,8 +637,8 @@ Func javaToBedrock()
 			convert(1, $blockTextures16, 48, 26)
 			convert(1, $blockTextures17, 4, 27)
 			convert(1, $blockTextures18, 43, 28)
-			convert(1, $blockTextures19, 45, 29)
-			convert(1, $blockTextures20, 45, 30)
+			convert(1, $blockTextures19, 44, 29)
+			convert(1, $blockTextures20, 44, 30)
 
 			convert(1, $colorMapTextures, 2, 31)
 
@@ -647,7 +647,7 @@ Func javaToBedrock()
 			convert(1, $itemTextures3, 85, 34)
 			convert(1, $itemTextures4, 85, 35)
 			convert(1, $itemTextures5, 21, 36)
-			convert(1, $itemTextures6, 31, 37)
+			convert(1, $itemTextures6, 30, 37)
 			convert(1, $itemTextures7, 31, 38)
 
 			convert(1, $entityTextures1, 94, 39)
@@ -662,7 +662,7 @@ Func javaToBedrock()
 
 			convert(1, $guiTextures, 8, 45)
 
-			convert(1, $trimTextures, 51, 46)
+			convert(1, $trimTextures, 48, 46)
 			$timesRan += 1
 			logWrite(1, "Texture conversion function ran " & $timesRan & "/" & $repeats)
 		WEnd
