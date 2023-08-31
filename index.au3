@@ -1,11 +1,11 @@
 #pragma compile(Compatibility, XP, vista, win7, win8, win81, win10, win11)
 #pragma compile(FileDescription, Alien's Minecraft resource pack converter)
 #pragma compile(ProductName, Alien's Minecraft resource pack converter)
-#pragma compile(ProductVersion, 1.4.0)
-#pragma compile(FileVersion, 1.4.0.0)
+#pragma compile(ProductVersion, 1.4.0-Beta1)
+#pragma compile(FileVersion, 1.4.0.1)
 #pragma compile(LegalCopyright, ©TheAlienDoctor)
 #pragma compile(CompanyName, TheAlienDoctor)
-#pragma compile(OriginalFilename, AliensPackConverter-V1.4.0)
+#pragma compile(OriginalFilename, AliensPackConverter-V1.4.0-Beta1)
 
 #include <ButtonConstants.au3>
 #include <EditConstants.au3>
@@ -21,7 +21,7 @@
 #include "UDF\JSON.au3"
 #include "UDF\BinaryCall.au3"
 
-Global Const $guiTitle = "Alien's Pack Converter V1.4.0"
+Global Const $guiTitle = "Alien's Pack Converter V1.4.0-Beta1"
 
 ;###########################################################################################################################################################################################
 ;Code for single instance
@@ -39,7 +39,7 @@ AutoItWinSetTitle($SingeInstance)
 ;GUI
 
 #Region ### START Koda GUI section ### Form=d:\06 code\minecraft-resource-pack-converter\gui.kxf
-Global $PackConverterGUI = GUICreate("" & $guiTitle & "", 617, 221, -1, -1)
+Global $PackConverterGUI = GUICreate("" & $guiTitle & "", 645, 221, -1, -1)
 Global $Tabs = GUICtrlCreateTab(8, 8, 601, 145)
 Global $BedrockToJava = GUICtrlCreateTabItem("Bedrock to Java")
 Global $JEPackDescTitle = GUICtrlCreateLabel("Pack Description:", 15, 80, 88, 17)
@@ -66,13 +66,13 @@ Global $BEPackNameTitle = GUICtrlCreateLabel("Pack Name:", 16, 48, 63, 17)
 GUICtrlCreateTabItem("")
 Global $CopyrightNotice = GUICtrlCreateLabel("Copyright © 2022 - 2023, TheAlienDoctor", 8, 200, 200, 17)
 GUICtrlSetTip(-1, "Copyright notice")
-GUICtrlSetCursor(-1, 0)
-Global $VersionNumber = GUICtrlCreateLabel("Version: 1.4.0", 537, 200, 69, 17)
+GUICtrlSetCursor (-1, 0)
+Global $VersionNumber = GUICtrlCreateLabel("Version: V1.4.0-Beta1", 537, 200, 107, 17)
 GUICtrlSetTip(-1, "Check for updates")
-GUICtrlSetCursor(-1, 0)
+GUICtrlSetCursor (-1, 0)
 Global $GitHubNotice = GUICtrlCreateLabel("View source code,  report bugs and contribute on GitHub", 235, 200, 273, 17)
 GUICtrlSetTip(-1, "Open GitHub repo")
-GUICtrlSetCursor(-1, 0)
+GUICtrlSetCursor (-1, 0)
 Global $ProgressBar = GUICtrlCreateProgress(8, 168, 601, 17)
 GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
