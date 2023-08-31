@@ -82,7 +82,7 @@ GUISetState(@SW_SHOW)
 
 Global $dateTime = @MDAY & '.' & @MON & '.' & @YEAR & '-' & @HOUR & '.' & @MIN & '.' & @SEC
 Global $inputDir = @ScriptDir & "\" & IniRead("options.ini", "config", "InputDir", "input")
-Global $repeats = IniRead("options.txt", "config", "repeats", 2)
+Global $repeats = IniRead("options.ini", "config", "repeats", 2)
 Global $conversionCount = 0
 Global $cancel = False
 
@@ -473,8 +473,10 @@ Func bedrockToJava()
 		logWrite(0, "Generating pack.mcmeta file")
 		GUICtrlSetData($ProgressBar, 5)
 
+		Local $conf_javaPackFormat = IniRead("options.ini", "Bedrock to Java", "pack_format", "15")
+
 		FileOpen($javaDir & "\pack\pack.txt", 8)
-		FileWrite($javaDir & '\pack\pack.txt', '{"pack":{"pack_format":9,"description":"' & $javaPackDesc & '"}}')
+		FileWrite($javaDir & '\pack\pack.txt', '{"pack":{"pack_format":' & $conf_javaPackFormat & ',"description":"' & $javaPackDesc & '"}}')
 		FileClose($javaDir & "\pack\pack.txt")
 		FileMove($javaDir & "\pack\pack.txt", $javaDir & "\pack\pack.mcmeta")
 
@@ -608,8 +610,11 @@ Func javaToBedrock()
 		logWrite(0, "Generating manifest.json file")
 		GUICtrlSetData($ProgressBar, 5)
 
+		Local $conf_bedrockMinEngineVersion = IniRead("options.ini", "Java to Bedrock", "min_engine_version", "1,20,0")
+		Local $conf_bedrockPackVersion = IniRead("options.ini", "Java to Bedrock", "pack_version", "1,0,0")
+
 		FileOpen($bedrockDir & "\pack\manifest.txt", 8)
-		FileWrite($bedrockDir & '\pack\manifest.txt', '{"format_version":2,"header":{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","name":"' & $bedrockPackName & '","uuid":"' & uuidGenerator() & '","version":[1,0,0],"min_engine_version":[1,19,0]},"modules":[{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","type":"resources","uuid":"' & uuidGenerator() & '","version":[1,0,0]}]}')
+		FileWrite($bedrockDir & '\pack\manifest.txt', '{"format_version":2,"header":{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","name":"' & $bedrockPackName & '","uuid":"' & uuidGenerator() & '","version":[' & $conf_bedrockPackVersion & '],"min_engine_version":[' & $conf_bedrockMinEngineVersion & ']},"modules":[{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","type":"resources","uuid":"' & uuidGenerator() & '","version":[' & $conf_bedrockPackVersion & ']}]}')
 		FileClose($bedrockDir & "\pack\manifest.txt")
 		FileMove($bedrockDir & "\pack\manifest.txt", $bedrockDir & "\pack\manifest.json")
 
