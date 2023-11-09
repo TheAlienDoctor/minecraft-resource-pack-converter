@@ -86,7 +86,7 @@ Global $repeats = IniRead("options.ini", "config", "repeats", 2)
 Global $conversionCount = 0
 Global $cancel = False
 
-Global Const $currentVersionNumber = 130
+Global Const $currentVersionNumber = 140
 Global Const $je_unsupportedVersions[3] = [1, 2, 3]
 
 ;Config file error checking
