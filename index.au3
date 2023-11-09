@@ -38,7 +38,7 @@ AutoItWinSetTitle($SingeInstance)
 ;###########################################################################################################################################################################################
 ;GUI
 
-#Region ### START Koda GUI section ### Form=d:\06 code\minecraft-resource-pack-converter\gui.kxf
+#Region ### START Koda GUI section ###
 Global $gui_mainWindow = GUICreate("" & $guiTitle & "", 645, 221, -1, -1)
 Global $gui_tabs = GUICtrlCreateTab(8, 8, 601, 145)
 Global $gui_bedrockToJavaTab = GUICtrlCreateTabItem("Bedrock to Java")
@@ -60,7 +60,7 @@ GUICtrlSetTip(-1, "Pack description")
 Global $gui_jeLoadInfo = GUICtrlCreateButton("Load original pack info", 13, 122, 145, 25)
 GUICtrlSetTip(-1, "Load original pack name and description")
 Global $gui_beDescTitle = GUICtrlCreateLabel("Pack Description:", 15, 80, 88, 17)
-Global $gui_startJeToBeBtn  = GUICtrlCreateButton("Start conversion", 457, 122, 145, 25)
+Global $gui_startJeToBeBtn = GUICtrlCreateButton("Start conversion", 457, 122, 145, 25)
 GUICtrlSetTip(-1, "Start conversion")
 Global $gui_beNameTitle = GUICtrlCreateLabel("Pack Name:", 16, 48, 63, 17)
 GUICtrlCreateTabItem("")
