@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="windows-1251"?>
-<object type="TAForm" name="PackConverterGUI">
+<object type="TAForm" name="gui_mainWindow">
 	<properties>
-		<property name="Left" vt="Int16">909</property>
-		<property name="Top" vt="Int16">485</property>
+		<property name="Left" vt="Int16">815</property>
+		<property name="Top" vt="Int16">317</property>
 		<property name="Width" vt="Int16">660</property>
 		<property name="Height" vt="Int16">259</property>
 		<property name="Hint" vt="String">Pack Converter</property>
@@ -32,13 +32,13 @@
 		<property name="TextHeight" vt="Int8">13</property>
 	</properties>
 	<components>
-		<object type="TATab" name="Tabs">
+		<object type="TATab" name="gui_tabs">
 			<properties>
 				<property name="Left" vt="Int8">8</property>
 				<property name="Top" vt="Int8">8</property>
 				<property name="Width" vt="Int16">601</property>
 				<property name="Height" vt="Int16">145</property>
-				<property name="ActivePage" vt="Ident">BedrockToJava</property>
+				<property name="ActivePage" vt="Ident">gui_javaToBedrockTab</property>
 				<property name="Font.Charset" vt="Ident">DEFAULT_CHARSET</property>
 				<property name="Font.Color" vt="Ident">clWindowText</property>
 				<property name="Font.Height" vt="Int8">-11</property>
@@ -51,7 +51,7 @@
 				<property name="Resizing" vt="Set">DockWidth, DockHeight</property>
 			</properties>
 			<components>
-				<object type="TTabSheet" name="BedrockToJava">
+				<object type="TTabSheet" name="gui_bedrockToJavaTab">
 					<properties>
 						<property name="Caption" vt="String">Bedrock to Java</property>
 						<property name="Font.Charset" vt="Ident">DEFAULT_CHARSET</property>
@@ -63,7 +63,7 @@
 						<property name="ParentFont" vt="False">False</property>
 					</properties>
 					<components>
-						<object type="TALabel" name="JEPackDescTitle">
+						<object type="TALabel" name="gui_jeDescTitle">
 							<properties>
 								<property name="Left" vt="Int8">3</property>
 								<property name="Top" vt="Int8">47</property>
@@ -79,7 +79,7 @@
 							</properties>
 							<components/>
 						</object>
-						<object type="TAButton" name="StartBeToJe">
+						<object type="TAButton" name="gui_startBeToJeBtn">
 							<properties>
 								<property name="Left" vt="Int16">445</property>
 								<property name="Top" vt="Int8">89</property>
@@ -95,7 +95,7 @@
 							</properties>
 							<components/>
 						</object>
-						<object type="TAInput" name="JEPackDescInput">
+						<object type="TAInput" name="gui_jeDescInput">
 							<properties>
 								<property name="Left" vt="Int8">100</property>
 								<property name="Top" vt="Int8">47</property>
@@ -111,7 +111,7 @@
 							</properties>
 							<components/>
 						</object>
-						<object type="TALabel" name="JEPackNameTitle">
+						<object type="TALabel" name="gui_jeNameTitle">
 							<properties>
 								<property name="Left" vt="Int8">4</property>
 								<property name="Top" vt="Int8">15</property>
@@ -127,7 +127,7 @@
 							</properties>
 							<components/>
 						</object>
-						<object type="TAInput" name="JEPackNameInput">
+						<object type="TAInput" name="gui_jeNameInput">
 							<properties>
 								<property name="Left" vt="Int8">76</property>
 								<property name="Top" vt="Int8">15</property>
@@ -143,7 +143,7 @@
 							</properties>
 							<components/>
 						</object>
-						<object type="TAButton" name="BELoadInfo">
+						<object type="TAButton" name="gui_beLoadInfo">
 							<properties>
 								<property name="Left" vt="Int8">1</property>
 								<property name="Top" vt="Int8">89</property>
@@ -161,7 +161,7 @@
 						</object>
 					</components>
 				</object>
-				<object type="TTabSheet" name="JavaToBedrock">
+				<object type="TTabSheet" name="gui_javaToBedrockTab">
 					<properties>
 						<property name="Caption" vt="String">Java to Bedrock</property>
 						<property name="Font.Charset" vt="Ident">DEFAULT_CHARSET</property>
@@ -173,7 +173,7 @@
 						<property name="ParentFont" vt="False">False</property>
 					</properties>
 					<components>
-						<object type="TAInput" name="BEPackDescInput">
+						<object type="TAInput" name="gui_bePackDescInput">
 							<properties>
 								<property name="Left" vt="Int8">100</property>
 								<property name="Top" vt="Int8">47</property>
@@ -188,7 +188,7 @@
 							</properties>
 							<components/>
 						</object>
-						<object type="TAInput" name="BEPackNameInput">
+						<object type="TAInput" name="gui_bePackNameInput">
 							<properties>
 								<property name="Left" vt="Int8">76</property>
 								<property name="Top" vt="Int8">15</property>
@@ -203,7 +203,7 @@
 							</properties>
 							<components/>
 						</object>
-						<object type="TAButton" name="StartJeToBe">
+						<object type="TAButton" name="gui_startJeToBeBtn">
 							<properties>
 								<property name="Left" vt="Int16">445</property>
 								<property name="Top" vt="Int8">89</property>
@@ -220,7 +220,7 @@
 							</properties>
 							<components/>
 						</object>
-						<object type="TALabel" name="BEPackDescTitle">
+						<object type="TALabel" name="gui_beDescTitle">
 							<properties>
 								<property name="Left" vt="Int8">3</property>
 								<property name="Top" vt="Int8">47</property>
@@ -235,7 +235,7 @@
 							</properties>
 							<components/>
 						</object>
-						<object type="TALabel" name="BEPackNameTitle">
+						<object type="TALabel" name="gui_beNameTitle">
 							<properties>
 								<property name="Left" vt="Int8">4</property>
 								<property name="Top" vt="Int8">15</property>
@@ -250,7 +250,7 @@
 							</properties>
 							<components/>
 						</object>
-						<object type="TAButton" name="JELoadInfo">
+						<object type="TAButton" name="gui_jeLoadInfo">
 							<properties>
 								<property name="Left" vt="Int8">1</property>
 								<property name="Top" vt="Int8">89</property>
@@ -270,7 +270,7 @@
 				</object>
 			</components>
 		</object>
-		<object type="TALabel" name="CopyrightNotice">
+		<object type="TALabel" name="gui_copyright">
 			<properties>
 				<property name="Left" vt="Int8">8</property>
 				<property name="Top" vt="Int16">200</property>
@@ -287,7 +287,7 @@
 			</properties>
 			<components/>
 		</object>
-		<object type="TALabel" name="VersionNumber">
+		<object type="TALabel" name="gui_verNum">
 			<properties>
 				<property name="Left" vt="Int16">537</property>
 				<property name="Top" vt="Int16">200</property>
@@ -304,7 +304,7 @@
 			</properties>
 			<components/>
 		</object>
-		<object type="TALabel" name="GitHubNotice">
+		<object type="TALabel" name="gui_github">
 			<properties>
 				<property name="Left" vt="Int16">235</property>
 				<property name="Top" vt="Int16">200</property>
@@ -321,7 +321,7 @@
 			</properties>
 			<components/>
 		</object>
-		<object type="TAProgress" name="ProgressBar">
+		<object type="TAProgress" name="gui_progressBar">
 			<properties>
 				<property name="Left" vt="Int8">8</property>
 				<property name="Top" vt="Int16">168</property>
