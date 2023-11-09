@@ -21,12 +21,13 @@
 #include "UDF\JSON.au3"
 #include "UDF\BinaryCall.au3"
 
-Global Const $guiTitle = "Alien's Pack Converter V1.4.0-Beta1"
+Global Const $guiTitle = "Alien's Pack Converter V1.4.0"
 
 ;###########################################################################################################################################################################################
 ;Code for single instance
 
-Global Const $SingeInstance = "fbdb8ca2-20d5-4c23-9e39-d10deb31f095"
+Global Const $SingeInstance = "c87e8274-07e6-40ab-b3d5-b605dc9f85b2"
+;UUID will change to match version ID in the update file on my website. This means you can have multiple instances of different versions open. Not sure who wants this, but you're welcome :D
 
 If WinExists($SingeInstance) Then
 	MsgBox(0, $guiTitle, "Pack converter already running!" & @CRLF & "You can only have one instance open at a time.")
@@ -39,7 +40,7 @@ AutoItWinSetTitle($SingeInstance)
 ;GUI
 
 #Region ### START Koda GUI section ###
-Global $gui_mainWindow = GUICreate("" & $guiTitle & "", 645, 221, -1, -1)
+Global $gui_mainWindow = GUICreate("" & $guiTitle & "", 619, 221, -1, -1)
 Global $gui_tabs = GUICtrlCreateTab(8, 8, 601, 145)
 Global $gui_bedrockToJavaTab = GUICtrlCreateTabItem("Bedrock to Java")
 Global $gui_jeDescTitle = GUICtrlCreateLabel("Pack Description:", 15, 80, 88, 17)
@@ -67,7 +68,7 @@ GUICtrlCreateTabItem("")
 Global $gui_copyright = GUICtrlCreateLabel("Copyright © 2022 - 2023, TheAlienDoctor", 8, 200, 200, 17)
 GUICtrlSetTip(-1, "Copyright notice")
 GUICtrlSetCursor (-1, 0)
-Global $gui_verNum = GUICtrlCreateLabel("Version: V1.4.0-Beta1", 537, 200, 107, 17)
+Global $gui_verNum = GUICtrlCreateLabel("Version: V1.4.0", 537, 200, 76, 17)
 GUICtrlSetTip(-1, "Check for updates")
 GUICtrlSetCursor (-1, 0)
 Global $gui_github = GUICtrlCreateLabel("View source code,  report bugs and contribute on GitHub", 235, 200, 273, 17)
