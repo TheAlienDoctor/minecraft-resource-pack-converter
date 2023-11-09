@@ -1,11 +1,11 @@
 #pragma compile(Compatibility, XP, vista, win7, win8, win81, win10, win11)
 #pragma compile(FileDescription, Alien's Minecraft resource pack converter)
 #pragma compile(ProductName, Alien's Minecraft resource pack converter)
-#pragma compile(ProductVersion, 1.4.0-Beta1)
-#pragma compile(FileVersion, 1.4.0.1)
+#pragma compile(ProductVersion, 1.4.0)
+#pragma compile(FileVersion, 1.4.0)
 #pragma compile(LegalCopyright, ©TheAlienDoctor)
 #pragma compile(CompanyName, TheAlienDoctor)
-#pragma compile(OriginalFilename, AliensPackConverter-V1.4.0-Beta1)
+#pragma compile(OriginalFilename, AliensPackConverter-V1.4.0)
 
 #include <ButtonConstants.au3>
 #include <EditConstants.au3>
