@@ -8,12 +8,13 @@
 #pragma compile(OriginalFilename, AliensPackConverter-V1.4.0)
 
 #include <ButtonConstants.au3>
+#include <ComboConstants.au3>
 #include <EditConstants.au3>
 #include <GUIConstantsEx.au3>
+#include <ProgressConstants.au3>
 #include <StaticConstants.au3>
 #include <TabConstants.au3>
 #include <WindowsConstants.au3>
-#include <InetConstants.au3>
 
 #include "conversions.au3"
 #include "animeTextures.au3"
@@ -39,10 +40,11 @@ AutoItWinSetTitle($SingeInstance)
 ;###########################################################################################################################################################################################
 ;GUI
 
-#Region ### START Koda GUI section ###
-Global $gui_mainWindow = GUICreate("" & $guiTitle & "", 619, 221, -1, -1)
-Global $gui_tabs = GUICtrlCreateTab(8, 8, 601, 145)
+#Region ### START Koda GUI section ### Form=d:\code\minecraft-resource-pack-converter\gui.kxf
+Global $gui_mainWindow = GUICreate("" & $guiTitle & "", 616, 350, -1, -1)
+Global $gui_tabs = GUICtrlCreateTab(8, 8, 601, 289)
 Global $gui_bedrockToJavaTab = GUICtrlCreateTabItem("Bedrock to Java")
+GUICtrlSetTip(-1, "")
 Global $gui_jeDescTitle = GUICtrlCreateLabel("Pack Description:", 15, 80, 88, 17)
 Global $gui_jeNameInput = GUICtrlCreateInput("Pack name here", 88, 48, 513, 21)
 GUICtrlSetTip(-1, "Pack name")
@@ -64,17 +66,32 @@ Global $gui_beDescTitle = GUICtrlCreateLabel("Pack Description:", 15, 80, 88, 17
 Global $gui_startJeToBeBtn = GUICtrlCreateButton("Start conversion", 457, 122, 145, 25)
 GUICtrlSetTip(-1, "Start conversion")
 Global $gui_beNameTitle = GUICtrlCreateLabel("Pack Name:", 16, 48, 63, 17)
+Global $gui_configTab = GUICtrlCreateTabItem("Settings")
+GUICtrlSetState(-1,$GUI_SHOW)
+Global $gui_customLogDirInput = GUICtrlCreateInput("", 152, 40, 441, 21)
+Global $gui_saveSettingsBtn = GUICtrlCreateButton("Save Settings", 496, 256, 105, 33)
+Global $gui_customLogDirBox = GUICtrlCreateCheckbox("Custom Log Directory:", 16, 40, 129, 17)
+Global $gui_customOutputDirBox = GUICtrlCreateCheckbox("Custom Output Directory:", 16, 72, 137, 17)
+Global $gui_customOutputInput = GUICtrlCreateInput("", 160, 72, 433, 21)
+Global $gui_bedrockSettingsGroup = GUICtrlCreateGroup("Bedrock Output Settings", 312, 104, 290, 145)
+GUICtrlCreateGroup("", -99, -99, 1, 1)
+Global $gui_javaSettingsGroup = GUICtrlCreateGroup("Java Output Settings", 16, 104, 290, 145)
+Global $gui_packFormatTitle = GUICtrlCreateLabel("Pack Format version:", 24, 128, 104, 17)
+Global $Combo1 = GUICtrlCreateCombo("", 136, 128, 161, 25, BitOR($CBS_DROPDOWN,$CBS_AUTOHSCROLL))
+GUICtrlSetData(-1, "a|b|c|d|e|f", "a")
+GUICtrlCreateGroup("", -99, -99, 1, 1)
+GUICtrlSetTip(-1, "Settings")
 GUICtrlCreateTabItem("")
-Global $gui_copyright = GUICtrlCreateLabel("Copyright © 2022 - 2023, TheAlienDoctor", 8, 200, 200, 17)
+Global $gui_copyright = GUICtrlCreateLabel("Copyright © 2022 - 2023, TheAlienDoctor", 8, 328, 200, 17)
 GUICtrlSetTip(-1, "Copyright notice")
 GUICtrlSetCursor (-1, 0)
-Global $gui_verNum = GUICtrlCreateLabel("Version: V1.4.0", 537, 200, 76, 17)
+Global $gui_verNum = GUICtrlCreateLabel("Version: V1.4.0", 537, 328, 76, 17)
 GUICtrlSetTip(-1, "Check for updates")
 GUICtrlSetCursor (-1, 0)
-Global $gui_github = GUICtrlCreateLabel("View source code,  report bugs and contribute on GitHub", 235, 200, 273, 17)
+Global $gui_github = GUICtrlCreateLabel("View source code,  report bugs and contribute on GitHub", 235, 328, 273, 17)
 GUICtrlSetTip(-1, "Open GitHub repo")
 GUICtrlSetCursor (-1, 0)
-Global $gui_progressBar = GUICtrlCreateProgress(8, 168, 601, 17)
+Global $gui_progressBar = GUICtrlCreateProgress(8, 304, 601, 17)
 GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
 
