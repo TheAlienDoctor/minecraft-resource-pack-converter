@@ -66,13 +66,12 @@ Global $gui_beDescTitle = GUICtrlCreateLabel("Pack Description:", 15, 80, 88, 17
 Global $gui_startJeToBeBtn = GUICtrlCreateButton("Start conversion", 457, 122, 145, 25)
 GUICtrlSetTip(-1, "Start conversion")
 Global $gui_beNameTitle = GUICtrlCreateLabel("Pack Name:", 16, 48, 63, 17)
-Global $gui_configTab = GUICtrlCreateTabItem("Settings")
-GUICtrlSetState(-1, $GUI_SHOW)
+Global $gui_settingsTab = GUICtrlCreateTabItem("Settings")
 Global $gui_customLogDirInput = GUICtrlCreateInput("", 152, 40, 441, 21)
 Global $gui_saveSettingsBtn = GUICtrlCreateButton("Save Settings", 496, 256, 105, 33)
 Global $gui_customLogDirBox = GUICtrlCreateCheckbox("Custom Log Directory:", 16, 40, 129, 17)
 Global $gui_customOutputDirBox = GUICtrlCreateCheckbox("Custom Output Directory:", 16, 72, 137, 17)
-Global $gui_customOutputInput = GUICtrlCreateInput("", 160, 72, 433, 21)
+Global $gui_customOutputDirInput = GUICtrlCreateInput("", 160, 72, 433, 21)
 Global $gui_bedrockSettingsGroup = GUICtrlCreateGroup("Bedrock Output Settings", 312, 168, 290, 81)
 Global $gui_packMinVerTitle = GUICtrlCreateLabel("Minimuim Minecraft Version:", 320, 192, 135, 17)
 Global $gui_packMinVerInput = GUICtrlCreateInput("", 464, 192, 121, 21)
@@ -80,17 +79,15 @@ Global $gui_OutputAsMcpackBox = GUICtrlCreateCheckbox("Output as .mcpack", 320, 
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 Global $gui_javaSettingsGroup = GUICtrlCreateGroup("Java Output Settings", 16, 168, 290, 81)
 Global $gui_packFormatTitle = GUICtrlCreateLabel("Pack Format version:", 24, 192, 104, 17)
-Global $gui_packFormatDrop = GUICtrlCreateCombo("", 136, 192, 161, 25, BitOR($CBS_DROPDOWN, $CBS_AUTOHSCROLL))
-GUICtrlSetData(-1, "18: 1.20.2|17|16|15 - 1.20.0 - 1.20.1|14|13: 1.19.4|12: 1.19.3|11|9: 1.19.0 - 1.19.2|8: 1.18.0 - 1.18.2|7: 1.17.0 - 1.17.1|6: 1.16.2 - 1.16.5|5:  1.15.0 - 1.16.1|4: 1.13.0 - 1.14.4|3: 1.11.0 - 1.12.2|2: 1.9.0 - 1.10.2|1: 1.6.1 - 1.8.9", "18: 1.20.2")
 Global $gui_outputAsZipBox = GUICtrlCreateCheckbox("Output as .zip", 24, 216, 121, 17)
+Global $gui_packFormatInput = GUICtrlCreateInput("", 136, 192, 161, 21)
 GUICtrlCreateGroup("", -99, -99, 1, 1)
-Global $gui_outputWithFolderBox = GUICtrlCreateCheckbox("Output with Folder", 16, 264, 113, 17)
-Global $gui_repeatsTitle = GUICtrlCreateLabel("Repeat Conversions:", 16, 136, 103, 17)
-Global $gui_repeatsDrop = GUICtrlCreateCombo("", 128, 136, 465, 25, BitOR($CBS_DROPDOWN, $CBS_AUTOHSCROLL))
-GUICtrlSetData(-1, "1|2|3|4|5", "2")
-Global $gui_checkUpdatesBox = GUICtrlCreateCheckbox("Check for updates on startup", 136, 264, 161, 17)
+Global $gui_outputWithFolderBox = GUICtrlCreateCheckbox("Output with Folder", 16, 136, 113, 17)
+Global $gui_repeatsTitle = GUICtrlCreateLabel("Repeat Conversions:", 408, 136, 103, 17)
+Global $gui_checkUpdatesBox = GUICtrlCreateCheckbox("Check for updates on startup", 200, 136, 161, 17)
 Global $gui_customInputDirBox = GUICtrlCreateCheckbox("Custom Input Directory:", 16, 104, 137, 17)
 Global $gui_customInputDirInput = GUICtrlCreateInput("", 152, 104, 441, 21)
+Global $gui_repeatsInput = GUICtrlCreateInput("", 520, 136, 73, 21)
 GUICtrlSetTip(-1, "Settings")
 GUICtrlCreateTabItem("")
 Global $gui_copyright = GUICtrlCreateLabel("Copyright © 2022 - 2023, TheAlienDoctor", 8, 328, 200, 17)
@@ -161,14 +158,74 @@ EndIf
 ;###########################################################################################################################################################################################
 ;Functions
 
-Func LoadSettings()
+Func loadSettings()
 	Global $cfg_useCustomLogDir = IniRead($settingsFile, "general", "useCustomLogDir", "empty")
+	If $cfg_useCustomLogDir = "True" Then
+		GUICtrlSetState($gui_customLogDirBox, $GUI_CHECKED)
+	ElseIf $cfg_useCustomLogDir = "False" Then
+		GUICtrlSetState($gui_customLogDirBox, $GUI_UNCHECKED)
+	EndIf
+
 	Global $cfg_customLogDir = IniRead($settingsFile, "general", "customLogDir", "empty")
-EndFunc   ;==>LoadSettings
+	GUICtrlSetData($gui_customLogDirInput, $cfg_customLogDir)
 
-Func errorCheckSettings()
+	Global $cfg_useCustomOutputDir = IniRead($settingsFile, "general", "useCustomOutputDir", "empty")
+	If $cfg_useCustomOutputDir = "True" Then
+		GUICtrlSetState($gui_customOutputDirBox, $GUI_CHECKED)
+	ElseIf $cfg_useCustomOutputDir = "False" Then
+		GUICtrlSetState($gui_customOutputDirBox, $GUI_UNCHECKED)
+	EndIf
 
-EndFunc   ;==>errorCheckSettings
+	Global $cfg_customOutputDir = IniRead($settingsFile, "general", "customOutputDir", "empty")
+	GUICtrlSetData($gui_customOutputDirInput, $cfg_customOutputDir)
+
+	Global $cfg_useCustomInputDir = IniRead($settingsFile, "general", "useCustomInputDir", "empty")
+	If $cfg_useCustomInputDir = "True" Then
+		GUICtrlSetState($gui_customInputDirBox, $GUI_CHECKED)
+	ElseIf $cfg_useCustomInputDir = "False" Then
+		GUICtrlSetState($gui_customInputDirBox, $GUI_UNCHECKED)
+	EndIf
+
+	Global $cfg_customInputDir = IniRead($settingsFile, "general", "customInputDir", "empty")
+	GUICtrlSetData($gui_customInputDirInput, $cfg_customInputDir)
+
+	Global $cfg_repeats = IniRead($settingsFile, "general", "repeats", "empty")
+	GUICtrlSetData($gui_repeatsInput, $cfg_repeats)
+
+	Global $cfg_outputWithFolder = IniRead($settingsFile, "general", "outputWithFolder", "empty")
+	If $cfg_outputWithFolder = "True" Then
+		GUICtrlSetState($gui_outputWithFolderBox, $GUI_CHECKED)
+	ElseIf $cfg_outputWithFolder = "False" Then
+		GUICtrlSetState($gui_outputWithFolderBox, $GUI_UNCHECKED)
+	EndIf
+
+	Global $cfg_checkForUpdates = IniRead($settingsFile, "general", "checkForUpdates", "empty")
+	If $cfg_checkForUpdates = "True" Then
+		GUICtrlSetState($gui_checkUpdatesBox, $GUI_CHECKED)
+	ElseIf $cfg_checkForUpdates = "False" Then
+		GUICtrlSetState($gui_checkUpdatesBox, $GUI_UNCHECKED)
+	EndIf
+
+	Global $cfg_packFormatVer = IniRead($settingsFile, "java", "packFormatVer", "empty")
+	GUICtrlSetData($gui_packFormatInput, $cfg_packFormatVer)
+
+	Global $cfg_outputAsZip = IniRead($settingsFile, "java", "outputAsZip", "empty")
+	If $cfg_outputAsZip = "True" Then
+		GUICtrlSetState($gui_outputAsZipBox, $GUI_CHECKED)
+	ElseIf $cfg_outputAsZip = "False" Then
+		GUICtrlSetState($gui_outputAsZipBox, $GUI_UNCHECKED)
+	EndIf
+
+	Global $cfg_packMinVer = IniRead($settingsFile, "bedrock", "packMinVer", "empty")
+	GUICtrlSetData($gui_packMinVerInput, $cfg_packMinVer)
+
+	Global $cfg_outputAsMcpack = IniRead($settingsFile, "bedrock", "outputAsMcpack", "empty")
+	If $cfg_outputAsMcpack = "True" Then
+		GUICtrlSetState($gui_OutputAsMcpackBox, $GUI_CHECKED)
+	ElseIf $cfg_outputAsMcpack = "False" Then
+		GUICtrlSetState($gui_OutputAsMcpackBox, $GUI_UNCHECKED)
+	EndIf
+EndFunc   ;==>loadSettings
 
 Func saveSettings()
 EndFunc   ;==>saveSettings
@@ -189,7 +246,6 @@ Func checkForUpdates($updateCheckOutputMsg)
 	logWrite(0, "Running update check")
 	Local $ping = Ping("TheAlienDoctor.com")
 	Local $NoInternetMsgBox = 0
-
 
 	If $ping > 0 Then
 		DirCreate(@ScriptDir & "\temp\")
@@ -775,7 +831,7 @@ While 1
 			javaToBedrock()
 
 		Case $gui_saveSettingsBtn
-			LoadSettings()
+			loadSettings()
 
 		Case $gui_copyright
 			If FileExists(@ScriptDir & "\LICENSE.txt") = 0 Then

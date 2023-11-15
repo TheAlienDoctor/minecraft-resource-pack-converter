@@ -38,7 +38,7 @@
 				<property name="Top" vt="Int8">8</property>
 				<property name="Width" vt="Int16">601</property>
 				<property name="Height" vt="Int16">289</property>
-				<property name="ActivePage" vt="Ident">gui_configTab</property>
+				<property name="ActivePage" vt="Ident">gui_bedrockToJavaTab</property>
 				<property name="Font.Charset" vt="Ident">DEFAULT_CHARSET</property>
 				<property name="Font.Color" vt="Ident">clWindowText</property>
 				<property name="Font.Height" vt="Int8">-11</property>
@@ -268,7 +268,7 @@
 						</object>
 					</components>
 				</object>
-				<object type="TTabSheet" name="gui_configTab">
+				<object type="TTabSheet" name="gui_settingsTab">
 					<properties>
 						<property name="Hint" vt="String">Settings</property>
 						<property name="Caption" vt="String">Settings</property>
@@ -337,7 +337,7 @@
 							</properties>
 							<components/>
 						</object>
-						<object type="TAInput" name="gui_customOutputInput">
+						<object type="TAInput" name="gui_customOutputDirInput">
 							<properties>
 								<property name="Left" vt="Int16">148</property>
 								<property name="Top" vt="Int8">39</property>
@@ -435,43 +435,6 @@
 									</properties>
 									<components/>
 								</object>
-								<object type="TACombo" name="gui_packFormatDrop">
-									<properties>
-										<property name="Left" vt="Int8">120</property>
-										<property name="Top" vt="Int8">24</property>
-										<property name="Width" vt="Int16">161</property>
-										<property name="Height" vt="Int8">25</property>
-										<property name="ItemHeight" vt="Int8">13</property>
-										<property name="ItemIndex" vt="Int8">1</property>
-										<property name="TabOrder" vt="Int8">1</property>
-										<property name="Text" vt="String">18: 1.20.2</property>
-										<property name="Items.Strings" vt="List">
-											<list>
-												<li vt="String">18: 1.20.2</li>
-												<li vt="String">17</li>
-												<li vt="String">16</li>
-												<li vt="String">15 - 1.20.0 - 1.20.1</li>
-												<li vt="String">14</li>
-												<li vt="String">13: 1.19.4</li>
-												<li vt="String">12: 1.19.3</li>
-												<li vt="String">11</li>
-												<li vt="String">9: 1.19.0 - 1.19.2</li>
-												<li vt="String">8: 1.18.0 - 1.18.2</li>
-												<li vt="String">7: 1.17.0 - 1.17.1</li>
-												<li vt="String">6: 1.16.2 - 1.16.5</li>
-												<li vt="String">5:  1.15.0 - 1.16.1</li>
-												<li vt="String">4: 1.13.0 - 1.14.4</li>
-												<li vt="String">3: 1.11.0 - 1.12.2</li>
-												<li vt="String">2: 1.9.0 - 1.10.2</li>
-												<li vt="String">1: 1.6.1 - 1.8.9</li>
-											</list>
-										</property>
-										<property name="CtrlStyle" vt="Int32">1342374466</property>
-										<property name="CtrlExStyle" vt="Int8">0</property>
-										<property name="Resizing" vt="Set">DockHeight</property>
-									</properties>
-									<components/>
-								</object>
 								<object type="TACheckbox" name="gui_outputAsZipBox">
 									<properties>
 										<property name="Left" vt="Int8">8</property>
@@ -479,9 +442,22 @@
 										<property name="Width" vt="Int8">121</property>
 										<property name="Height" vt="Int8">17</property>
 										<property name="Caption" vt="String">Output as .zip</property>
-										<property name="TabOrder" vt="Int8">2</property>
+										<property name="TabOrder" vt="Int8">1</property>
 										<property name="CtrlStyle" vt="Int32">1342242819</property>
 										<property name="CtrlExStyle" vt="Int8">0</property>
+										<property name="Resizing" vt="Set">DockHeight</property>
+									</properties>
+									<components/>
+								</object>
+								<object type="TAInput" name="gui_packFormatInput">
+									<properties>
+										<property name="Left" vt="Int8">120</property>
+										<property name="Top" vt="Int8">24</property>
+										<property name="Width" vt="Int16">161</property>
+										<property name="Height" vt="Int8">21</property>
+										<property name="TabOrder" vt="Int8">2</property>
+										<property name="CtrlStyle" vt="Int32">1342374016</property>
+										<property name="CtrlExStyle" vt="Int16">512</property>
 										<property name="Resizing" vt="Set">DockHeight</property>
 									</properties>
 									<components/>
@@ -491,7 +467,7 @@
 						<object type="TACheckbox" name="gui_outputWithFolderBox">
 							<properties>
 								<property name="Left" vt="Int8">4</property>
-								<property name="Top" vt="Int16">231</property>
+								<property name="Top" vt="Int8">103</property>
 								<property name="Width" vt="Int8">113</property>
 								<property name="Height" vt="Int8">17</property>
 								<property name="Caption" vt="String">Output with Folder</property>
@@ -504,7 +480,7 @@
 						</object>
 						<object type="TALabel" name="gui_repeatsTitle">
 							<properties>
-								<property name="Left" vt="Int8">4</property>
+								<property name="Left" vt="Int16">396</property>
 								<property name="Top" vt="Int8">103</property>
 								<property name="Width" vt="Int8">103</property>
 								<property name="Height" vt="Int8">17</property>
@@ -517,39 +493,14 @@
 							</properties>
 							<components/>
 						</object>
-						<object type="TACombo" name="gui_repeatsDrop">
-							<properties>
-								<property name="Left" vt="Int8">116</property>
-								<property name="Top" vt="Int8">103</property>
-								<property name="Width" vt="Int16">465</property>
-								<property name="Height" vt="Int8">25</property>
-								<property name="ItemHeight" vt="Int8">13</property>
-								<property name="ItemIndex" vt="Int8">2</property>
-								<property name="TabOrder" vt="Int8">9</property>
-								<property name="Text" vt="String">2</property>
-								<property name="Items.Strings" vt="List">
-									<list>
-										<li vt="String">1</li>
-										<li vt="String">2</li>
-										<li vt="String">3</li>
-										<li vt="String">4</li>
-										<li vt="String">5</li>
-									</list>
-								</property>
-								<property name="CtrlStyle" vt="Int32">1342374466</property>
-								<property name="CtrlExStyle" vt="Int8">0</property>
-								<property name="Resizing" vt="Set">DockHeight</property>
-							</properties>
-							<components/>
-						</object>
 						<object type="TACheckbox" name="gui_checkUpdatesBox">
 							<properties>
-								<property name="Left" vt="Int8">124</property>
-								<property name="Top" vt="Int16">231</property>
+								<property name="Left" vt="Int16">188</property>
+								<property name="Top" vt="Int8">103</property>
 								<property name="Width" vt="Int16">161</property>
 								<property name="Height" vt="Int8">17</property>
 								<property name="Caption" vt="String">Check for updates on startup</property>
-								<property name="TabOrder" vt="Int8">10</property>
+								<property name="TabOrder" vt="Int8">9</property>
 								<property name="CtrlStyle" vt="Int32">1342242819</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
 								<property name="Resizing" vt="Set">DockHeight</property>
@@ -563,7 +514,7 @@
 								<property name="Width" vt="Int16">137</property>
 								<property name="Height" vt="Int8">17</property>
 								<property name="Caption" vt="String">Custom Input Directory:</property>
-								<property name="TabOrder" vt="Int8">11</property>
+								<property name="TabOrder" vt="Int8">10</property>
 								<property name="CtrlStyle" vt="Int32">1342242819</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
 								<property name="Resizing" vt="Set">DockHeight</property>
@@ -575,6 +526,19 @@
 								<property name="Left" vt="Int16">140</property>
 								<property name="Top" vt="Int8">71</property>
 								<property name="Width" vt="Int16">441</property>
+								<property name="Height" vt="Int8">21</property>
+								<property name="TabOrder" vt="Int8">11</property>
+								<property name="CtrlStyle" vt="Int32">1342374016</property>
+								<property name="CtrlExStyle" vt="Int16">512</property>
+								<property name="Resizing" vt="Set">DockHeight</property>
+							</properties>
+							<components/>
+						</object>
+						<object type="TAInput" name="gui_repeatsInput">
+							<properties>
+								<property name="Left" vt="Int16">508</property>
+								<property name="Top" vt="Int8">103</property>
+								<property name="Width" vt="Int8">73</property>
 								<property name="Height" vt="Int8">21</property>
 								<property name="TabOrder" vt="Int8">12</property>
 								<property name="CtrlStyle" vt="Int32">1342374016</property>
