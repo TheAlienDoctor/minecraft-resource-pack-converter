@@ -228,6 +228,7 @@ Func loadSettings()
 EndFunc   ;==>loadSettings
 
 Func saveSettings()
+;Note for later: if GUI = $unchecked then set to false, if checked set to true
 EndFunc   ;==>saveSettings
 
 ;Version 4 UUID generator
@@ -831,7 +832,7 @@ While 1
 			javaToBedrock()
 
 		Case $gui_saveSettingsBtn
-			loadSettings()
+			saveSettings()
 
 		Case $gui_copyright
 			If FileExists(@ScriptDir & "\LICENSE.txt") = 0 Then
