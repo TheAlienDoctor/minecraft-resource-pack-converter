@@ -107,53 +107,12 @@ GUISetState(@SW_SHOW)
 ;Declare variables
 
 Global $dateTime = @MDAY & '.' & @MON & '.' & @YEAR & '-' & @HOUR & '.' & @MIN & '.' & @SEC
-Global $inputDir = @ScriptDir & "\" & IniRead("options.ini", "config", "InputDir", "input")
-Global $repeats = IniRead("options.ini", "config", "repeats", 2)
 Global $settingsFile = @ScriptDir & "\settings.ini"
 Global $conversionCount = 0
 Global $cancel = False
 
 Global Const $currentVersionNumber = 140
 Global Const $je_unsupportedVersions[3] = [1, 2, 3]
-
-;Config file error checking
-If IniRead("options.ini", "Bedrock to Java", "useCustomDir", "error") = "false" Then
-	Global $javaDir = @ScriptDir & "\Java Pack"
-
-ElseIf IniRead("options.ini", "Bedrock to Java", "useCustomDir", "error") = "true" Then
-	Global $javaDir = IniRead("options.ini", "Bedrock to Java", "JavaDir", @ScriptDir & "Java-pack")
-
-Else
-	MsgBox(0, $guiTitle, "Error in config file: useCustomDir can only be set to true or false!")
-	exitProgram()
-	Exit
-EndIf
-
-
-If IniRead("options.ini", "Java to Bedrock", "useCustomDir", "false") = "false" Then
-	Global $bedrockDir = @ScriptDir & "\Bedrock pack"
-
-ElseIf IniRead("options.ini", "Java to Bedrock", "useCustomDir", "false") = "true" Then
-	Global $bedrockDir = IniRead("options.ini", "Java to Bedrock", "BedrockDir", @ScriptDir & "\Bedrock Pack")
-
-Else
-	MsgBox(0, $guiTitle, "Error in config file: useCustomDir can only be set to true or false!")
-	exitProgram()
-	Exit
-EndIf
-
-If IniRead("options.ini", "logConfig", "CustomLogDir", "error") = "false" Then
-	Global $logDir = @ScriptDir & "\logs"
-
-ElseIf IniRead("options.ini", "logConfig", "CustomLogDir", "error") = "true" Then
-	Global $logDir = IniRead("options.ini", "logConfig", "LogDir", @ScriptDir & "\logs")
-
-Else
-	MsgBox(0, $guiTitle, "Error in config file: CustomLogDir can only be set to true or false!")
-	Exit
-EndIf
-
-;The conversion variables can be found in conversions.au3, this is to help with not cluttering this script
 
 ;###########################################################################################################################################################################################
 ;Functions
@@ -225,6 +184,8 @@ Func loadSettings()
 	ElseIf $cfg_outputAsMcpack = "False" Then
 		GUICtrlSetState($gui_OutputAsMcpackBox, $GUI_UNCHECKED)
 	EndIf
+
+	reloadSettings()
 EndFunc   ;==>loadSettings
 
 Func saveSettings()
@@ -313,7 +274,28 @@ Func saveSettings()
 
 	MsgBox(0, $guiTitle, "Your settings have been saved!")
 	GUICtrlSetData($gui_progressBar, 0)
+	reloadSettings()
 EndFunc   ;==>saveSettings
+
+Func reloadSettings()
+	If $cfg_useCustomOutputDir = "True" Then
+		Global $outputDir = $cfg_customOutputDir
+	ElseIf $cfg_useCustomOutputDir = "False" Then
+		Global $outputDir = @ScriptDir & "\output"
+	EndIf
+
+	If $cfg_useCustomInputDir = "True" Then
+		Global $inputDir = $cfg_customInputDir
+	ElseIf $cfg_useCustomInputDir = "False" Then
+		Global $inputDir = @ScriptDir & "\input"
+	EndIf
+
+	If $cfg_useCustomLogDir = "True" Then
+		Global $logDir = $cfg_customLogDir
+	ElseIf $cfg_useCustomLogDir = "False" Then
+		Global $logDir = @ScriptDir & "\logs"
+	EndIf
+EndFunc   ;==>reloadSettings
 
 ;Version 4 UUID generator
 ;credits goes to mimec (http://php.net/uniqid#69164)
@@ -395,7 +377,7 @@ Func createLog()
 	EndIf
 EndFunc   ;==>createLog
 
-Func startUp() ;Function to be ran on startup (excluding create logs function)
+Func startUp() ;Function to be ran on startup (excluding create logs and load settings functions)
 
 	If FileExists(@ScriptDir & "\LICENSE.txt") = 0 Then ;License redownload
 		InetGet("https://thealiendoctor.com/software-license/pack-converter-2022.txt", @ScriptDir & "\LICENSE.txt")
@@ -409,15 +391,11 @@ Func startUp() ;Function to be ran on startup (excluding create logs function)
 		logWrite(0, "Created input directory")
 	EndIf
 
-	If IniRead("options.ini", "config", "autoCheckUpdates", "Error") = true Then ;Check for updates on startup
+	If $cfg_checkForUpdates = "True" Then
 		checkForUpdates(0)
-
-	ElseIf IniRead("options.ini", "config", "autoCheckUpdates", "Error") = false Then
-		logWrite(0, "Auto update check is disabled - this is not recommended!")
-	Else
-		MsgBox(0, $guiTitle, "Error in config file: autoCheckUpdates can only be set to true or false!")
-		exitProgram()
-		Exit
+	ElseIf $cfg_checkForUpdates = "False" Then
+		logWrite(0, "Auto update check is disabled")
+		MsgBox(0, $guiTitle, "Auto update check is disabled - this is not recommended!")
 	EndIf
 EndFunc   ;==>startUp
 
@@ -547,7 +525,7 @@ Func convert($mode, $conversionArray, $arrayDataCount, $gui_progressBarPercent)
 			Local $current = $conversionArray[$index]
 
 			If FileExists($inputDir & "\" & $current[0]) Then
-				FileMove($inputDir & "\" & $current[0], $javaDir & "\pack\" & $current[1], 8)
+				FileMove($inputDir & "\" & $current[0], $outputDir & "\pack\" & $current[1], 8)
 				Sleep(10)
 				$conversionCount += 1
 				logWrite(0, $current[0] & " found, moved it to " & $current[1])
@@ -561,7 +539,7 @@ Func convert($mode, $conversionArray, $arrayDataCount, $gui_progressBarPercent)
 			Local $current = $conversionArray[$index]
 
 			If FileExists($inputDir & "\" & $current[1]) Then
-				FileMove($inputDir & "\" & $current[1], $bedrockDir & "\pack\" & $current[0], 8)
+				FileMove($inputDir & "\" & $current[1], $outputDir & "\pack\" & $current[0], 8)
 				Sleep(10)
 				$conversionCount += 1
 				logWrite(0, $current[1] & " found, moved it to " & $current[0])
@@ -580,39 +558,39 @@ Func convertAnime() ;Converts animated block textures
 	For $index = 0 To 25
 		Local $current = $animeTextures1[$index]
 
-		If FileExists($javaDir & "\pack\assets\minecraft\textures\block\" & $current[0]) Then
-			FileOpen($javaDir & "\pack\assets\minecraft\textures\block\" & $current[0] & ".mcmeta")
-			FileWrite($javaDir & "\pack\assets\minecraft\textures\block\" & $current[0] & ".mcmeta", $current[1])
-			FileClose($javaDir & "\pack\assets\minecraft\textures\block\" & $current[0] & ".mcmeta")
-			logWrite(0, "Found file " & $javaDir & "\pack\assets\minecraft\textures\block\" & $current[0] & " and generated a .mcmeta file for it")
+		If FileExists($outputDir & "\pack\assets\minecraft\textures\block\" & $current[0]) Then
+			FileOpen($outputDir & "\pack\assets\minecraft\textures\block\" & $current[0] & ".mcmeta")
+			FileWrite($outputDir & "\pack\assets\minecraft\textures\block\" & $current[0] & ".mcmeta", $current[1])
+			FileClose($outputDir & "\pack\assets\minecraft\textures\block\" & $current[0] & ".mcmeta")
+			logWrite(0, "Found file " & $outputDir & "\pack\assets\minecraft\textures\block\" & $current[0] & " and generated a .mcmeta file for it")
 			$animeCount += 1
 		Else
-			logWrite(0, "Could not find animated file " & $javaDir & "\pack\assets\minecraft\textures\block\" & $current[0] & " so did not generate an .mcmeta file.")
+			logWrite(0, "Could not find animated file " & $outputDir & "\pack\assets\minecraft\textures\block\" & $current[0] & " so did not generate an .mcmeta file.")
 		EndIf
 	Next
 
 	For $index = 0 To 19
 		Local $current = $animeTextures2[$index]
 
-		If FileExists($javaDir & "\pack\assets\minecraft\textures\block\" & $current[0]) Then
-			FileOpen($javaDir & "\pack\assets\minecraft\textures\block\" & $current[0] & ".mcmeta")
-			FileWrite($javaDir & "\pack\assets\minecraft\textures\block\" & $current[0] & ".mcmeta", $current[1])
-			FileClose($javaDir & "\pack\assets\minecraft\textures\block\" & $current[0] & ".mcmeta")
-			logWrite(0, "Found file " & $javaDir & "\pack\assets\minecraft\textures\block\" & $current[0] & " and generated a .mcmeta file for it")
+		If FileExists($outputDir & "\pack\assets\minecraft\textures\block\" & $current[0]) Then
+			FileOpen($outputDir & "\pack\assets\minecraft\textures\block\" & $current[0] & ".mcmeta")
+			FileWrite($outputDir & "\pack\assets\minecraft\textures\block\" & $current[0] & ".mcmeta", $current[1])
+			FileClose($outputDir & "\pack\assets\minecraft\textures\block\" & $current[0] & ".mcmeta")
+			logWrite(0, "Found file " & $outputDir & "\pack\assets\minecraft\textures\block\" & $current[0] & " and generated a .mcmeta file for it")
 			$animeCount += 1
 		Else
-			logWrite(0, "Could not find animated file " & $javaDir & "\pack\assets\minecraft\textures\block\" & $current[0] & " so did not generate an .mcmeta file.")
+			logWrite(0, "Could not find animated file " & $outputDir & "\pack\assets\minecraft\textures\block\" & $current[0] & " so did not generate an .mcmeta file.")
 		EndIf
 	Next
 EndFunc   ;==>convertAnime
 
 Func convertPackIcon()
 	If FileExists($inputDir & "\pack_icon.png") Then ;Bedrock Pack
-		FileMove($inputDir & "\pack_icon.png", $javaDir & "\pack\pack.png", 8)
+		FileMove($inputDir & "\pack_icon.png", $outputDir & "\pack\pack.png", 8)
 		logWrite(0, "Converted pack icon")
 		$conversionCount += 1
 	ElseIf FileExists($inputDir & "\pack.png") Then ;Java Pack
-		FileMove($inputDir & "\pack.png", $bedrockDir & "\pack\pack_icon.png", 8)
+		FileMove($inputDir & "\pack.png", $outputDir & "\pack\pack_icon.png", 8)
 		logWrite(0, "Converted pack icon")
 		$conversionCount += 1
 	Else
@@ -625,7 +603,7 @@ EndFunc   ;==>convertPackIcon
 
 Func bedrockToJava()
 	GUICtrlSetData($gui_progressBar, 0)
-	Local $confirmBox = MsgBox(1, $guiTitle, "Are you sure you want to start conversion? This will delete everything inside the " & $javaDir & " folder, so make sure you have removed any previous packs from it.")
+	Local $confirmBox = MsgBox(1, $guiTitle, "Are you sure you want to start conversion? This will delete everything inside the " & $outputDir & " folder, so make sure you have removed any previous packs from it.")
 	If $confirmBox = 1 Then
 
 		logWrite(1, "Began converting Bedrock to Java")
@@ -650,25 +628,23 @@ Func bedrockToJava()
 		Global $conversionCount = 0
 		Local $timesRan = 0
 
-		DirRemove($javaDir, 1)
-		DirCreate($javaDir & "\pack")
+		DirRemove($outputDir, 1)
+		DirCreate($outputDir & "\pack")
 
 		logWrite(0, "Generating pack.mcmeta file")
 		GUICtrlSetData($gui_progressBar, 5)
 
-		Local $conf_javaPackFormat = IniRead("options.ini", "Bedrock to Java", "pack_format", "15")
-
-		FileOpen($javaDir & "\pack\pack.txt", 8)
-		FileWrite($javaDir & '\pack\pack.txt', '{"pack":{"pack_format":' & $conf_javaPackFormat & ',"description":"' & $javaPackDesc & '"}}')
-		FileClose($javaDir & "\pack\pack.txt")
-		FileMove($javaDir & "\pack\pack.txt", $javaDir & "\pack\pack.mcmeta")
+		FileOpen($outputDir & "\pack\pack.txt", 8)
+		FileWrite($outputDir & '\pack\pack.txt', '{"pack":{"pack_format":' & $cfg_packFormatVer & ',"description":"' & $javaPackDesc & '"}}')
+		FileClose($outputDir & "\pack\pack.txt")
+		FileMove($outputDir & "\pack\pack.txt", $outputDir & "\pack\pack.mcmeta")
 
 		GUICtrlSetData($gui_progressBar, 10)
 
 		logWrite(0, "Generated pack.mcmeta file")
 		logWrite(0, "Beginning texture file conversion")
 
-		While $timesRan < $repeats
+		While $timesRan < $cfg_repeats
 			If $cancel = True Then
 				GuiEnable()
 			EndIf
@@ -718,7 +694,7 @@ Func bedrockToJava()
 
 			convert(0, $trimTextures, 48, 46)
 			$timesRan += 1
-			logWrite(1, "Texture conversion function ran " & $timesRan & "/" & $repeats)
+			logWrite(1, "Texture conversion function ran " & $timesRan & "/" & $cfg_repeats)
 		WEnd
 
 		convertAnime()
@@ -735,17 +711,21 @@ Func bedrockToJava()
 
 		GUICtrlSetData($gui_progressBar, 50)
 
-		_Zip_Create($javaDir & "\pack.zip")
+		_Zip_Create($outputDir & "\pack.zip")
 
 		logWrite(0, "Created pack.zip file")
 		logWrite(0, "Adding files to pack.zip file")
 
-		_Zip_AddFolderContents($javaDir & "\pack.zip", $javaDir & "\pack", 0)
+		_Zip_AddFolderContents($outputDir & "\pack.zip", $outputDir & "\pack", 0)
 
 		logWrite(0, "Finished adding files to pack.zip!")
 		GUICtrlSetData($gui_progressBar, 60)
 
-		FileMove($javaDir & "\pack.zip", $javaDir & "\" & $javaPackName & ".zip")
+		FileMove($outputDir & "\pack.zip", $outputDir & "\" & $javaPackName & ".zip")
+
+		If $cfg_outputWithFolder = "False" Then
+			FileDelete($inputDir & "\pack")
+		EndIf
 
 		logWrite(0, ".zip folder renamed!")
 		logWrite(0, "Bedrock to Java pack conversion complete!")
@@ -762,7 +742,7 @@ EndFunc   ;==>bedrockToJava
 
 Func javaToBedrock()
 	GUICtrlSetData($gui_progressBar, 0)
-	Local $confirmBox = MsgBox(1, $guiTitle, "Are you sure you want to start conversion? This will delete everything inside the " & $bedrockDir & " folder, so make sure you have removed any previous packs from it.")
+	Local $confirmBox = MsgBox(1, $guiTitle, "Are you sure you want to start conversion? This will delete everything inside the " & $outputDir & " folder, so make sure you have removed any previous packs from it.")
 
 	If $confirmBox = 1 Then
 		logWrite(1, "Began converting Java to Bedrock")
@@ -787,26 +767,25 @@ Func javaToBedrock()
 		Global $conversionCount = 0
 		Local $timesRan = 0
 
-		DirRemove($bedrockDir, 1)
-		DirCreate($bedrockDir & "\pack")
+		DirRemove($outputDir, 1)
+		DirCreate($outputDir & "\pack")
 
 		logWrite(0, "Generating manifest.json file")
 		GUICtrlSetData($gui_progressBar, 5)
 
-		Local $conf_bedrockMinEngineVersion = IniRead("options.ini", "Java to Bedrock", "min_engine_version", "1,20,0")
 		Local $conf_bedrockPackVersion = IniRead("options.ini", "Java to Bedrock", "pack_version", "1,0,0")
 
-		FileOpen($bedrockDir & "\pack\manifest.txt", 8)
-		FileWrite($bedrockDir & '\pack\manifest.txt', '{"format_version":2,"header":{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","name":"' & $bedrockPackName & '","uuid":"' & uuidGenerator() & '","version":[' & $conf_bedrockPackVersion & '],"min_engine_version":[' & $conf_bedrockMinEngineVersion & ']},"modules":[{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","type":"resources","uuid":"' & uuidGenerator() & '","version":[' & $conf_bedrockPackVersion & ']}]}')
-		FileClose($bedrockDir & "\pack\manifest.txt")
-		FileMove($bedrockDir & "\pack\manifest.txt", $bedrockDir & "\pack\manifest.json")
+		FileOpen($outputDir & "\pack\manifest.txt", 8)
+		FileWrite($outputDir & '\pack\manifest.txt', '{"format_version":2,"header":{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","name":"' & $bedrockPackName & '","uuid":"' & uuidGenerator() & '","version":[' & $conf_bedrockPackVersion & '],"min_engine_version":[' & $cfg_packMinVer & ']},"modules":[{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","type":"resources","uuid":"' & uuidGenerator() & '","version":[' & $conf_bedrockPackVersion & ']}]}')
+		FileClose($outputDir & "\pack\manifest.txt")
+		FileMove($outputDir & "\pack\manifest.txt", $outputDir & "\pack\manifest.json")
 
 		GUICtrlSetData($gui_progressBar, 10)
 
 		logWrite(0, "Generated manifest.json file")
 		logWrite(0, "Beginning texture file conversion")
 
-		While $timesRan < $repeats
+		While $timesRan < $cfg_repeats
 			convert(1, $blockTextures1, 49, 11)
 			convert(1, $blockTextures2, 48, 12)
 			convert(1, $blockTextures3, 46, 13)
@@ -852,7 +831,7 @@ Func javaToBedrock()
 
 			convert(1, $trimTextures, 48, 46)
 			$timesRan += 1
-			logWrite(1, "Texture conversion function ran " & $timesRan & "/" & $repeats)
+			logWrite(1, "Texture conversion function ran " & $timesRan & "/" & $cfg_repeats)
 		WEnd
 
 		convertPackIcon()
@@ -864,17 +843,21 @@ Func javaToBedrock()
 
 		GUICtrlSetData($gui_progressBar, 50)
 
-		_Zip_Create($bedrockDir & "\" & $bedrockPackName & ".zip")
+		_Zip_Create($outputDir & "\" & $bedrockPackName & ".zip")
 
 		logWrite(0, "Created pack.zip file")
 		logWrite(0, "Adding files to pack.zip file")
 
-		_Zip_AddFolderContents($bedrockDir & "\" & $bedrockPackName & ".zip", $bedrockDir & "\pack\", 1)
+		_Zip_AddFolderContents($outputDir & "\" & $bedrockPackName & ".zip", $outputDir & "\pack\", 1)
 
 		logWrite(0, "Finished adding files to pack.zip!")
 		GUICtrlSetData($gui_progressBar, 60)
 
-		FileMove($bedrockDir & "\" & $bedrockPackName & ".zip", $bedrockDir & "\" & $bedrockPackName & ".mcpack")
+		FileMove($outputDir & "\" & $bedrockPackName & ".zip", $outputDir & "\" & $bedrockPackName & ".mcpack")
+
+		If $cfg_outputWithFolder = "False" Then
+			FileDelete($inputDir & "\pack")
+		EndIf
 
 		logWrite(0, ".zip folder renamed!")
 		logWrite(3, "Java to Bedrock pack conversion complete!")
