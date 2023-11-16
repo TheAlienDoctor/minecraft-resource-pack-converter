@@ -228,7 +228,91 @@ Func loadSettings()
 EndFunc   ;==>loadSettings
 
 Func saveSettings()
-;Note for later: if GUI = $unchecked then set to false, if checked set to true
+
+	GUICtrlSetData($gui_progressBar, 0)
+
+	If GUICtrlRead($gui_customLogDirBox) = 1 Then
+		$cfg_useCustomLogDir = "True"
+	ElseIf GUICtrlRead($gui_customLogDirBox) = 4 Then
+		$cfg_useCustomLogDir = "False"
+	EndIf
+	IniWrite($settingsFile, "general", "useCustomLogDir", $cfg_useCustomLogDir)
+	GUICtrlSetData($gui_progressBar, 7)
+
+	$cfg_customLogDir = GUICtrlRead($gui_customLogDirInput)
+	IniWrite($settingsFile, "general", "customLogDir", $cfg_customLogDir)
+	GUICtrlSetData($gui_progressBar, 14)
+
+	If GUICtrlRead($gui_customOutputDirBox) = 1 Then
+		$cfg_useCustomOutputDir = "True"
+	ElseIf GUICtrlRead($gui_customOutputDirBox) = 4 Then
+		$cfg_useCustomOutputDir = "False"
+	EndIf
+	IniWrite($settingsFile, "general", "useCustomOutputDir", $cfg_useCustomOutputDir)
+	GUICtrlSetData($gui_progressBar, 21)
+
+	$cfg_customOutputDir = GUICtrlRead($gui_customOutputDirInput)
+	IniWrite($settingsFile, "general", "customOutputDir", $cfg_customOutputDir)
+	GUICtrlSetData($gui_progressBar, 28)
+
+	If GUICtrlRead($gui_customInputDirBox) = 1 Then
+		$cfg_useCustomInputDir = "True"
+	ElseIf GUICtrlRead($gui_customInputDirBox) = 4 Then
+		$cfg_useCustomInputDir = "False"
+	EndIf
+	IniWrite($settingsFile, "general", "useCustomInputDir", $cfg_useCustomInputDir)
+	GUICtrlSetData($gui_progressBar, 35)
+
+	$cfg_customInputDir = GUICtrlRead($gui_customInputDirInput)
+	IniWrite($settingsFile, "general", "customInputDir", $cfg_customInputDir)
+	GUICtrlSetData($gui_progressBar, 42)
+
+	$cfg_repeats = GUICtrlRead($gui_repeatsInput)
+	IniWrite($settingsFile, "general", "repeats", $cfg_repeats)
+	GUICtrlSetData($gui_progressBar, 49)
+
+	If GUICtrlRead($gui_outputWithFolderBox) = 1 Then
+		$cfg_outputWithFolder = "True"
+	ElseIf GUICtrlRead($gui_outputWithFolderBox) = 4 Then
+		$cfg_outputWithFolder = "False"
+	EndIf
+	IniWrite($settingsFile, "general", "outputWithFolder", $cfg_outputWithFolder)
+	GUICtrlSetData($gui_progressBar, 56)
+
+	If GUICtrlRead($gui_checkUpdatesBox) = 1 Then
+		$cfg_checkForUpdates = "True"
+	ElseIf GUICtrlRead($gui_checkUpdatesBox) = 4 Then
+		$cfg_checkForUpdates = "False"
+	EndIf
+	IniWrite($settingsFile, "general", "checkForUpdates", $cfg_checkForUpdates)
+	GUICtrlSetData($gui_progressBar, 63)
+
+	$cfg_packFormatVer = GUICtrlRead($gui_packFormatInput)
+	IniWrite($settingsFile, "java", "packFormatVer", $cfg_packFormatVer)
+	GUICtrlSetData($gui_progressBar, 70)
+
+	If GUICtrlRead($gui_outputAsZipBox) = 1 Then
+		$cfg_outputAsZip = "True"
+	ElseIf GUICtrlRead($gui_outputAsZipBox) = 4 Then
+		$cfg_outputAsZip = "False"
+	EndIf
+	IniWrite($settingsFile, "java", "outputAsZip", $cfg_outputAsZip)
+	GUICtrlSetData($gui_progressBar, 77)
+
+	$cfg_packMinVer = GUICtrlRead($gui_packMinVerInput)
+	IniWrite($settingsFile, "bedrock", "packMinVer", $cfg_packMinVer)
+	GUICtrlSetData($gui_progressBar, 84)
+
+	If GUICtrlRead($gui_OutputAsMcpackBox) = 1 Then
+		$cfg_outputAsMcpack = "True"
+	ElseIf GUICtrlRead($gui_OutputAsMcpackBox) = 4 Then
+		$cfg_outputAsMcpack = "False"
+	EndIf
+	IniWrite($settingsFile, "bedrock", "outputAsMcpack", $cfg_outputAsMcpack)
+	GUICtrlSetData($gui_progressBar, 100)
+
+	MsgBox(0, $guiTitle, "Your settings have been saved!")
+	GUICtrlSetData($gui_progressBar, 0)
 EndFunc   ;==>saveSettings
 
 ;Version 4 UUID generator
@@ -809,6 +893,7 @@ EndFunc   ;==>javaToBedrock
 ;###########################################################################################################################################################################################
 ;GUI Control
 
+loadSettings()
 createLog()
 startUp()
 
