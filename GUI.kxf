@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <object type="TAForm" name="gui_mainWindow">
 	<properties>
-		<property name="Left" vt="Int16">970</property>
-		<property name="Top" vt="Int16">411</property>
+		<property name="Left" vt="Int16">728</property>
+		<property name="Top" vt="Int16">383</property>
 		<property name="Width" vt="Int16">633</property>
 		<property name="Height" vt="Int16">378</property>
 		<property name="Hint" vt="String">Pack Converter</property>
@@ -149,7 +149,7 @@
 								<property name="Resizing" vt="Set"/>
 							</properties>
 							<components>
-								<object type="TACheckbox" name="gui_beToJe">
+								<object type="TACheckbox" name="gui_beToJeBox">
 									<properties>
 										<property name="Left" vt="Int8">8</property>
 										<property name="Top" vt="Int8">24</property>
@@ -179,45 +179,14 @@
 								</object>
 							</components>
 						</object>
-					</components>
-				</object>
-				<object type="TTabSheet" name="gui_bedrockToJavaTab">
-					<properties>
-						<property name="Caption" vt="String">Bedrock to Java</property>
-						<property name="Font.Charset" vt="Ident">DEFAULT_CHARSET</property>
-						<property name="Font.Color" vt="Ident">clWindowText</property>
-						<property name="Font.Height" vt="Int8">-11</property>
-						<property name="Font.Name" vt="String">MS Sans Serif</property>
-						<property name="Font.Style" vt="Set"/>
-						<property name="ImageIndex" vt="Int8">-1</property>
-						<property name="ParentFont" vt="False">False</property>
-					</properties>
-					<components>
-						<object type="TALabel" name="gui_jeDescTitle">
+						<object type="TAButton" name="gui_startBtn">
 							<properties>
-								<property name="Left" vt="Int8">3</property>
-								<property name="Top" vt="Int8">47</property>
-								<property name="Width" vt="Int8">88</property>
-								<property name="Height" vt="Int8">17</property>
-								<property name="Caption" vt="String">Pack Description:</property>
-								<property name="TabOrder" vt="Int8">0</property>
-								<property name="HaveVariable" vt="False">False</property>
-								<property name="CtrlStyle" vt="Int32">1342308608</property>
-								<property name="CtrlExStyle" vt="Int8">0</property>
-								<property name="Resizing" vt="Set"/>
-								<property name="Description" vt="String">JEPackDescTitle</property>
-							</properties>
-							<components/>
-						</object>
-						<object type="TAButton" name="gui_startBeToJeBtn">
-							<properties>
-								<property name="Left" vt="Int16">445</property>
-								<property name="Top" vt="Int8">89</property>
-								<property name="Width" vt="Int16">145</property>
-								<property name="Height" vt="Int8">25</property>
-								<property name="Hint" vt="String">Start conversion</property>
-								<property name="Caption" vt="String">Start conversion</property>
-								<property name="TabOrder" vt="Int8">4</property>
+								<property name="Left" vt="Int16">148</property>
+								<property name="Top" vt="Int16">223</property>
+								<property name="Width" vt="Int16">139</property>
+								<property name="Height" vt="Int8">33</property>
+								<property name="Caption" vt="String">Start Conversion</property>
+								<property name="TabOrder" vt="Int8">2</property>
 								<property name="Color" vt="Ident">clBtnFace</property>
 								<property name="CtrlStyle" vt="Int32">1342373888</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
@@ -225,64 +194,13 @@
 							</properties>
 							<components/>
 						</object>
-						<object type="TAInput" name="gui_jeDescInput">
-							<properties>
-								<property name="Left" vt="Int8">100</property>
-								<property name="Top" vt="Int8">47</property>
-								<property name="Width" vt="Int16">489</property>
-								<property name="Height" vt="Int8">21</property>
-								<property name="Hint" vt="String">Pack description</property>
-								<property name="TabOrder" vt="Int8">2</property>
-								<property name="Text" vt="String">Pack description here</property>
-								<property name="CtrlStyle" vt="Int32">1342374016</property>
-								<property name="CtrlExStyle" vt="Int16">512</property>
-								<property name="Resizing" vt="Set">DockHeight</property>
-								<property name="Description" vt="String">JEPackDescInput</property>
-							</properties>
-							<components/>
-						</object>
-						<object type="TALabel" name="gui_jeNameTitle">
+						<object type="TAButton" name="gui_loadInfoBtn">
 							<properties>
 								<property name="Left" vt="Int8">4</property>
-								<property name="Top" vt="Int8">15</property>
-								<property name="Width" vt="Int8">63</property>
-								<property name="Height" vt="Int8">17</property>
-								<property name="Caption" vt="String">Pack Name:</property>
-								<property name="TabOrder" vt="Int8">5</property>
-								<property name="HaveVariable" vt="False">False</property>
-								<property name="CtrlStyle" vt="Int32">1342308608</property>
-								<property name="CtrlExStyle" vt="Int8">0</property>
-								<property name="Resizing" vt="Set"/>
-								<property name="Description" vt="String">JEPackNameTitle</property>
-							</properties>
-							<components/>
-						</object>
-						<object type="TAInput" name="gui_jeNameInput">
-							<properties>
-								<property name="Left" vt="Int8">76</property>
-								<property name="Top" vt="Int8">15</property>
-								<property name="Width" vt="Int16">513</property>
-								<property name="Height" vt="Int8">21</property>
-								<property name="Hint" vt="String">Pack name</property>
-								<property name="TabOrder" vt="Int8">1</property>
-								<property name="Text" vt="String">Pack name here</property>
-								<property name="CtrlStyle" vt="Int32">1342374016</property>
-								<property name="CtrlExStyle" vt="Int16">512</property>
-								<property name="Resizing" vt="Set">DockHeight</property>
-								<property name="Description" vt="String">JEPackNameInput</property>
-							</properties>
-							<components/>
-						</object>
-						<object type="TAButton" name="gui_beLoadInfo">
-							<properties>
-								<property name="Left" vt="Int8">1</property>
-								<property name="Top" vt="Int8">89</property>
-								<property name="Width" vt="Int16">145</property>
-								<property name="Height" vt="Int8">25</property>
-								<property name="Hint" vt="String">Load original pack name and
-									description
-								</property>
-								<property name="Caption" vt="String">Load original pack info</property>
+								<property name="Top" vt="Int16">223</property>
+								<property name="Width" vt="Int16">139</property>
+								<property name="Height" vt="Int8">33</property>
+								<property name="Caption" vt="String">Load Original Pack Info</property>
 								<property name="TabOrder" vt="Int8">3</property>
 								<property name="Color" vt="Ident">clBtnFace</property>
 								<property name="CtrlStyle" vt="Int32">1342373888</property>
@@ -291,108 +209,14 @@
 							</properties>
 							<components/>
 						</object>
-					</components>
-				</object>
-				<object type="TTabSheet" name="gui_javaToBedrockTab">
-					<properties>
-						<property name="Caption" vt="String">Java to Bedrock</property>
-						<property name="Font.Charset" vt="Ident">DEFAULT_CHARSET</property>
-						<property name="Font.Color" vt="Ident">clWindowText</property>
-						<property name="Font.Height" vt="Int8">-11</property>
-						<property name="Font.Name" vt="String">MS Sans Serif</property>
-						<property name="Font.Style" vt="Set"/>
-						<property name="ImageIndex" vt="Int8">-1</property>
-						<property name="ParentFont" vt="False">False</property>
-					</properties>
-					<components>
-						<object type="TAInput" name="gui_bePackDescInput">
+						<object type="TAButton" name="gui_checkForUpdatesBtn">
 							<properties>
-								<property name="Left" vt="Int8">100</property>
-								<property name="Top" vt="Int8">47</property>
-								<property name="Width" vt="Int16">489</property>
-								<property name="Height" vt="Int8">21</property>
-								<property name="Hint" vt="String">Pack description</property>
-								<property name="TabOrder" vt="Int8">1</property>
-								<property name="Text" vt="String">Pack description here</property>
-								<property name="CtrlStyle" vt="Int32">1342374016</property>
-								<property name="CtrlExStyle" vt="Int16">512</property>
-								<property name="Resizing" vt="Set">DockHeight</property>
-							</properties>
-							<components/>
-						</object>
-						<object type="TAInput" name="gui_bePackNameInput">
-							<properties>
-								<property name="Left" vt="Int8">76</property>
-								<property name="Top" vt="Int8">15</property>
-								<property name="Width" vt="Int16">513</property>
-								<property name="Height" vt="Int8">21</property>
-								<property name="Hint" vt="String">Pack name</property>
-								<property name="TabOrder" vt="Int8">0</property>
-								<property name="Text" vt="String">Pack name here</property>
-								<property name="CtrlStyle" vt="Int32">1342374016</property>
-								<property name="CtrlExStyle" vt="Int16">512</property>
-								<property name="Resizing" vt="Set">DockHeight</property>
-							</properties>
-							<components/>
-						</object>
-						<object type="TAButton" name="gui_startJeToBeBtn">
-							<properties>
-								<property name="Left" vt="Int16">445</property>
-								<property name="Top" vt="Int8">89</property>
-								<property name="Width" vt="Int16">145</property>
-								<property name="Height" vt="Int8">25</property>
-								<property name="Hint" vt="String">Start conversion</property>
-								<property name="Caption" vt="String">Start conversion</property>
+								<property name="Left" vt="Int16">452</property>
+								<property name="Top" vt="Int16">223</property>
+								<property name="Width" vt="Int16">139</property>
+								<property name="Height" vt="Int8">33</property>
+								<property name="Caption" vt="String">Check For Updates</property>
 								<property name="TabOrder" vt="Int8">4</property>
-								<property name="Color" vt="Ident">clBtnFace</property>
-								<property name="CtrlStyle" vt="Int32">1342373888</property>
-								<property name="CtrlExStyle" vt="Int8">0</property>
-								<property name="Resizing" vt="Set">DockWidth, DockHeight</property>
-								<property name="Description" vt="String">StartJeToBe</property>
-							</properties>
-							<components/>
-						</object>
-						<object type="TALabel" name="gui_beDescTitle">
-							<properties>
-								<property name="Left" vt="Int8">3</property>
-								<property name="Top" vt="Int8">47</property>
-								<property name="Width" vt="Int8">88</property>
-								<property name="Height" vt="Int8">17</property>
-								<property name="Caption" vt="String">Pack Description:</property>
-								<property name="TabOrder" vt="Int8">3</property>
-								<property name="HaveVariable" vt="False">False</property>
-								<property name="CtrlStyle" vt="Int32">1342308608</property>
-								<property name="CtrlExStyle" vt="Int8">0</property>
-								<property name="Resizing" vt="Set"/>
-							</properties>
-							<components/>
-						</object>
-						<object type="TALabel" name="gui_beNameTitle">
-							<properties>
-								<property name="Left" vt="Int8">4</property>
-								<property name="Top" vt="Int8">15</property>
-								<property name="Width" vt="Int8">63</property>
-								<property name="Height" vt="Int8">17</property>
-								<property name="Caption" vt="String">Pack Name:</property>
-								<property name="TabOrder" vt="Int8">5</property>
-								<property name="HaveVariable" vt="False">False</property>
-								<property name="CtrlStyle" vt="Int32">1342308608</property>
-								<property name="CtrlExStyle" vt="Int8">0</property>
-								<property name="Resizing" vt="Set"/>
-							</properties>
-							<components/>
-						</object>
-						<object type="TAButton" name="gui_jeLoadInfo">
-							<properties>
-								<property name="Left" vt="Int8">1</property>
-								<property name="Top" vt="Int8">89</property>
-								<property name="Width" vt="Int16">145</property>
-								<property name="Height" vt="Int8">25</property>
-								<property name="Hint" vt="String">Load original pack name and
-									description
-								</property>
-								<property name="Caption" vt="String">Load original pack info</property>
-								<property name="TabOrder" vt="Int8">2</property>
 								<property name="Color" vt="Ident">clBtnFace</property>
 								<property name="CtrlStyle" vt="Int32">1342373888</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
@@ -489,7 +313,7 @@
 								<property name="Left" vt="Int8">4</property>
 								<property name="Top" vt="Int16">135</property>
 								<property name="Width" vt="Int16">290</property>
-								<property name="Height" vt="Int8">81</property>
+								<property name="Height" vt="Int8">121</property>
 								<property name="CtrlStyle" vt="Int32">1342308359</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
 								<property name="Caption" vt="String">Bedrock Output Settings</property>
@@ -501,11 +325,9 @@
 									<properties>
 										<property name="Left" vt="Int8">8</property>
 										<property name="Top" vt="Int8">24</property>
-										<property name="Width" vt="Int16">171</property>
+										<property name="Width" vt="Int16">135</property>
 										<property name="Height" vt="Int8">17</property>
-										<property name="Caption" vt="String">Minimuim Minecraft
-											Version:
-										</property>
+										<property name="Caption" vt="String">Minimuim Minecraft Version:</property>
 										<property name="TabOrder" vt="Int8">0</property>
 										<property name="HaveVariable" vt="False">False</property>
 										<property name="CtrlStyle" vt="Int32">1342308608</property>
@@ -516,9 +338,9 @@
 								</object>
 								<object type="TAInput" name="gui_packMinVerInput">
 									<properties>
-										<property name="Left" vt="Int16">144</property>
+										<property name="Left" vt="Int16">152</property>
 										<property name="Top" vt="Int8">24</property>
-										<property name="Width" vt="Int16">137</property>
+										<property name="Width" vt="Int16">129</property>
 										<property name="Height" vt="Int8">21</property>
 										<property name="TabOrder" vt="Int8">1</property>
 										<property name="CtrlStyle" vt="Int32">1342374016</property>
@@ -530,13 +352,41 @@
 								<object type="TACheckbox" name="gui_OutputAsMcpackBox">
 									<properties>
 										<property name="Left" vt="Int8">8</property>
-										<property name="Top" vt="Int8">48</property>
+										<property name="Top" vt="Int8">88</property>
 										<property name="Width" vt="Int16">177</property>
 										<property name="Height" vt="Int8">17</property>
 										<property name="Caption" vt="String">Output as .mcpack</property>
 										<property name="TabOrder" vt="Int8">2</property>
 										<property name="CtrlStyle" vt="Int32">1342242819</property>
 										<property name="CtrlExStyle" vt="Int8">0</property>
+										<property name="Resizing" vt="Set">DockHeight</property>
+									</properties>
+									<components/>
+								</object>
+								<object type="TALabel" name="gui_packVerTitle">
+									<properties>
+										<property name="Left" vt="Int8">8</property>
+										<property name="Top" vt="Int8">56</property>
+										<property name="Width" vt="Int8">70</property>
+										<property name="Height" vt="Int8">17</property>
+										<property name="Caption" vt="String">Pack Version:</property>
+										<property name="TabOrder" vt="Int8">3</property>
+										<property name="HaveVariable" vt="False">False</property>
+										<property name="CtrlStyle" vt="Int32">1342308608</property>
+										<property name="CtrlExStyle" vt="Int8">0</property>
+										<property name="Resizing" vt="Set"/>
+									</properties>
+									<components/>
+								</object>
+								<object type="TAInput" name="gui_packVerInput">
+									<properties>
+										<property name="Left" vt="Int8">88</property>
+										<property name="Top" vt="Int8">56</property>
+										<property name="Width" vt="Int16">193</property>
+										<property name="Height" vt="Int8">21</property>
+										<property name="TabOrder" vt="Int8">4</property>
+										<property name="CtrlStyle" vt="Int32">1342374016</property>
+										<property name="CtrlExStyle" vt="Int16">512</property>
 										<property name="Resizing" vt="Set">DockHeight</property>
 									</properties>
 									<components/>
@@ -723,15 +573,13 @@
 		</object>
 		<object type="TALabel" name="gui_github">
 			<properties>
-				<property name="Left" vt="Int16">227</property>
+				<property name="Left" vt="Int16">235</property>
 				<property name="Top" vt="Int16">320</property>
-				<property name="Width" vt="Int16">288</property>
+				<property name="Width" vt="Int16">270</property>
 				<property name="Height" vt="Int8">17</property>
 				<property name="Cursor" vt="Ident">crHandPoint</property>
 				<property name="Hint" vt="String">Open GitHub repo</property>
-				<property name="Caption" vt="String">View source code, report bugs and contribute on
-					GitHub
-				</property>
+				<property name="Caption" vt="String">View source code, report bugs and contribute on GitHub</property>
 				<property name="TabOrder" vt="Int8">3</property>
 				<property name="HaveVariable" vt="False">False</property>
 				<property name="CtrlStyle" vt="Int32">1342308608</property>
