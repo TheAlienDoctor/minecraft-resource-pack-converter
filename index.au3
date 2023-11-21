@@ -86,13 +86,13 @@ GUICtrlSetTip(-1, "Settings")
 GUICtrlCreateTabItem("")
 Global $gui_copyright = GUICtrlCreateLabel("Copyright © 2022 - 2023, TheAlienDoctor", 8, 320, 200, 17)
 GUICtrlSetTip(-1, "Copyright notice")
-GUICtrlSetCursor (-1, 0)
+GUICtrlSetCursor(-1, 0)
 Global $gui_verNum = GUICtrlCreateLabel("Version: V1.4.0", 537, 320, 76, 17)
 GUICtrlSetTip(-1, "Check for updates")
-GUICtrlSetCursor (-1, 0)
+GUICtrlSetCursor(-1, 0)
 Global $gui_github = GUICtrlCreateLabel("View source code, report bugs and contribute on GitHub", 235, 320, 270, 17)
 GUICtrlSetTip(-1, "Open GitHub repo")
-GUICtrlSetCursor (-1, 0)
+GUICtrlSetCursor(-1, 0)
 Global $gui_progressBar = GUICtrlCreateProgress(8, 296, 601, 17)
 GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
@@ -436,9 +436,26 @@ Func GuiDisable()
 	GuiCtrlSetState($gui_loadInfoBtn, $GUI_DISABLE)
 	GuiCtrlSetState($gui_startBtn, $GUI_DISABLE)
 	GuiCtrlSetState($gui_checkForUpdatesBtn, $GUI_DISABLE)
+
+	GUICtrlSetState($gui_customLogDirBox, $GUI_DISABLE)
+	GUICtrlSetState($gui_customLogDirInput, $GUI_DISABLE)
+	GUICtrlSetState($gui_customOutputDirBox, $GUI_DISABLE)
+	GUICtrlSetState($gui_customOutputDirInput, $GUI_DISABLE)
+	GUICtrlSetState($gui_customInputDirBox, $GUI_DISABLE)
+	GUICtrlSetState($gui_customInputDirInput, $GUI_DISABLE)
+	GUICtrlSetState($gui_outputWithFolderBox, $GUI_DISABLE)
+	GUICtrlSetState($gui_checkUpdatesBox, $GUI_DISABLE)
+	GUICtrlSetState($gui_repeatsInput, $GUI_DISABLE)
+	GUICtrlSetState($gui_packMinVerInput, $GUI_DISABLE)
+	GUICtrlSetState($gui_packVerInput, $GUI_DISABLE)
+	GUICtrlSetState($gui_OutputAsMcpackBox, $GUI_DISABLE)
+	GUICtrlSetState($gui_packFormatInput, $GUI_DISABLE)
+	GUICtrlSetState($gui_outputAsZipBox, $GUI_DISABLE)
+	GUICtrlSetState($gui_saveSettingsBtn, $GUI_DISABLE)
 EndFunc   ;==>GuiDisable
 
 Func GuiEnable()
+	;Convert tab
 	GuiCtrlSetState($gui_packNameInput, $GUI_ENABLE)
 	GuiCtrlSetState($gui_packDescriptionInput, $GUI_ENABLE)
 	GuiCtrlSetState($gui_beToJeBox, $GUI_ENABLE)
@@ -446,6 +463,22 @@ Func GuiEnable()
 	GuiCtrlSetState($gui_loadInfoBtn, $GUI_ENABLE)
 	GuiCtrlSetState($gui_startBtn, $GUI_ENABLE)
 	GuiCtrlSetState($gui_checkForUpdatesBtn, $GUI_ENABLE)
+
+	GUICtrlSetState($gui_customLogDirBox, $GUI_ENABLE)
+	GUICtrlSetState($gui_customLogDirInput, $GUI_ENABLE)
+	GUICtrlSetState($gui_customOutputDirBox, $GUI_ENABLE)
+	GUICtrlSetState($gui_customOutputDirInput, $GUI_ENABLE)
+	GUICtrlSetState($gui_customInputDirBox, $GUI_ENABLE)
+	GUICtrlSetState($gui_customInputDirInput, $GUI_ENABLE)
+	GUICtrlSetState($gui_outputWithFolderBox, $GUI_ENABLE)
+	GUICtrlSetState($gui_checkUpdatesBox, $GUI_ENABLE)
+	GUICtrlSetState($gui_repeatsInput, $GUI_ENABLE)
+	GUICtrlSetState($gui_packMinVerInput, $GUI_ENABLE)
+	GUICtrlSetState($gui_packVerInput, $GUI_ENABLE)
+	GUICtrlSetState($gui_OutputAsMcpackBox, $GUI_ENABLE)
+	GUICtrlSetState($gui_packFormatInput, $GUI_ENABLE)
+	GUICtrlSetState($gui_outputAsZipBox, $GUI_ENABLE)
+	GUICtrlSetState($gui_saveSettingsBtn, $GUI_ENABLE)
 EndFunc   ;==>GuiEnable
 
 Func loadInfo()
@@ -457,8 +490,8 @@ Func loadInfo()
 		Local $name = Json_Get($decoded_json, '["header"]["name"]')
 		Local $description = Json_Get($decoded_json, '["header"]["description"]')
 		logWrite(0, "Decoded json")
-		GUICtrlSetData($gui_packdesq, $name)
-		GUICtrlSetData($gui_jeDescInput, $description)
+		GUICtrlSetData($gui_packNameInput, $name)
+		GUICtrlSetData($gui_packDescriptionInput, $description)
 		logWrite(0, "Loaded original pack info")
 	ElseIf FileExists($inputDir & "\pack.mcmeta") Then ;Java Pack
 		logWrite(0, "Detected pack.mcmeta")
@@ -466,7 +499,7 @@ Func loadInfo()
 		Local $decoded_json = Json_Decode($file)
 		Local $description = Json_Get($decoded_json, '["pack"]["description"]')
 		logWrite(0, "Decoded json")
-		GUICtrlSetData($gui_bePackDescInput, $description)
+		GUICtrlSetData($gui_packDescriptionInput, $description)
 		logWrite(0, "Loaded original pack info")
 	Else
 		logWrite(0, "Error: Unable to find manifest.json or pack.mcmeta")
@@ -509,6 +542,26 @@ EndFunc   ;==>compatCheck
 
 ;###########################################################################################################################################################################################
 ;Other conversion functions
+
+Func startConversion()
+	logWrite(0, "Start button pressed")
+	If GUICtrlRead($gui_beToJeBox) == GUICtrlRead($gui_jeToBeBox) Then
+		logWrite(0, "Either both modes are selected or only one")
+		MsgBox(0, $guiTitle, "Please select one conversion mode")
+	ElseIf GUICtrlRead($gui_beToJeBox) <> GUICtrlRead($gui_jeToBeBox) Then
+		selectConversionMode()
+	EndIf
+EndFunc   ;==>startConversion
+
+Func selectConversionMode()
+	If GUICtrlRead($gui_beToJeBox) = 1 Then
+		logWrite(0, "Bedrock to Java mode selected")
+		bedrockToJava()
+	ElseIf $gui_jeToBeBox = 1 Then
+		logWrite(0, "Java to Bedrock mode selected")
+		javaToBedrock()
+	EndIf
+EndFunc   ;==>selectConversionMode
 
 Func convert($mode, $conversionArray, $arrayDataCount, $gui_progressBarPercent)
 	$arrayDataCount -= 1 ;ForLoops start at 0, so you need to minus 1 from the total
@@ -615,8 +668,8 @@ Func bedrockToJava()
 			EndIf
 		EndIf
 
-		Local $javaPackName = GUICtrlRead($gui_jeNameInput)
-		Local $javaPackDesc = GUICtrlRead($gui_jeDescInput)
+		Local $javaPackName = GUICtrlRead($gui_packNameInput)
+		Local $javaPackDesc = GUICtrlRead($gui_packDescriptionInput)
 		Global $conversionCount = 0
 		Local $timesRan = 0
 
@@ -756,8 +809,8 @@ Func javaToBedrock()
 			EndIf
 		EndIf
 
-		Local $bedrockPackName = GUICtrlRead($gui_bePackNameInput)
-		Local $bedrockPackDesc = GUICtrlRead($gui_bePackDescInput)
+		Local $bedrockPackName = GUICtrlRead($gui_packNameInput)
+		Local $bedrockPackDesc = GUICtrlRead($gui_packDescriptionInput)
 		Global $conversionCount = 0
 		Local $timesRan = 0
 
@@ -883,17 +936,11 @@ While 1
 			exitProgram()
 			Exit
 
-		Case $gui_beLoadInfo
+		Case $gui_loadInfoBtn
 			loadInfo()
 
-		Case $gui_jeLoadInfo
-			loadInfo()
-
-		Case $gui_startBeToJeBtn
-			bedrockToJava()
-
-		Case $gui_startJeToBeBtn
-			javaToBedrock()
+		Case $gui_startBtn
+			startConversion()
 
 		Case $gui_saveSettingsBtn
 			saveSettings()
