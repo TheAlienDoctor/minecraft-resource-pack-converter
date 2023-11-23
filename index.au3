@@ -496,6 +496,8 @@ Func loadInfo()
 		GUICtrlSetData($gui_packNameInput, $name)
 		GUICtrlSetData($gui_packDescriptionInput, $description)
 		logWrite(0, "Loaded original pack info")
+		GuiCtrlSetState($gui_beToJeBox, $GUI_ENABLE)
+		GuiCtrlSetState($gui_jeToBeBox, $GUI_DISABLE)
 	ElseIf FileExists($inputDir & "\pack.mcmeta") Then ;Java Pack
 		logWrite(0, "Detected pack.mcmeta")
 		Local $file = FileRead($inputDir & "\pack.mcmeta")
@@ -504,6 +506,8 @@ Func loadInfo()
 		logWrite(0, "Decoded json")
 		GUICtrlSetData($gui_packDescriptionInput, $description)
 		logWrite(0, "Loaded original pack info")
+		GuiCtrlSetState($gui_beToJeBox, $GUI_DISABLE)
+		GuiCtrlSetState($gui_jeToBeBox, $GUI_ENABLE)
 	Else
 		logWrite(0, "Error: Unable to find manifest.json or pack.mcmeta")
 		MsgBox(0, $guiTitle, "Error: Unable to find manifest.json or pack.mcmeta")
@@ -559,9 +563,11 @@ EndFunc   ;==>startConversion
 Func selectConversionMode()
 	If GUICtrlRead($gui_beToJeBox) = 1 Then
 		logWrite(0, "Bedrock to Java mode selected")
+		Global $convertMode = "be2je"
 		bedrockToJava()
 	ElseIf $gui_jeToBeBox = 1 Then
 		logWrite(0, "Java to Bedrock mode selected")
+		Global $convertMode = "je2be"
 		javaToBedrock()
 	EndIf
 EndFunc   ;==>selectConversionMode
@@ -643,6 +649,12 @@ Func convertPackIcon()
 		$conversionCount += 1
 	Else
 		logWrite(0, "Pack Icon not found!")
+		If $convertMode = "be2je" Then
+			logWrite(0, "Downloading default pack icon")
+			InetGet("https://thealiendoctor.com/img/download-icons/pack-converter.png", $outputDir & "\pack_icon.png")
+		ElseIf $convertMode = "je2be" Then
+			InetGet("https://thealiendoctor.com/img/download-icons/pack-converter.png", $outputDir & "\pack.png")
+		EndIf
 	EndIf
 EndFunc   ;==>convertPackIcon
 
