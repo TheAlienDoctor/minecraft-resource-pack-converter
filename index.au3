@@ -291,6 +291,7 @@ Func reloadSettings()
 	ElseIf $cfg_useCustomLogDir = "False" Then
 		Global $logDir = @ScriptDir & "\logs"
 	EndIf
+	createLog()
 EndFunc   ;==>reloadSettings
 
 ;Version 4 UUID generator
