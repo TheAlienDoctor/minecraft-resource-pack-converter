@@ -97,7 +97,7 @@
 										<property name="Top" vt="Int8">24</property>
 										<property name="Width" vt="Int16">481</property>
 										<property name="Height" vt="Int8">21</property>
-										<property name="TabOrder" vt="Int8">1</property>
+										<property name="TabOrder" vt="Int8">2</property>
 										<property name="Text" vt="String">Pack Name</property>
 										<property name="CtrlStyle" vt="Int32">1342374016</property>
 										<property name="CtrlExStyle" vt="Int16">512</property>
@@ -112,7 +112,7 @@
 										<property name="Width" vt="Int8">88</property>
 										<property name="Height" vt="Int8">17</property>
 										<property name="Caption" vt="String">Pack Description:</property>
-										<property name="TabOrder" vt="Int8">2</property>
+										<property name="TabOrder" vt="Int8">1</property>
 										<property name="HaveVariable" vt="False">False</property>
 										<property name="CtrlStyle" vt="Int32">1342308608</property>
 										<property name="CtrlExStyle" vt="Int8">0</property>
@@ -186,7 +186,7 @@
 								<property name="Width" vt="Int16">139</property>
 								<property name="Height" vt="Int8">33</property>
 								<property name="Caption" vt="String">Start Conversion</property>
-								<property name="TabOrder" vt="Int8">2</property>
+								<property name="TabOrder" vt="Int8">3</property>
 								<property name="Color" vt="Ident">clBtnFace</property>
 								<property name="CtrlStyle" vt="Int32">1342373888</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
@@ -201,7 +201,7 @@
 								<property name="Width" vt="Int16">139</property>
 								<property name="Height" vt="Int8">33</property>
 								<property name="Caption" vt="String">Load Original Pack Info</property>
-								<property name="TabOrder" vt="Int8">3</property>
+								<property name="TabOrder" vt="Int8">2</property>
 								<property name="Color" vt="Ident">clBtnFace</property>
 								<property name="CtrlStyle" vt="Int32">1342373888</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
@@ -246,7 +246,7 @@
 								<property name="Width" vt="Int16">129</property>
 								<property name="Height" vt="Int8">17</property>
 								<property name="Caption" vt="String">Custom Log Directory:</property>
-								<property name="TabOrder" vt="Int8">2</property>
+								<property name="TabOrder" vt="Int8">0</property>
 								<property name="CtrlStyle" vt="Int32">1342242819</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
 								<property name="Resizing" vt="Set">DockHeight</property>
@@ -260,7 +260,7 @@
 								<property name="Width" vt="Int8">105</property>
 								<property name="Height" vt="Int8">33</property>
 								<property name="Caption" vt="String">Save Settings</property>
-								<property name="TabOrder" vt="Int8">1</property>
+								<property name="TabOrder" vt="Int8">12</property>
 								<property name="Color" vt="Ident">clBtnFace</property>
 								<property name="CtrlStyle" vt="Int32">1342373888</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
@@ -274,7 +274,7 @@
 								<property name="Top" vt="Int8">7</property>
 								<property name="Width" vt="Int16">441</property>
 								<property name="Height" vt="Int8">21</property>
-								<property name="TabOrder" vt="Int8">0</property>
+								<property name="TabOrder" vt="Int8">3</property>
 								<property name="CtrlStyle" vt="Int32">1342374016</property>
 								<property name="CtrlExStyle" vt="Int16">512</property>
 								<property name="Resizing" vt="Set">DockHeight</property>
@@ -288,7 +288,7 @@
 								<property name="Width" vt="Int16">137</property>
 								<property name="Height" vt="Int8">17</property>
 								<property name="Caption" vt="String">Custom Output Directory:</property>
-								<property name="TabOrder" vt="Int8">3</property>
+								<property name="TabOrder" vt="Int8">1</property>
 								<property name="CtrlStyle" vt="Int32">1342242819</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
 								<property name="Resizing" vt="Set">DockHeight</property>
@@ -317,7 +317,7 @@
 								<property name="CtrlStyle" vt="Int32">1342308359</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
 								<property name="Caption" vt="String">Bedrock Output Settings</property>
-								<property name="TabOrder" vt="Int8">5</property>
+								<property name="TabOrder" vt="Int8">10</property>
 								<property name="Resizing" vt="Set"/>
 							</properties>
 							<components>
@@ -342,7 +342,7 @@
 										<property name="Top" vt="Int8">24</property>
 										<property name="Width" vt="Int16">129</property>
 										<property name="Height" vt="Int8">21</property>
-										<property name="TabOrder" vt="Int8">1</property>
+										<property name="TabOrder" vt="Int8">2</property>
 										<property name="CtrlStyle" vt="Int32">1342374016</property>
 										<property name="CtrlExStyle" vt="Int16">512</property>
 										<property name="Resizing" vt="Set">DockHeight</property>
@@ -356,7 +356,7 @@
 										<property name="Width" vt="Int16">177</property>
 										<property name="Height" vt="Int8">17</property>
 										<property name="Caption" vt="String">Output as .mcpack</property>
-										<property name="TabOrder" vt="Int8">2</property>
+										<property name="TabOrder" vt="Int8">4</property>
 										<property name="CtrlStyle" vt="Int32">1342242819</property>
 										<property name="CtrlExStyle" vt="Int8">0</property>
 										<property name="Resizing" vt="Set">DockHeight</property>
@@ -370,7 +370,7 @@
 										<property name="Width" vt="Int8">70</property>
 										<property name="Height" vt="Int8">17</property>
 										<property name="Caption" vt="String">Pack Version:</property>
-										<property name="TabOrder" vt="Int8">3</property>
+										<property name="TabOrder" vt="Int8">1</property>
 										<property name="HaveVariable" vt="False">False</property>
 										<property name="CtrlStyle" vt="Int32">1342308608</property>
 										<property name="CtrlExStyle" vt="Int8">0</property>
@@ -384,7 +384,7 @@
 										<property name="Top" vt="Int8">56</property>
 										<property name="Width" vt="Int16">193</property>
 										<property name="Height" vt="Int8">21</property>
-										<property name="TabOrder" vt="Int8">4</property>
+										<property name="TabOrder" vt="Int8">3</property>
 										<property name="CtrlStyle" vt="Int32">1342374016</property>
 										<property name="CtrlExStyle" vt="Int16">512</property>
 										<property name="Resizing" vt="Set">DockHeight</property>
@@ -402,7 +402,7 @@
 								<property name="CtrlStyle" vt="Int32">1342308359</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
 								<property name="Caption" vt="String">Java Output Settings</property>
-								<property name="TabOrder" vt="Int8">6</property>
+								<property name="TabOrder" vt="Int8">11</property>
 								<property name="Resizing" vt="Set"/>
 							</properties>
 							<components>
@@ -428,7 +428,7 @@
 										<property name="Width" vt="Int8">121</property>
 										<property name="Height" vt="Int8">17</property>
 										<property name="Caption" vt="String">Output as .zip</property>
-										<property name="TabOrder" vt="Int8">1</property>
+										<property name="TabOrder" vt="Int8">2</property>
 										<property name="CtrlStyle" vt="Int32">1342242819</property>
 										<property name="CtrlExStyle" vt="Int8">0</property>
 										<property name="Resizing" vt="Set">DockHeight</property>
@@ -441,7 +441,7 @@
 										<property name="Top" vt="Int8">24</property>
 										<property name="Width" vt="Int16">161</property>
 										<property name="Height" vt="Int8">21</property>
-										<property name="TabOrder" vt="Int8">2</property>
+										<property name="TabOrder" vt="Int8">1</property>
 										<property name="CtrlStyle" vt="Int32">1342374016</property>
 										<property name="CtrlExStyle" vt="Int16">512</property>
 										<property name="Resizing" vt="Set">DockHeight</property>
@@ -457,7 +457,7 @@
 								<property name="Width" vt="Int8">113</property>
 								<property name="Height" vt="Int8">17</property>
 								<property name="Caption" vt="String">Output with Folder</property>
-								<property name="TabOrder" vt="Int8">7</property>
+								<property name="TabOrder" vt="Int8">6</property>
 								<property name="CtrlStyle" vt="Int32">1342242819</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
 								<property name="Resizing" vt="Set">DockHeight</property>
@@ -486,7 +486,7 @@
 								<property name="Width" vt="Int16">161</property>
 								<property name="Height" vt="Int8">17</property>
 								<property name="Caption" vt="String">Check for updates on startup</property>
-								<property name="TabOrder" vt="Int8">9</property>
+								<property name="TabOrder" vt="Int8">7</property>
 								<property name="CtrlStyle" vt="Int32">1342242819</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
 								<property name="Resizing" vt="Set">DockHeight</property>
@@ -500,7 +500,7 @@
 								<property name="Width" vt="Int16">137</property>
 								<property name="Height" vt="Int8">17</property>
 								<property name="Caption" vt="String">Custom Input Directory:</property>
-								<property name="TabOrder" vt="Int8">10</property>
+								<property name="TabOrder" vt="Int8">2</property>
 								<property name="CtrlStyle" vt="Int32">1342242819</property>
 								<property name="CtrlExStyle" vt="Int8">0</property>
 								<property name="Resizing" vt="Set">DockHeight</property>
@@ -513,7 +513,7 @@
 								<property name="Top" vt="Int8">71</property>
 								<property name="Width" vt="Int16">441</property>
 								<property name="Height" vt="Int8">21</property>
-								<property name="TabOrder" vt="Int8">11</property>
+								<property name="TabOrder" vt="Int8">5</property>
 								<property name="CtrlStyle" vt="Int32">1342374016</property>
 								<property name="CtrlExStyle" vt="Int16">512</property>
 								<property name="Resizing" vt="Set">DockHeight</property>
@@ -526,7 +526,7 @@
 								<property name="Top" vt="Int8">103</property>
 								<property name="Width" vt="Int8">73</property>
 								<property name="Height" vt="Int8">21</property>
-								<property name="TabOrder" vt="Int8">12</property>
+								<property name="TabOrder" vt="Int8">9</property>
 								<property name="CtrlStyle" vt="Int32">1342374016</property>
 								<property name="CtrlExStyle" vt="Int16">512</property>
 								<property name="Resizing" vt="Set">DockHeight</property>
