@@ -1,4 +1,4 @@
-## List of UDFs if you wish to download them
+## List of UDFs if you wish to download them yourself
 
 # Zip.au3
 - Forum post: https://www.autoitscript.com/forum/topic/73425-zipau3-udf-in-pure-autoit/
