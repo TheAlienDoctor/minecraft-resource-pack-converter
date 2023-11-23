@@ -727,7 +727,7 @@ Func bedrockToJava()
 
 			convert(0, $entityTextures1, 94, 39)
 			convert(0, $entityTextures2, 92, 40)
-			convert(0, $entityTextures3, 57, 41)
+			convert(0, $entityTextures3, 56, 41)
 			convert(0, $entityTextures4, 43, 42)
 			convert(0, $entityTextures5, 19, 43)
 
@@ -866,7 +866,7 @@ Func javaToBedrock()
 
 			convert(1, $entityTextures1, 94, 39)
 			convert(1, $entityTextures2, 92, 40)
-			convert(1, $entityTextures3, 57, 41)
+			convert(1, $entityTextures3, 56, 41)
 			convert(1, $entityTextures4, 43, 42)
 			convert(1, $entityTextures5, 19, 43)
 
