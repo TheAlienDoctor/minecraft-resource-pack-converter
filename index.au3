@@ -183,6 +183,7 @@ Func loadSettings()
 EndFunc   ;==>loadSettings
 
 Func saveSettings()
+	logWrite(0, "Began saving settings")
 
 	GUICtrlSetData($gui_progressBar, 0)
 
@@ -269,6 +270,7 @@ Func saveSettings()
 	MsgBox(0, $guiTitle, "Your settings have been saved!")
 	GUICtrlSetData($gui_progressBar, 0)
 	reloadSettings()
+	logWrite(0, "Settings saved")
 EndFunc   ;==>saveSettings
 
 Func reloadSettings()
