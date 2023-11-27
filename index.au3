@@ -100,7 +100,6 @@ GUISetState(@SW_SHOW)
 ;###########################################################################################################################################################################################
 ;Declare variables
 
-Global $dateTime = @MDAY & '.' & @MON & '.' & @YEAR & '-' & @HOUR & '.' & @MIN & '.' & @SEC
 Global $settingsFile = @ScriptDir & "\settings.ini"
 Global $conversionCount = 0
 Global $cancel = False
@@ -426,7 +425,7 @@ Func exitProgram()
 	FileOpen($logDir & "\log.latest", 1)
 	logWrite(0, "###################################################################")
 	logWrite(0, "Log file closed at " & @HOUR & ":" & @MIN & ":" & @SEC & " on " & @MDAY & "/" & @MON & "/" & @YEAR & " (HH:MM:SS on DD.MM.YY)")
-	FileMove($logDir & "\log.latest", $logDir & "\log[" & $dateTime & "].txt")
+	FileMove($logDir & "\log.latest", $logDir & "\log[" & @MDAY & '.' & @MON & '.' & @YEAR & '-' & @HOUR & '.' & @MIN & '.' & @SEC & "].txt")
 
 	DirRemove(@ScriptDir & "\temp\", 1)
 EndFunc   ;==>exitProgram
