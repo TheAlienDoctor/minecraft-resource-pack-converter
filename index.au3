@@ -40,7 +40,7 @@ AutoItWinSetTitle($SingeInstance)
 ;###########################################################################################################################################################################################
 ;GUI
 
-#Region ### START Koda GUI section ### Form=d:\code\minecraft-resource-pack-converter\gui.kxf
+#Region ### START Koda GUI section ###
 Global $gui_mainWindow = GUICreate("" & $guiTitle & "", 618, 340, -1, -1)
 Global $gui_tabs = GUICtrlCreateTab(8, 0, 601, 289)
 Global $gui_convertTab = GUICtrlCreateTabItem("Convert")
