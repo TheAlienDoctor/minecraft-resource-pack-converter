@@ -1,11 +1,11 @@
 #pragma compile(Compatibility, XP, vista, win7, win8, win81, win10, win11)
-#pragma compile(FileDescription, Alien's Minecraft resource pack converter)
-#pragma compile(ProductName, Alien's Minecraft resource pack converter)
-#pragma compile(ProductVersion, 1.4.0)
-#pragma compile(FileVersion, 1.4.0)
+#pragma compile(FileDescription, Alien's Minecraft Resource Pack Converter)
+#pragma compile(ProductName, Alien's Minecraft Resource Pack Converter)
+#pragma compile(ProductVersion, 1.5.0)
+#pragma compile(FileVersion, 1.5.0)
 #pragma compile(LegalCopyright, ©TheAlienDoctor)
 #pragma compile(CompanyName, TheAlienDoctor)
-#pragma compile(OriginalFilename, AliensPackConverter-V1.4.0)
+#pragma compile(OriginalFilename, AliensPackConverter-V1.5.0)
 
 #include <ButtonConstants.au3>
 #include <ComboConstants.au3>
@@ -22,12 +22,12 @@
 #include "UDF\JSON.au3"
 #include "UDF\BinaryCall.au3"
 
-Global Const $guiTitle = "Alien's Pack Converter V1.4.0"
+Global Const $guiTitle = "Alien's Pack Converter V1.5.0"
 
 ;###########################################################################################################################################################################################
 ;Code for single instance
 
-Global Const $SingeInstance = "c87e8274-07e6-40ab-b3d5-b605dc9f85b2"
+Global Const $SingeInstance = "d449f5f7-bdd8-4826-8da2-d22463f77b0d"
 ;UUID will change to match version ID in the update file on my website. This means you can have multiple instances of different versions open. Not sure who wants this, but you're welcome :D
 
 If WinExists($SingeInstance) Then
@@ -105,7 +105,7 @@ Global $settingsFile = @ScriptDir & "\settings.ini"
 Global $conversionCount = 0
 Global $cancel = False
 
-Global Const $currentVersionNumber = 140
+Global Const $currentVersionNumber = 150
 Global Const $je_unsupportedVersions[3] = [1, 2, 3]
 
 ;###########################################################################################################################################################################################
@@ -431,7 +431,7 @@ Func exitProgram()
 	DirRemove(@ScriptDir & "\temp\", 1)
 EndFunc   ;==>exitProgram
 
-Func GuiDisable()
+Func guiDisable()
 	GuiCtrlSetState($gui_packNameInput, $GUI_DISABLE)
 	GuiCtrlSetState($gui_packDescriptionInput, $GUI_DISABLE)
 	GuiCtrlSetState($gui_beToJeBox, $GUI_DISABLE)
@@ -457,7 +457,7 @@ Func GuiDisable()
 	GUICtrlSetState($gui_saveSettingsBtn, $GUI_DISABLE)
 EndFunc   ;==>GuiDisable
 
-Func GuiEnable()
+Func guiEnable()
 	;Convert tab
 	GuiCtrlSetState($gui_packNameInput, $GUI_ENABLE)
 	GuiCtrlSetState($gui_packDescriptionInput, $GUI_ENABLE)
@@ -482,7 +482,7 @@ Func GuiEnable()
 	GUICtrlSetState($gui_packFormatInput, $GUI_ENABLE)
 	GUICtrlSetState($gui_outputAsZipBox, $GUI_ENABLE)
 	GUICtrlSetState($gui_saveSettingsBtn, $GUI_ENABLE)
-EndFunc   ;==>GuiEnable
+EndFunc   ;==>guiEnable
 
 Func loadInfo()
 	logWrite(0, "Began loading original pack information")
@@ -667,7 +667,7 @@ Func bedrockToJava()
 	If $confirmBox = 1 Then
 
 		logWrite(1, "Began converting Bedrock to Java")
-		GuiDisable()
+		guiDisable()
 
 		compatCheck()
 		If $compatible_result = False Then
@@ -678,7 +678,7 @@ Func bedrockToJava()
 				logWrite(0, "Continued pack conversion")
 			ElseIf $incompatible_msg = 7 Then
 				logWrite(3, "Pack conversion aborted due to outdated version")
-				GuiEnable()
+				guiEnable()
 				Return ;Stop function
 			EndIf
 		EndIf
@@ -706,7 +706,7 @@ Func bedrockToJava()
 
 		While $timesRan < $cfg_repeats
 			If $cancel = True Then
-				GuiEnable()
+				guiEnable()
 			EndIf
 
 			convert(0, $blockTextures1, 49, 11)
@@ -799,7 +799,7 @@ Func bedrockToJava()
 	EndIf
 
 	GUICtrlSetData($gui_progressBar, 100)
-	GuiEnable()
+	guiEnable()
 EndFunc   ;==>bedrockToJava
 
 Func javaToBedrock()
@@ -808,7 +808,7 @@ Func javaToBedrock()
 
 	If $confirmBox = 1 Then
 		logWrite(1, "Began converting Java to Bedrock")
-		GuiDisable()
+		guiDisable()
 
 		compatCheck()
 		If $compatible_result = False Then
@@ -819,7 +819,7 @@ Func javaToBedrock()
 				logWrite(0, "Continued pack conversion")
 			ElseIf $incompatible_msg = 7 Then
 				logWrite(3, "Pack conversion aborted due to outdated version")
-				GuiEnable()
+				guiEnable()
 				Return ;Stop function
 			EndIf
 		EndIf
@@ -932,10 +932,9 @@ Func javaToBedrock()
 	Else
 		logWrite(0, "Conversion aborted")
 	EndIf
-	GuiEnable()
+	guiEnable()
 	GUICtrlSetData($gui_progressBar, 100)
 EndFunc   ;==>javaToBedrock
-
 
 ;###########################################################################################################################################################################################
 ;GUI Control
