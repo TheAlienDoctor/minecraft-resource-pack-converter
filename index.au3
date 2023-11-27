@@ -52,8 +52,8 @@ Global $gui_packNameInput = GUICtrlCreateInput("Pack Name", 104, 56, 481, 21)
 Global $gui_packDescriptionInput = GUICtrlCreateInput("Pack Description", 128, 88, 457, 21)
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 Global $gui_packTypeGroup = GUICtrlCreateGroup("Pack Type", 24, 128, 569, 81)
-Global $gui_beToJeBox = GUICtrlCreateCheckbox("Bedrock to Java", 32, 152, 97, 17)
-Global $gui_jeToBeBox = GUICtrlCreateCheckbox("Java to Bedrock", 32, 176, 97, 17)
+Global $gui_beToJeBox = GUICtrlCreateRadio("Bedrock to Java", 32, 152, 113, 17)
+Global $gui_jeToBeBox = GUICtrlCreateRadio("Java to Bedrock", 32, 176, 113, 17)
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 Global $gui_loadInfoBtn = GUICtrlCreateButton("Load Original Pack Info", 16, 248, 139, 33)
 Global $gui_startBtn = GUICtrlCreateButton("Start Conversion", 160, 248, 139, 33)
@@ -551,25 +551,16 @@ EndFunc   ;==>compatCheck
 
 Func startConversion()
 	logWrite(0, "Start button pressed")
-	If GUICtrlRead($gui_beToJeBox) == GUICtrlRead($gui_jeToBeBox) Then
-		logWrite(0, "Either both modes are selected or only one")
-		MsgBox(0, $guiTitle, "Please select one conversion mode")
-	ElseIf GUICtrlRead($gui_beToJeBox) <> GUICtrlRead($gui_jeToBeBox) Then
-		selectConversionMode()
-	EndIf
-EndFunc   ;==>startConversion
-
-Func selectConversionMode()
 	If GUICtrlRead($gui_beToJeBox) = 1 Then
 		logWrite(0, "Bedrock to Java mode selected")
 		Global $convertMode = "be2je"
 		bedrockToJava()
-	ElseIf $gui_jeToBeBox = 1 Then
+	ElseIf GUICtrlRead($gui_jeToBeBox) = 1 Then
 		logWrite(0, "Java to Bedrock mode selected")
 		Global $convertMode = "je2be"
 		javaToBedrock()
 	EndIf
-EndFunc   ;==>selectConversionMode
+EndFunc   ;==>startConversion
 
 Func convert($mode, $conversionArray, $arrayDataCount, $gui_progressBarPercent)
 	$arrayDataCount -= 1 ;ForLoops start at 0, so you need to minus 1 from the total

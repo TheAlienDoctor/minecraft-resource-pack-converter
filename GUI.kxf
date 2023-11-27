@@ -149,29 +149,29 @@
 								<property name="Resizing" vt="Set"/>
 							</properties>
 							<components>
-								<object type="TACheckbox" name="gui_beToJeBox">
+								<object type="TARadio" name="gui_beToJeBox">
 									<properties>
 										<property name="Left" vt="Int8">8</property>
 										<property name="Top" vt="Int8">24</property>
-										<property name="Width" vt="Int8">97</property>
+										<property name="Width" vt="Int8">113</property>
 										<property name="Height" vt="Int8">17</property>
 										<property name="Caption" vt="String">Bedrock to Java</property>
 										<property name="TabOrder" vt="Int8">0</property>
-										<property name="CtrlStyle" vt="Int32">1342242819</property>
+										<property name="CtrlStyle" vt="Int32">1342242825</property>
 										<property name="CtrlExStyle" vt="Int8">0</property>
 										<property name="Resizing" vt="Set">DockHeight</property>
 									</properties>
 									<components/>
 								</object>
-								<object type="TACheckbox" name="gui_jeToBeBox">
+								<object type="TARadio" name="gui_jeToBeBox">
 									<properties>
 										<property name="Left" vt="Int8">8</property>
 										<property name="Top" vt="Int8">48</property>
-										<property name="Width" vt="Int8">97</property>
+										<property name="Width" vt="Int8">113</property>
 										<property name="Height" vt="Int8">17</property>
 										<property name="Caption" vt="String">Java to Bedrock</property>
 										<property name="TabOrder" vt="Int8">1</property>
-										<property name="CtrlStyle" vt="Int32">1342242819</property>
+										<property name="CtrlStyle" vt="Int32">1342242825</property>
 										<property name="CtrlExStyle" vt="Int8">0</property>
 										<property name="Resizing" vt="Set">DockHeight</property>
 									</properties>
