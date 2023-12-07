@@ -22,12 +22,12 @@
 #include "UDF\JSON.au3"
 #include "UDF\BinaryCall.au3"
 
-Global Const $guiTitle = "Alien's Pack Converter V1.5.0"
+Global Const $guiTitle = "Alien's Pack Converter V1.5.1"
 
 ;###########################################################################################################################################################################################
 ;Code for single instance
 
-Global Const $SingeInstance = "d449f5f7-bdd8-4826-8da2-d22463f77b0d"
+Global Const $SingeInstance = "3f85567f-e1b5-4a24-aee9-2953b7f47c4d"
 ;UUID will change to match version ID in the update file on my website. This means you can have multiple instances of different versions open. Not sure who wants this, but you're welcome :D
 
 If WinExists($SingeInstance) Then
@@ -40,7 +40,7 @@ AutoItWinSetTitle($SingeInstance)
 ;###########################################################################################################################################################################################
 ;GUI
 
-#Region ### START Koda GUI section ###
+#Region ### START Koda GUI section ### Form=d:\06 code\minecraft-resource-pack-converter\gui.kxf
 Global $gui_mainWindow = GUICreate("" & $guiTitle & "", 618, 340, -1, -1)
 Global $gui_tabs = GUICtrlCreateTab(8, 0, 601, 289)
 Global $gui_convertTab = GUICtrlCreateTabItem("Convert")
@@ -87,7 +87,7 @@ GUICtrlCreateTabItem("")
 Global $gui_copyright = GUICtrlCreateLabel("Copyright © 2022 - 2023, TheAlienDoctor", 8, 320, 200, 17)
 GUICtrlSetTip(-1, "Copyright notice")
 GUICtrlSetCursor (-1, 0)
-Global $gui_verNum = GUICtrlCreateLabel("Version: V1.4.0", 537, 320, 76, 17)
+Global $gui_verNum = GUICtrlCreateLabel("Version: V1.5.1", 537, 320, 76, 17)
 GUICtrlSetTip(-1, "Check for updates")
 GUICtrlSetCursor (-1, 0)
 Global $gui_github = GUICtrlCreateLabel("View source code, report bugs and contribute on GitHub", 235, 320, 270, 17)
@@ -102,9 +102,8 @@ GUISetState(@SW_SHOW)
 
 Global $settingsFile = @ScriptDir & "\settings.ini"
 Global $conversionCount = 0
-Global $cancel = False
 
-Global Const $currentVersionNumber = 150
+Global Const $currentVersionNumber = 151
 Global Const $je_unsupportedVersions[3] = [1, 2, 3]
 
 ;###########################################################################################################################################################################################
@@ -177,6 +176,9 @@ Func loadSettings()
 	ElseIf $cfg_outputAsMcpack = "False" Then
 		GUICtrlSetState($gui_OutputAsMcpackBox, $GUI_UNCHECKED)
 	EndIf
+
+	Global $cfg_packVer = IniRead($settingsFile, "bedrock", "packVer", "empty")
+	GUICtrlSetData($gui_packVerInput, $cfg_packVer)
 
 	reloadSettings()
 EndFunc   ;==>loadSettings
@@ -264,6 +266,10 @@ Func saveSettings()
 		$cfg_outputAsMcpack = "False"
 	EndIf
 	IniWrite($settingsFile, "bedrock", "outputAsMcpack", $cfg_outputAsMcpack)
+	GUICtrlSetData($gui_progressBar, 90)
+
+	$cfg_packVer = GUICtrlRead($gui_packVerInput)
+	IniWrite($settingsFile, "bedrock", "packVer", $cfg_packVer)
 	GUICtrlSetData($gui_progressBar, 100)
 
 	MsgBox(0, $guiTitle, "Your settings have been saved!")
@@ -695,9 +701,6 @@ Func bedrockToJava()
 		logWrite(0, "Beginning texture file conversion")
 
 		While $timesRan < $cfg_repeats
-			If $cancel = True Then
-				guiEnable()
-			EndIf
 
 			convert(0, $blockTextures1, 49, 11)
 			convert(0, $blockTextures2, 48, 12)
@@ -825,10 +828,8 @@ Func javaToBedrock()
 		logWrite(0, "Generating manifest.json file")
 		GUICtrlSetData($gui_progressBar, 5)
 
-		Local $conf_bedrockPackVersion = IniRead("options.ini", "Java to Bedrock", "pack_version", "1,0,0")
-
 		FileOpen($outputDir & "\pack\manifest.txt", 8)
-		FileWrite($outputDir & '\pack\manifest.txt', '{"format_version":2,"header":{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","name":"' & $bedrockPackName & '","uuid":"' & uuidGenerator() & '","version":[' & $conf_bedrockPackVersion & '],"min_engine_version":[' & $cfg_packMinVer & ']},"modules":[{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","type":"resources","uuid":"' & uuidGenerator() & '","version":[' & $conf_bedrockPackVersion & ']}]}')
+		FileWrite($outputDir & '\pack\manifest.txt', '{"format_version":2,"header":{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","name":"' & $bedrockPackName & '","uuid":"' & uuidGenerator() & '","version":[' & $cfg_packVer & '],"min_engine_version":[' & $cfg_packMinVer & ']},"modules":[{"description":"' & $bedrockPackDesc & ' | §9Converted to from Java to Bedrock using Aliens pack converter §r | §eDownload pack converter from TheAlienDoctor.com §r","type":"resources","uuid":"' & uuidGenerator() & '","version":[' & $cfg_packVer & ']}]}')
 		FileClose($outputDir & "\pack\manifest.txt")
 		FileMove($outputDir & "\pack\manifest.txt", $outputDir & "\pack\manifest.json")
 

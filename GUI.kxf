@@ -562,7 +562,7 @@
 				<property name="Height" vt="Int8">17</property>
 				<property name="Cursor" vt="Ident">crHandPoint</property>
 				<property name="Hint" vt="String">Check for updates</property>
-				<property name="Caption" vt="String">Version: V1.4.0</property>
+				<property name="Caption" vt="String">Version: V1.5.1</property>
 				<property name="TabOrder" vt="Int8">2</property>
 				<property name="HaveVariable" vt="False">False</property>
 				<property name="CtrlStyle" vt="Int32">1342308608</property>
