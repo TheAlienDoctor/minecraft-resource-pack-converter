@@ -1,3 +1,13 @@
+#cs ----------------------------------------------------------------------------
+
+ AutoIt Version: 3.3.16.1
+ Author:         TheAlienDoctor
+
+ Script Function:
+	Converts Minecraft resource packs between versions (Bedrock and Java)
+
+#ce ----------------------------------------------------------------------------
+
 #pragma compile(Compatibility, XP, vista, win7, win8, win81, win10, win11)
 #pragma compile(FileDescription, Alien's Minecraft Resource Pack Converter)
 #pragma compile(ProductName, Alien's Minecraft Resource Pack Converter)
