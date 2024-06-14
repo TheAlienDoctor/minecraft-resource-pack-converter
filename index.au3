@@ -16,11 +16,15 @@
 #include <TabConstants.au3>
 #include <WindowsConstants.au3>
 
-#include "conversions.au3"
 #include "animeTextures.au3"
 #include "UDF\Zip.au3"
 #include "UDF\JSON.au3"
 #include "UDF\BinaryCall.au3"
+
+#include "textures\blocks.au3"
+#include "textures\entities.au3"
+#include "textures\items.au3"
+#include "textures\other.au3"
 
 Global Const $guiTitle = "Alien's Pack Converter V1.5.1"
 
@@ -731,7 +735,7 @@ Func bedrockToJava()
 			convert(0, $itemTextures4, 85, 35)
 			convert(0, $itemTextures5, 21, 36)
 			convert(0, $itemTextures6, 30, 37)
-			convert(0, $itemTextures7, 31, 38)
+			convert(0, $itemTextures7, 30, 38)
 
 			convert(0, $entityTextures1, 94, 39)
 			convert(0, $entityTextures2, 92, 40)
@@ -868,7 +872,7 @@ Func javaToBedrock()
 			convert(1, $itemTextures4, 85, 35)
 			convert(1, $itemTextures5, 21, 36)
 			convert(1, $itemTextures6, 30, 37)
-			convert(1, $itemTextures7, 31, 38)
+			convert(1, $itemTextures7, 30, 38)
 
 			convert(1, $entityTextures1, 94, 39)
 			convert(1, $entityTextures2, 92, 40)
