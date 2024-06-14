@@ -451,13 +451,13 @@ Func exitProgram()
 EndFunc   ;==>exitProgram
 
 Func guiDisable()
-	GuiCtrlSetState($gui_packNameInput, $GUI_DISABLE)
-	GuiCtrlSetState($gui_packDescriptionInput, $GUI_DISABLE)
-	GuiCtrlSetState($gui_beToJeBox, $GUI_DISABLE)
-	GuiCtrlSetState($gui_jeToBeBox, $GUI_DISABLE)
-	GuiCtrlSetState($gui_loadInfoBtn, $GUI_DISABLE)
-	GuiCtrlSetState($gui_startBtn, $GUI_DISABLE)
-	GuiCtrlSetState($gui_checkForUpdatesBtn, $GUI_DISABLE)
+	GUICtrlSetState($gui_packNameInput, $GUI_DISABLE)
+	GUICtrlSetState($gui_packDescriptionInput, $GUI_DISABLE)
+	GUICtrlSetState($gui_beToJeBox, $GUI_DISABLE)
+	GUICtrlSetState($gui_jeToBeBox, $GUI_DISABLE)
+	GUICtrlSetState($gui_loadInfoBtn, $GUI_DISABLE)
+	GUICtrlSetState($gui_startBtn, $GUI_DISABLE)
+	GUICtrlSetState($gui_checkForUpdatesBtn, $GUI_DISABLE)
 
 	GUICtrlSetState($gui_customLogDirBox, $GUI_DISABLE)
 	GUICtrlSetState($gui_customLogDirInput, $GUI_DISABLE)
@@ -478,13 +478,13 @@ EndFunc   ;==>guiDisable
 
 Func guiEnable()
 	;Convert tab
-	GuiCtrlSetState($gui_packNameInput, $GUI_ENABLE)
-	GuiCtrlSetState($gui_packDescriptionInput, $GUI_ENABLE)
-	GuiCtrlSetState($gui_beToJeBox, $GUI_ENABLE)
-	GuiCtrlSetState($gui_jeToBeBox, $GUI_ENABLE)
-	GuiCtrlSetState($gui_loadInfoBtn, $GUI_ENABLE)
-	GuiCtrlSetState($gui_startBtn, $GUI_ENABLE)
-	GuiCtrlSetState($gui_checkForUpdatesBtn, $GUI_ENABLE)
+	GUICtrlSetState($gui_packNameInput, $GUI_ENABLE)
+	GUICtrlSetState($gui_packDescriptionInput, $GUI_ENABLE)
+	GUICtrlSetState($gui_beToJeBox, $GUI_ENABLE)
+	GUICtrlSetState($gui_jeToBeBox, $GUI_ENABLE)
+	GUICtrlSetState($gui_loadInfoBtn, $GUI_ENABLE)
+	GUICtrlSetState($gui_startBtn, $GUI_ENABLE)
+	GUICtrlSetState($gui_checkForUpdatesBtn, $GUI_ENABLE)
 
 	GUICtrlSetState($gui_customLogDirBox, $GUI_ENABLE)
 	GUICtrlSetState($gui_customLogDirInput, $GUI_ENABLE)
@@ -515,8 +515,8 @@ Func loadInfo()
 		GUICtrlSetData($gui_packNameInput, $name)
 		GUICtrlSetData($gui_packDescriptionInput, $description)
 		logWrite(0, "Loaded original pack info")
-		GuiCtrlSetState($gui_beToJeBox, $GUI_ENABLE)
-		GuiCtrlSetState($gui_jeToBeBox, $GUI_DISABLE)
+		GUICtrlSetState($gui_beToJeBox, $GUI_ENABLE)
+		GUICtrlSetState($gui_jeToBeBox, $GUI_DISABLE)
 	ElseIf FileExists($inputDir & "\pack.mcmeta") Then ;Java Pack
 		logWrite(0, "Detected pack.mcmeta")
 		Local $file = FileRead($inputDir & "\pack.mcmeta")
@@ -525,8 +525,8 @@ Func loadInfo()
 		logWrite(0, "Decoded json")
 		GUICtrlSetData($gui_packDescriptionInput, $description)
 		logWrite(0, "Loaded original pack info")
-		GuiCtrlSetState($gui_beToJeBox, $GUI_DISABLE)
-		GuiCtrlSetState($gui_jeToBeBox, $GUI_ENABLE)
+		GUICtrlSetState($gui_beToJeBox, $GUI_DISABLE)
+		GUICtrlSetState($gui_jeToBeBox, $GUI_ENABLE)
 	Else
 		logWrite(0, "Error: Unable to find manifest.json or pack.mcmeta")
 		MsgBox(0, $guiTitle, "Error: Unable to find manifest.json or pack.mcmeta")
@@ -551,7 +551,7 @@ Func compatCheck() ;Check compatibility
 		Local $decoded_json = Json_Decode($file)
 		Local $pack_version = Json_Get($decoded_json, '["pack"]["pack_format"]')
 		logWrite(0, "Decoded json")
-		For $index = 0 to 2
+		For $index = 0 To 2
 			If $pack_version = $je_unsupportedVersions[$index] Then
 				Global $compatible_result = False
 			Else
