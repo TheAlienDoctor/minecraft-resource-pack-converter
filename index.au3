@@ -1,11 +1,11 @@
 #pragma compile(Compatibility, XP, vista, win7, win8, win81, win10, win11)
 #pragma compile(FileDescription, Alien's Minecraft Resource Pack Converter)
 #pragma compile(ProductName, Alien's Minecraft Resource Pack Converter)
-#pragma compile(ProductVersion, 1.5.0)
-#pragma compile(FileVersion, 1.5.0)
+#pragma compile(ProductVersion, 1.5.1)
+#pragma compile(FileVersion, 1.5.1)
 #pragma compile(LegalCopyright, ©TheAlienDoctor)
 #pragma compile(CompanyName, TheAlienDoctor)
-#pragma compile(OriginalFilename, AliensPackConverter-V1.5.0)
+#pragma compile(OriginalFilename, AliensPackConverter-V1.5.1)
 
 #include <ButtonConstants.au3>
 #include <ComboConstants.au3>
@@ -86,13 +86,13 @@ GUICtrlSetTip(-1, "Settings")
 GUICtrlCreateTabItem("")
 Global $gui_copyright = GUICtrlCreateLabel("Copyright © 2022 - 2023, TheAlienDoctor", 8, 320, 200, 17)
 GUICtrlSetTip(-1, "Copyright notice")
-GUICtrlSetCursor (-1, 0)
+GUICtrlSetCursor(-1, 0)
 Global $gui_verNum = GUICtrlCreateLabel("Version: V1.5.1", 537, 320, 76, 17)
 GUICtrlSetTip(-1, "Check for updates")
-GUICtrlSetCursor (-1, 0)
+GUICtrlSetCursor(-1, 0)
 Global $gui_github = GUICtrlCreateLabel("View source code, report bugs and contribute on GitHub", 235, 320, 270, 17)
 GUICtrlSetTip(-1, "Open GitHub repo")
-GUICtrlSetCursor (-1, 0)
+GUICtrlSetCursor(-1, 0)
 Global $gui_progressBar = GUICtrlCreateProgress(8, 296, 601, 17)
 GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
@@ -460,7 +460,7 @@ Func guiDisable()
 	GUICtrlSetState($gui_packFormatInput, $GUI_DISABLE)
 	GUICtrlSetState($gui_outputAsZipBox, $GUI_DISABLE)
 	GUICtrlSetState($gui_saveSettingsBtn, $GUI_DISABLE)
-EndFunc   ;==>GuiDisable
+EndFunc   ;==>guiDisable
 
 Func guiEnable()
 	;Convert tab

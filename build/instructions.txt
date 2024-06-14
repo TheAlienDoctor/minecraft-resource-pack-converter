@@ -1,0 +1,43 @@
+# Info
+Alien's pack converter is a program written in AutoIt that will convert Mineraft Resource packs between Minecraft Bedrock and Java editions.
+It is also open sorce if you wish to contribute or report bugs, which you can find the link for by clicking on the GitHub notice in the GUI.
+
+# How to use
+1) Firstly you are going to need to get the pack you wish to convert, unzip it and save it in the input directory. By default this is a
+folder in the scripts directory called "input" but the name can be changed in the options.ini file. Make sure that the unzipped version
+of the pack is not nested inside the folder, and that the pack files are the first thing inside the input folder.
+
+2) Now you can open the "AliensPackConverter-V1.x.x.exe" file, which is the main pack converter itself.
+
+3) You can press the "Load original pack info", and the pack converter will try and load the original pack info into the boxes. Please note
+that it cannot find the original Java pack name as this is determined from the file name of the pack, not set in the pack.mcmeta. Alternatively
+you can input the pack info yourself, including the pack conversion type (Bedrock to Java or Java to Bedrock)
+
+4) Next you can click the "start conversion" button to start the conversion. For whatever reason, whilst converting program starts to lag,
+even on my super fancy computer... I'm guessing this is an AutoIt (the programming language I used) issue but I'm not 100% sure.
+
+5) After all the files have been converted, if you have the option enabled to output as a .mcpack/.zip, another window will popup with a loading
+bar to zip the pack files into a zip files
+
+6) By default, it outputs the pack as both a folder and as a .mcpack/.zip, so you can check the conversion ran properly with the folder version
+and actually use the .mcpack/.zip in your game. (or alternatively set it to only output as a folder, then change the output dir to your bedrock com.mojang
+and it will automatically inport into your game :D - same can be done with the .zip version for Java)
+
+# Updating
+To update, download the latest version from TheAlienDoctor.com. If you want to you can copy over your settings from the settings.ini file
+(make sure to check for value name changes before copy and pasting!)
+The pack converter will automatically check for updates on startup, unless its disabled in the settings.
+
+# Report bugs
+To report any bugs, please check out the GitHub repo and click on the "issues" tab. You may also contribute code there should you wish. You can also join Alien's Discord server (linked below) if you are having issues running this program. Feel free to ask for help with this in th Help channel!
+
+Thats it, hope you enjoy :D
+
+# Links
+GitHub repo: https://github.com/TheAlienDoctor/minecraft-resource-pack-converter
+
+YouTube: @TheAlienDoctor - https://TheAlienDoctor.com/r/YouTube
+Discord server: https://TheAlienDoctor.com/r/Discord
+Twitter/X: @TheAlienDoctor - https://TheAlienDoctor.com/r/Twitter
+Patreon: TheAlienDoctor - https://TheAlienDoctor.com/r/Patreon
+Twitch: TheAliendoctor_ - https://TheAlienDoctor.com/r/Twitch
