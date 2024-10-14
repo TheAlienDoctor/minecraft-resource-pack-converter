@@ -1,20 +1,31 @@
-BSD 3-Clause License
+UFO Licence: Version 1.0
 
-Copyright (c) 2022, TheAlienDoctor
+Copyright (©) 2022, TheAlienDoctor
 All rights reserved.
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
+This license applies to both source and binary forms of the project.
+External Packages do not apply.
 
-1. Redistributions of source code must retain the above copyright notice, this
-   list of conditions and the following disclaimer.
+You may:
 
-2. Redistributions in binary form must reproduce the above copyright notice,
-   this list of conditions and the following disclaimer in the documentation
-   and/or other materials provided with the distribution.
+1. Use the source code in personal or not-for-profit projects, with obvious credit to the
+   original author(s) and the above copyright notice.
 
-3. Neither the name of the copyright holder nor the names of its
-   contributors may be used to endorse or promote products derived from
+2. Take inspiration from this project, to create your own.
+
+3. Update/Add to this project with your own code, if permitted by the copyright owner.
+
+You may not:
+
+1. Monetise this project without the copyright owners prior permission.
+   This includes paywalling a public instance of the project.
+
+2. Redistribute the source code or binary forms of the project.
+
+3. Modify the public version of this code to its detriment.
+
+4. Use the name of the copyright holder nor the names of its
+   contributors to endorse or promote products derived from
    this software without specific prior written permission.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
